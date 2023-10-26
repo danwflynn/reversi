@@ -2,6 +2,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.experimental.theories.suppliers.TestedOn;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import javax.swing.text.Position;
 
 import rmodel.IReversiModel;
@@ -9,6 +12,7 @@ import rmodel.Position3D;
 import rmodel.ReversiModelImpl;
 import rmodel.Tile;
 import rmodel.TileType;
+
 
 public class ReversiModelTests {
 
@@ -183,4 +187,5 @@ public class ReversiModelTests {
     Position3D pos2 = new Position3D(pos1);
     Assert.assertTrue(-2 == pos2.getS() && 1 == pos2.getQ() && 1 == pos2.getR());
   }
+
 }
