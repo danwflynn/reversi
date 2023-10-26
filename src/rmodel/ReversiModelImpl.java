@@ -61,6 +61,11 @@ public class ReversiModelImpl implements IReversiModel {
   }
 
   @Override
+  public int getBoardSize() {
+    return this.board.size();
+  }
+
+  @Override
   public boolean isGameOver() {
     return false;
   }

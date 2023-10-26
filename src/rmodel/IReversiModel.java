@@ -9,11 +9,32 @@ public interface IReversiModel {
    */
   TileType getTileTypeAt(Position3D pos) throws IllegalArgumentException;
 
+  /**
+   * Get the amount of hexagons starting from the center making a straight line to the edge.
+   * @return radius
+   */
   int getRadius();
 
+  /**
+   * Do nothing on your turn.
+   */
   void pass();
 
+  /**
+   * Place a tile on your turn to make a move.
+   * @param pos coordinates as position type
+   */
   void placeTile(Position3D pos);
 
+  /**
+   * Get the amount of hexagons on the board.
+   * @return amount of tiles
+   */
+  int getBoardSize();
+
+  /**
+   * Check if the game is over.
+   * @return true if the game is over
+   */
   boolean isGameOver();
 }
