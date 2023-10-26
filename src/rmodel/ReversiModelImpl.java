@@ -74,25 +74,36 @@ public class ReversiModelImpl implements IReversiModel {
     }
   }
 
-  private List<List<Tile>> getAvailableBridges(Position3D pos) {
-    List<List<Tile>> bridges = new ArrayList<>();
-    placeTileBasicExceptions(pos);
-    Position3D p = pos;
+  private void getAvailableBridgesHelper(Position3D pos, List<List<Tile>> bridges, int qInc, int rInc, int sInc) {
+    Position3D p = new Position3D(pos);
     List<Tile> bridge = new ArrayList<>();
     while (true) {
-      p = new Position3D(p.getQ() + 1, p.getR() - 1, p.getS());
+      p = new Position3D(p.getQ() + qInc, p.getR() + rInc, p.getS() + sInc);
       try {
-        placeTileBasicExceptions(pos);
+        placeTileBasicExceptions(p);
       } catch (IllegalArgumentException | IllegalStateException e) {
         break;
       }
-      if (getTileAt(pos).getTileType().equals(this.turn)) {
+      if (getTileAt(p).getTileType().equals(this.turn)) {
         bridges.add(bridge);
         break;
       } else {
-        bridge.add(this.getTileAt(pos));
+        bridge.add(this.getTileAt(p));
       }
     }
+  }
+
+  private List<List<Tile>> getAvailableBridges(Position3D pos) {
+    List<List<Tile>> bridges = new ArrayList<>();
+    placeTileBasicExceptions(pos);
+
+    getAvailableBridgesHelper(pos, bridges, 1, -1, 0);
+    getAvailableBridgesHelper(pos, bridges, 1, 0, -1);
+    getAvailableBridgesHelper(pos, bridges, 0, 1, -1);
+    getAvailableBridgesHelper(pos, bridges, -1, 1, 0);
+    getAvailableBridgesHelper(pos, bridges, -1, 0, 1);
+    getAvailableBridgesHelper(pos, bridges, 0, -1, 1);
+
     return bridges;
   }
 

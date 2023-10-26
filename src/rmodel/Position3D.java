@@ -24,6 +24,12 @@ public final class Position3D {
     this.s = s;
   }
 
+  public Position3D(Position3D pos) {
+    this.q = pos.getQ();
+    this.r = pos.getR();
+    this.s = pos.getS();
+  }
+
   public int getQ() {
     return q;
   }
