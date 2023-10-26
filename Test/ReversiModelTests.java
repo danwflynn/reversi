@@ -142,6 +142,14 @@ public class ReversiModelTests {
   }
 
   @Test
+  public void testPlaceTileOutOfBoundsThrows() {
+    IReversiModel model = new ReversiModelImpl(4);
+    Assert.assertThrows(IllegalArgumentException.class, () -> {
+      model.placeTile(new Position3D(-5, 3, 2));
+    });
+  }
+
+  @Test
   public void testPassChangesProperly() {
     IReversiModel model = new ReversiModelImpl(4);
     Assert.assertTrue(model.getBlackTurn());
