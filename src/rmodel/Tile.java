@@ -22,4 +22,8 @@ public class Tile {
   public TileType getTileType() {
     return tileType;
   }
+
+  public Position3D getPos() {
+    return this.pos;
+  }
 }

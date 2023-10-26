@@ -16,7 +16,17 @@ public class ReversiModelImpl implements IReversiModel {
       for (int r = -1 * radius + 1; r < radius; r++) {
         for (int s = -1 * radius + 1; s < radius; s++) {
           if (q + r + s == 0) {
-            this.board.add(new Tile(new Position3D(q, r, s), TileType.EMPTY));
+            if (Math.abs(q) + Math.abs(r) + Math.abs(s) == 2) {
+              if ((q == 0 && r == -1 && s == 1)
+              || (q == 1 && r == 0 && s == -1)
+              || (q == -1 && r == 1 && s == 0)) {
+                this.board.add(new Tile(new Position3D(q, r, s), TileType.BLACK));
+              } else {
+                this.board.add(new Tile(new Position3D(q, r, s), TileType.WHITE));
+              }
+            } else {
+              this.board.add(new Tile(new Position3D(q, r, s), TileType.EMPTY));
+            }
           }
         }
       }
@@ -26,8 +36,13 @@ public class ReversiModelImpl implements IReversiModel {
 
 
   @Override
-  public TileType getTileAt(Position3D pos) {
-    return null;
+  public TileType getTileTypeAt(Position3D pos) throws IllegalArgumentException {
+    for (Tile tile : this.board) {
+      if (tile.getPos() == pos) {
+        return tile.getTileType();
+      }
+    }
+    throw new IllegalArgumentException("This position is not on the board");
   }
 
   @Override
