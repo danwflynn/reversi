@@ -136,7 +136,7 @@ public class ReversiModelTests {
   @Test
   public void testPlaceTileThrowsIfTileAlreadyOnDestination() {
     IReversiModel model = new ReversiModelImpl(4);
-    Assert.assertThrows(IllegalArgumentException.class, () -> {
+    Assert.assertThrows(IllegalStateException.class, () -> {
       model.placeTile(new Position3D(0, 1, -1));
     });
   }
