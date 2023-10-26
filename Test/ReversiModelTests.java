@@ -19,6 +19,9 @@ public class ReversiModelTests {
     Assert.assertEquals(pos1, pos2);
   }
 
+
+
+
   @Test
   public void testPosition3DEqualsOtherButQIsDifferent() {
     Position3D pos1 = new Position3D(0, 0, 0);
@@ -76,6 +79,9 @@ public class ReversiModelTests {
     Position3D pos1 = new Position3D(0, -1, 1);
     Assert.assertEquals(TileType.BLACK, model.getTileAt(pos1).getTileType());
   }
+
+  //getPossibleLine(Position3D vector, Position3D start, List listToAddTo)
+
 
   @Test
   public void testInitialStateOfGameBlackBottomLeft() {
@@ -169,5 +175,12 @@ public class ReversiModelTests {
   public void testGetFarthestDirectionPositiveOne() {
     Position3D pos1 = new Position3D(1, -1, 0);
     Assert.assertEquals(1, pos1.getFarthestDirection());
+  }
+
+  @Test
+  public void testPracticeConstructorPosition3D() {
+    Position3D pos1 = new Position3D(1, 1, -2);
+    Position3D pos2 = new Position3D(pos1);
+    Assert.assertTrue(-2 == pos2.getS() && 1 == pos2.getQ() && 1 == pos2.getR());
   }
 }
