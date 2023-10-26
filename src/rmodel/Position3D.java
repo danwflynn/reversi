@@ -36,6 +36,10 @@ public final class Position3D {
     return s;
   }
 
+  public int getFarthestDirection() {
+    return Math.max(Math.max(Math.abs(q), Math.abs(r)), Math.abs(s));
+  }
+
   @Override
   public boolean equals(Object other) {
     if (!(other instanceof Position3D)) {

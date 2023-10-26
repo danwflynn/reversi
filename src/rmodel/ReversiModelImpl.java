@@ -61,8 +61,13 @@ public class ReversiModelImpl implements IReversiModel {
   }
 
   @Override
-  public void placeTile(Position3D pos) {
-
+  public void placeTile(Position3D pos) throws IllegalStateException, IllegalArgumentException {
+    if (pos.getFarthestDirection() >= radius) {
+      throw new IllegalArgumentException("Position out of bounds for game board");
+    }
+    if (!this.getTileTypeAt(pos).equals(TileType.EMPTY)) {
+      throw new IllegalStateException("There already is a tile in this position");
+    }
   }
 
   @Override
