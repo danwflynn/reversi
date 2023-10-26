@@ -107,9 +107,31 @@ public class ReversiModelImpl implements IReversiModel {
     return bridges;
   }
 
+  private void flipBridge(List<Tile> bridge) {
+    for (Tile t : bridge) {
+      if (!t.getTileType().equals(this.turn)) {
+        t.setTileType(this.turn);
+      }
+    }
+  }
+
   @Override
   public void placeTile(Position3D pos) throws IllegalStateException, IllegalArgumentException {
     placeTileBasicExceptions(pos);
+    boolean noBridges = true;
+    for (List<Tile> l : this.getAvailableBridges(pos)) {
+      if (!l.isEmpty()) {
+        noBridges = false;
+        break;
+      }
+    }
+    if (noBridges) {
+      throw new IllegalStateException("No available bridges");
+    }
+    for (List<Tile> l : this.getAvailableBridges(pos)) {
+      this.flipBridge(l);
+    }
+    this.pass();
   }
 
   @Override
