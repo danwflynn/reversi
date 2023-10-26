@@ -152,11 +152,11 @@ public class ReversiModelTests {
   @Test
   public void testPassChangesProperly() {
     IReversiModel model = new ReversiModelImpl(4);
-    Assert.assertTrue(model.getBlackTurn());
+    Assert.assertEquals(TileType.BLACK, model.getBlackTurn());
     model.pass();
-    Assert.assertFalse(model.getBlackTurn());
+    Assert.assertEquals(TileType.WHITE, model.getBlackTurn());
     model.pass();
-    Assert.assertTrue(model.getBlackTurn());
+    Assert.assertEquals(TileType.BLACK, model.getBlackTurn());
   }
 
   @Test
