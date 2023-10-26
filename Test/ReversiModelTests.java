@@ -197,4 +197,16 @@ public class ReversiModelTests {
     Assert.assertEquals(TileType.BLACK, model.getTileAt(new Position3D(0, -1, 1)).getTileType());
   }
 
+  @Test
+  public void testTwoMovesWhitePlacesOnNegOneNegOnePosTwo() {
+    IReversiModel model = new ReversiModelImpl(6);
+    model.placeTile(new Position3D(-2, 1, 1));
+    model.placeTile(new Position3D(-1, -1, 2));
+    Assert.assertEquals(TileType.BLACK, model.getTileAt(new Position3D(-2, 1, 1)).getTileType());
+    Assert.assertEquals(TileType.BLACK, model.getTileAt(new Position3D(-1, 0, 1)).getTileType());
+    Assert.assertEquals(TileType.WHITE, model.getTileAt(new Position3D(-1, -1, 2)).getTileType());
+    Assert.assertEquals(TileType.WHITE, model.getTileAt(new Position3D(0, -1, 1)).getTileType());
+    Assert.assertEquals(TileType.WHITE, model.getTileAt(new Position3D(1, -1, 0)).getTileType());
+  }
+
 }
