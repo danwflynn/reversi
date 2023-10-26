@@ -1,5 +1,6 @@
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.experimental.theories.suppliers.TestedOn;
 
 import rmodel.IReversiModel;
 import rmodel.Position3D;
@@ -107,6 +108,21 @@ public class ReversiModelTests {
     IReversiModel model = new ReversiModelImpl(3);
     Position3D pos1 = new Position3D(0, 1, -1);
     Assert.assertEquals(TileType.WHITE, model.getTileAt(pos1));
+  }
+
+  @Test
+  public void testTileGetPosition() {
+    Tile tile = new Tile(new Position3D(1, 1,  -2), TileType.BLACK);
+    Assert.assertEquals(new Position3D(1, 1, -2), tile.getPos());
+  }
+
+  @Test
+  public void testGetTileAtTooBigThrowsException() {
+    IReversiModel model = new ReversiModelImpl(3);
+    Position3D pos1 = new Position3D(5, -4, -1);
+    Assert.assertThrows(IllegalArgumentException.class, () -> {
+      model.getTileAt(pos1);
+    });
   }
 
   //put this in protected test in model.
