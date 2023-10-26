@@ -74,42 +74,42 @@ public class ReversiModelTests {
   public void testInitialStateOfGameBlackUpLeft() {
     IReversiModel model = new ReversiModelImpl(3);
     Position3D pos1 = new Position3D(0, -1, 1);
-    Assert.assertEquals(TileType.BLACK, model.getTileTypeAt(pos1));
+    Assert.assertEquals(TileType.BLACK, model.getTileAt(pos1).getTileType());
   }
 
   @Test
   public void testInitialStateOfGameBlackBottomLeft() {
     IReversiModel model = new ReversiModelImpl(3);
     Position3D pos1 = new Position3D(-1, 1, 0);
-    Assert.assertEquals(TileType.BLACK, model.getTileTypeAt(pos1));
+    Assert.assertEquals(TileType.BLACK, model.getTileAt(pos1).getTileType());
   }
 
   @Test
   public void testInitialStateOfGameBlackRight() {
     IReversiModel model = new ReversiModelImpl(3);
     Position3D pos1 = new Position3D(1, 0, -1);
-    Assert.assertEquals(TileType.BLACK, model.getTileTypeAt(pos1));
+    Assert.assertEquals(TileType.BLACK, model.getTileAt(pos1).getTileType());
   }
 
   @Test
   public void testInitialStateOfGameWhiteLeft() {
     IReversiModel model = new ReversiModelImpl(3);
     Position3D pos1 = new Position3D(-1, 0 , 1);
-    Assert.assertEquals(TileType.WHITE, model.getTileTypeAt(pos1));
+    Assert.assertEquals(TileType.WHITE, model.getTileAt(pos1).getTileType());
   }
 
   @Test
   public void testInitialStateOfGameWhiteUpRight() {
     IReversiModel model = new ReversiModelImpl(3);
     Position3D pos1 = new Position3D(1, -1, 0);
-    Assert.assertEquals(TileType.WHITE, model.getTileTypeAt(pos1));
+    Assert.assertEquals(TileType.WHITE, model.getTileAt(pos1).getTileType());
   }
 
   @Test
   public void testInitialStateOfGameWhiteBottomRight() {
     IReversiModel model = new ReversiModelImpl(3);
     Position3D pos1 = new Position3D(0, 1, -1);
-    Assert.assertEquals(TileType.WHITE, model.getTileTypeAt(pos1));
+    Assert.assertEquals(TileType.WHITE, model.getTileAt(pos1).getTileType());
   }
 
   @Test
@@ -123,7 +123,7 @@ public class ReversiModelTests {
     IReversiModel model = new ReversiModelImpl(3);
     Position3D pos1 = new Position3D(5, -4, -1);
     Assert.assertThrows(IllegalArgumentException.class, () -> {
-      model.getTileTypeAt(pos1);
+      model.getTileAt(pos1);
     });
   }
 
