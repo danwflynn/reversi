@@ -5,13 +5,13 @@ import java.util.List;
 
 public class ReversiModelImpl implements IReversiModel {
   private final List<Tile> board;
-  private boolean blackTurn;
+  private TileType turn;
   private final int radius;
 
   public ReversiModelImpl(int radius) {
     this.radius = radius;
     this.board = new ArrayList<>();
-    this.blackTurn = true;
+    this.turn = TileType.BLACK;
     for (int q = -1 * radius + 1; q < radius; q++) {
       for (int r = -1 * radius + 1; r < radius; r++) {
         for (int s = -1 * radius + 1; s < radius; s++) {
@@ -36,10 +36,10 @@ public class ReversiModelImpl implements IReversiModel {
 
 
   @Override
-  public TileType getTileTypeAt(Position3D pos) throws IllegalArgumentException {
+  public Tile getTileAt(Position3D pos) throws IllegalArgumentException {
     for (Tile tile : this.board) {
       if (tile.getPos().equals(pos)) {
-        return tile.getTileType();
+        return tile;
       }
     }
     throw new IllegalArgumentException("This position is not on the board");
@@ -51,23 +51,54 @@ public class ReversiModelImpl implements IReversiModel {
   }
 
   @Override
-  public boolean getBlackTurn() {
-    return this.blackTurn;
+  public TileType getTurn() {
+    return this.turn;
   }
 
   @Override
   public void pass() {
-    this.blackTurn = !this.blackTurn;
+    if (this.turn == TileType.BLACK) {
+      this.turn = TileType.WHITE;
+    } else {
+      this.turn = TileType.BLACK;
+    }
+  }
+
+  private void placeTileBasicExceptions(Position3D pos) {
+    if (pos.getFarthestDirection() >= radius) {
+      throw new IllegalArgumentException("Position out of bounds for game board");
+    }
+    if (!this.getTileAt(pos).getTileType()
+            .equals(TileType.EMPTY)) {
+      throw new IllegalStateException("There already is a tile in this position");
+    }
+  }
+
+  private List<List<Tile>> getAvailableBridges(Position3D pos) {
+    List<List<Tile>> bridges = new ArrayList<>();
+    placeTileBasicExceptions(pos);
+    Position3D p = pos;
+    List<Tile> bridge = new ArrayList<>();
+    while (true) {
+      p = new Position3D(p.getQ() + 1, p.getR() - 1, p.getS());
+      try {
+        placeTileBasicExceptions(pos);
+      } catch (IllegalArgumentException | IllegalStateException e) {
+        break;
+      }
+      if (getTileAt(pos).getTileType().equals(this.turn)) {
+        bridges.add(bridge);
+        break;
+      } else {
+        bridge.add(this.getTileAt(pos));
+      }
+    }
+    return bridges;
   }
 
   @Override
   public void placeTile(Position3D pos) throws IllegalStateException, IllegalArgumentException {
-    if (pos.getFarthestDirection() >= radius) {
-      throw new IllegalArgumentException("Position out of bounds for game board");
-    }
-    if (!this.getTileTypeAt(pos).equals(TileType.EMPTY)) {
-      throw new IllegalStateException("There already is a tile in this position");
-    }
+    placeTileBasicExceptions(pos);
   }
 
   @Override

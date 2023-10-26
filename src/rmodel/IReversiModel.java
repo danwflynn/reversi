@@ -7,7 +7,7 @@ public interface IReversiModel {
    * @return the tile type at the given
    * @throws IllegalArgumentException if provided position is out of the bounds of the board
    */
-  TileType getTileTypeAt(Position3D pos) throws IllegalArgumentException;
+  Tile getTileAt(Position3D pos) throws IllegalArgumentException;
 
   /**
    * Get the amount of hexagons starting from the center making a straight line to the edge.
@@ -16,10 +16,10 @@ public interface IReversiModel {
   int getRadius();
 
   /**
-   * Get if it's black's turn.
-   * @return true if black's turn
+   * Get whose turn.
+   * @return tile type of turn
    */
-  boolean getBlackTurn();
+  TileType getTurn();
 
   /**
    * Do nothing on your turn.
