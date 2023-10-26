@@ -79,9 +79,7 @@ public class ReversiModelImpl implements IReversiModel {
     List<Tile> bridge = new ArrayList<>();
     while (true) {
       p = new Position3D(p.getQ() + qInc, p.getR() + rInc, p.getS() + sInc);
-      try {
-        placeTileBasicExceptions(p);
-      } catch (IllegalArgumentException | IllegalStateException e) {
+      if (p.getFarthestDirection() >= radius || this.getTileAt(p).getTileType().equals(TileType.EMPTY)) {
         break;
       }
       if (getTileAt(p).getTileType().equals(this.turn)) {
@@ -131,6 +129,7 @@ public class ReversiModelImpl implements IReversiModel {
     for (List<Tile> l : this.getAvailableBridges(pos)) {
       this.flipBridge(l);
     }
+    this.getTileAt(pos).setTileType(this.turn);
     this.pass();
   }
 
