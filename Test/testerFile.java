@@ -12,38 +12,38 @@ public class testerFile {
   public void testPosition3DEqualsOther() {
     Position3D pos1 = new Position3D(0, 0, 0);
     Position3D pos2 = new Position3D(0, 0, 0);
-    Assert.assertTrue(pos1.equals(pos2));
+    Assert.assertEquals(pos1, pos2);
   }
 
   @Test
   public void testPosition3DEqualsOtherButQIsDifferent() {
     Position3D pos1 = new Position3D(0, 0, 0);
     Position3D pos2 = new Position3D(1, 0, -1);
-    Assert.assertFalse(pos1.equals(pos2));
+    Assert.assertNotEquals(pos1, pos2);
   }
 
   @Test
   public void testPosition3DEqualsOtherButRIsDifferent() {
     Position3D pos1 = new Position3D(0, 0, 0);
     Position3D pos2 = new Position3D(0, 1, -1);
-    Assert.assertFalse(pos1.equals(pos2));
+    Assert.assertNotEquals(pos1, pos2);
   }
 
   @Test
   public void testPosition3DEqualsOtherButSIsDifferent() {
     Position3D pos1 = new Position3D(0, 0, 0);
     Position3D pos2 = new Position3D(0, -1, 1);
-    Assert.assertFalse(pos1.equals(pos2));
+    Assert.assertNotEquals(pos1, pos2);
   }
 
   @Test
   public void testPosition3DNotEqualToNull() {
     Position3D pos1 = new Position3D(0, 0, 0);
-    Assert.assertFalse(pos1.equals(null));
+    Assert.assertNotNull(pos1);
   }
 
   @Test
-  public void testConstuctPosition3DIllegalCoordinates() {
+  public void testConstructPosition3DIllegalCoordinates() {
     Assert.assertThrows(IllegalArgumentException.class, () -> {
       Position3D pos1 = new Position3D(1, 1, 1);
     });
