@@ -140,4 +140,14 @@ public class ReversiModelTests {
       model.placeTile(new Position3D(0, 1, -1));
     });
   }
+
+  @Test
+  public void testPassChangesProperly() {
+    IReversiModel model = new ReversiModelImpl(4);
+    Assert.assertTrue(model.getBlackTurn());
+    model.pass();
+    Assert.assertFalse(model.getBlackTurn());
+    model.pass();
+    Assert.assertTrue(model.getBlackTurn());
+  }
 }
