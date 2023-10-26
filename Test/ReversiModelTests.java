@@ -188,4 +188,11 @@ public class ReversiModelTests {
     Assert.assertTrue(-2 == pos2.getS() && 1 == pos2.getQ() && 1 == pos2.getR());
   }
 
+  @Test
+  public void testMoveTileBlackNegTwoPosOnePosOne() {
+    IReversiModel model = new ReversiModelImpl(6);
+    model.placeTile(new Position3D(-2, 1, 1));
+    Assert.assertEquals(TileType.BLACK, model.getTileAt(new Position3D(-1, 0, 1)));
+  }
+
 }
