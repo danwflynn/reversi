@@ -140,4 +140,34 @@ public class ReversiModelTests {
       model.placeTile(new Position3D(0, 1, -1));
     });
   }
+
+  @Test
+  public void testPlaceTileOutOfBoundsThrows() {
+    IReversiModel model = new ReversiModelImpl(4);
+    Assert.assertThrows(IllegalArgumentException.class, () -> {
+      model.placeTile(new Position3D(-5, 3, 2));
+    });
+  }
+
+  @Test
+  public void testPassChangesProperly() {
+    IReversiModel model = new ReversiModelImpl(4);
+    Assert.assertTrue(model.getBlackTurn());
+    model.pass();
+    Assert.assertFalse(model.getBlackTurn());
+    model.pass();
+    Assert.assertTrue(model.getBlackTurn());
+  }
+
+  @Test
+  public void testGetFarthestDirectionNegativeThree() {
+    Position3D pos1 = new Position3D(-3, 2, 1);
+    Assert.assertEquals(3, pos1.getFarthestDirection());
+  }
+
+  @Test
+  public void testGetFarthestDirectionPositiveOne() {
+    Position3D pos1 = new Position3D(1, -1, 0);
+    Assert.assertEquals(1, pos1.getFarthestDirection());
+  }
 }
