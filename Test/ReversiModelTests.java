@@ -1,12 +1,10 @@
 import org.junit.Assert;
 import org.junit.Test;
-import rmodel.IReversiModel;
 import rmodel.Position3D;
-import rmodel.ReversiModelImpl;
 import rmodel.Tile;
 import rmodel.TileType;
 
-public class testerFile {
+public class ReversiModelTests {
 
   @Test
   public void testPosition3DEqualsOther() {

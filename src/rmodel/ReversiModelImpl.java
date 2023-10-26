@@ -21,6 +21,7 @@ public class ReversiModelImpl implements IReversiModel {
         }
       }
     }
+    // INVARIANT: The q r and s values of every position on the board add to 0
   }
 
 
