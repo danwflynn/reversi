@@ -23,8 +23,10 @@ public interface IReversiModel {
   /**
    * Place a tile on your turn to make a move.
    * @param pos coordinates as position type
+   * @throws IllegalStateException if the move is Illegal
+   * @throws IllegalArgumentException if the position is out of bounds
    */
-  void placeTile(Position3D pos);
+  void placeTile(Position3D pos) throws IllegalStateException, IllegalArgumentException;
 
   /**
    * Get the amount of hexagons on the board.
