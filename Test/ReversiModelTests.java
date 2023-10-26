@@ -1,6 +1,9 @@
 import org.junit.Assert;
 import org.junit.Test;
+
+import rmodel.IReversiModel;
 import rmodel.Position3D;
+import rmodel.ReversiModelImpl;
 import rmodel.Tile;
 import rmodel.TileType;
 
@@ -62,6 +65,48 @@ public class ReversiModelTests {
     Assert.assertThrows(IllegalStateException.class, () -> {
       tile.setTileType(TileType.EMPTY);
     });
+  }
+
+  @Test
+  public void testInitialStateOfGameBlackUpLeft() {
+    IReversiModel model = new ReversiModelImpl(3);
+    Position3D pos1 = new Position3D(0, -1, 1);
+    Assert.assertEquals(TileType.BLACK, model.getTileAt(pos1));
+  }
+
+  @Test
+  public void testInitialStateOfGameBlackBottomLeft() {
+    IReversiModel model = new ReversiModelImpl(3);
+    Position3D pos1 = new Position3D(-1, 1, 0);
+    Assert.assertEquals(TileType.BLACK, model.getTileAt(pos1));
+  }
+
+  @Test
+  public void testInitialStateOfGameBlackRight() {
+    IReversiModel model = new ReversiModelImpl(3);
+    Position3D pos1 = new Position3D(1, 0, -1);
+    Assert.assertEquals(TileType.BLACK, model.getTileAt(pos1));
+  }
+
+  @Test
+  public void testInitialStateOfGameWhiteLeft() {
+    IReversiModel model = new ReversiModelImpl(3);
+    Position3D pos1 = new Position3D(-1, 0 , 1);
+    Assert.assertEquals(TileType.WHITE, model.getTileAt(pos1));
+  }
+
+  @Test
+  public void testInitialStateOfGameWhiteUpRight() {
+    IReversiModel model = new ReversiModelImpl(3);
+    Position3D pos1 = new Position3D(1, -1, 0);
+    Assert.assertEquals(TileType.WHITE, model.getTileAt(pos1));
+  }
+
+  @Test
+  public void testInitialStateOfGameWhiteBottomRight() {
+    IReversiModel model = new ReversiModelImpl(3);
+    Position3D pos1 = new Position3D(0, 1, -1);
+    Assert.assertEquals(TileType.WHITE, model.getTileAt(pos1));
   }
 
   //put this in protected test in model.
