@@ -121,14 +121,13 @@ public class ReversiModelTests {
     IReversiModel model = new ReversiModelImpl(3);
     Position3D pos1 = new Position3D(5, -4, -1);
     Assert.assertThrows(IllegalArgumentException.class, () -> {
-      model.getTileAt(pos1);
+      model.getTileTypeAt(pos1);
     });
   }
 
-  //put this in protected test in model.
-//  @Test
-//  public void testMakeReversiBoardHasCorrectNumberOfTiles() {
-//    IReversiModel model = new ReversiModelImpl(4);
-//    Assert.assertEquals(37, model.board.size());
-//  }
+  @Test
+  public void testMakeReversiBoardHasCorrectNumberOfTiles() {
+    IReversiModel model = new ReversiModelImpl(4);
+    Assert.assertEquals(37, model.getBoardSize());
+  }
 }

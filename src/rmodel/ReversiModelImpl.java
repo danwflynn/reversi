@@ -38,7 +38,7 @@ public class ReversiModelImpl implements IReversiModel {
   @Override
   public TileType getTileTypeAt(Position3D pos) throws IllegalArgumentException {
     for (Tile tile : this.board) {
-      if (tile.getPos() == pos) {
+      if (tile.getPos().equals(pos)) {
         return tile.getTileType();
       }
     }
