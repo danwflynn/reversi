@@ -2,6 +2,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.experimental.theories.suppliers.TestedOn;
 
+import javax.swing.text.Position;
+
 import rmodel.IReversiModel;
 import rmodel.Position3D;
 import rmodel.ReversiModelImpl;
@@ -129,5 +131,13 @@ public class ReversiModelTests {
   public void testMakeReversiBoardHasCorrectNumberOfTiles() {
     IReversiModel model = new ReversiModelImpl(4);
     Assert.assertEquals(37, model.getBoardSize());
+  }
+
+  @Test
+  public void testPlaceTileThrowsIfTileAlreadyOnDestination() {
+    IReversiModel model = new ReversiModelImpl(4);
+    Assert.assertThrows(IllegalArgumentException.class, () -> {
+      model.placeTile(new Position3D(0, 1, -1));
+    });
   }
 }
