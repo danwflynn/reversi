@@ -150,4 +150,16 @@ public class ReversiModelTests {
     model.pass();
     Assert.assertTrue(model.getBlackTurn());
   }
+
+  @Test
+  public void testGetFarthestDirectionNegativeThree() {
+    Position3D pos1 = new Position3D(-3, 2, 1);
+    Assert.assertEquals(3, pos1.getFarthestDirection());
+  }
+
+  @Test
+  public void testGetFarthestDirectionPositiveOne() {
+    Position3D pos1 = new Position3D(1, -1, 0);
+    Assert.assertEquals(1, pos1.getFarthestDirection());
+  }
 }
