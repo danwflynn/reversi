@@ -47,12 +47,17 @@ public class ReversiModelImpl implements IReversiModel {
 
   @Override
   public int getRadius() {
-    return 0;
+    return this.radius;
+  }
+
+  @Override
+  public boolean getBlackTurn() {
+    return this.blackTurn;
   }
 
   @Override
   public void pass() {
-
+    this.blackTurn = !this.blackTurn;
   }
 
   @Override

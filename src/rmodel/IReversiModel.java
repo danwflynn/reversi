@@ -16,6 +16,12 @@ public interface IReversiModel {
   int getRadius();
 
   /**
+   * Get if it's black's turn.
+   * @return true if black's turn
+   */
+  boolean getBlackTurn();
+
+  /**
    * Do nothing on your turn.
    */
   void pass();
