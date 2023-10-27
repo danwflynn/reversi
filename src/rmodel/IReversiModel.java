@@ -32,6 +32,7 @@ public interface IReversiModel {
    * @param pos coordinates as position type
    * @throws IllegalStateException if the move is Illegal
    * @throws IllegalArgumentException if the position is out of bounds
+   * @throws IllegalStateException if the game is over
    */
   void placeTile(Position3D pos) throws IllegalStateException, IllegalArgumentException;
 
