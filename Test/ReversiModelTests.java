@@ -209,4 +209,76 @@ public class ReversiModelTests {
     Assert.assertEquals(TileType.WHITE, model.getTileAt(new Position3D(1, -1, 0)).getTileType());
   }
 
+  @Test
+  public void testInitialScores() {
+    IReversiModel model = new ReversiModelImpl(6);
+    Assert.assertEquals(3, model.getBlackScore());
+    Assert.assertEquals(3, model.getWhiteScore());
+  }
+
+  @Test
+  public void testScoresAfterMakingMove() {
+    IReversiModel model = new ReversiModelImpl(6);
+    model.placeTile(new Position3D(-2, 1, 1));
+    Assert.assertEquals(5, model.getBlackScore());
+    Assert.assertEquals(2, model.getWhiteScore());
+  }
+
+  @Test
+  public void testScoresAfterMakingTwoMoves() {
+    IReversiModel model = new ReversiModelImpl(6);
+    model.placeTile(new Position3D(-2, 1, 1));
+    model.placeTile(new Position3D(-1, -1, 2));
+    Assert.assertEquals(4, model.getBlackScore());
+    Assert.assertEquals(4, model.getWhiteScore());
+  }
+
+  @Test
+  public void testScoresAfterMoreMoves() {
+    IReversiModel model = new ReversiModelImpl(6);
+    model.placeTile(new Position3D(-2, 1, 1));
+    model.placeTile(new Position3D(-1, -1, 2));
+    model.placeTile(new Position3D(1, -2, 1));
+    Assert.assertEquals(7, model.getBlackScore());
+    Assert.assertEquals(2, model.getWhiteScore());
+    model.placeTile(new Position3D(2, -1, -1));
+    Assert.assertEquals(4, model.getBlackScore());
+    Assert.assertEquals(6, model.getWhiteScore());
+    model.placeTile(new Position3D(1, 1, -2));
+    Assert.assertEquals(8, model.getBlackScore());
+    Assert.assertEquals(3, model.getWhiteScore());
+    model.placeTile(new Position3D(-1, 2, -1));
+    Assert.assertEquals(4, model.getBlackScore());
+    Assert.assertEquals(8, model.getWhiteScore());
+  }
+
+  @Test
+  public void testGameOver() {
+    IReversiModel model = new ReversiModelImpl(6);
+    Assert.assertFalse(model.isGameOver());
+    model.pass();
+    Assert.assertFalse(model.isGameOver());
+    model.placeTile(new Position3D(-2, 1, 1));
+    Assert.assertFalse(model.isGameOver());
+    model.pass();
+    Assert.assertFalse(model.isGameOver());
+    model.pass();
+    Assert.assertTrue(model.isGameOver());
+  }
+
+  @Test (expected = IllegalStateException.class)
+  public void testGameOverPassException() {
+    IReversiModel model = new ReversiModelImpl(6);
+    model.pass();
+    model.pass();
+    model.pass();
+  }
+
+  @Test (expected = IllegalStateException.class)
+  public void testGameOverPlaceTileException() {
+    IReversiModel model = new ReversiModelImpl(6);
+    model.pass();
+    model.pass();
+    model.placeTile(new Position3D(-2, 1, 1));
+  }
 }

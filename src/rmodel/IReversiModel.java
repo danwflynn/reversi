@@ -23,8 +23,9 @@ public interface IReversiModel {
 
   /**
    * Do nothing on your turn.
+   * @throws IllegalStateException if the game is over
    */
-  void pass();
+  void pass() throws IllegalStateException;
 
   /**
    * Place a tile on your turn to make a move.
@@ -39,6 +40,18 @@ public interface IReversiModel {
    * @return amount of tiles
    */
   int getBoardSize();
+
+  /**
+   * Gets how many black tiles on the board.
+   * @return black score
+   */
+  int getBlackScore();
+
+  /**
+   * Gets how many white tiles on the board.
+   * @return white score
+   */
+  int getWhiteScore();
 
   /**
    * Check if the game is over.

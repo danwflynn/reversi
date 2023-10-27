@@ -7,8 +7,14 @@ public class ReversiModelImpl implements IReversiModel {
   private final List<Tile> board;
   private TileType turn;
   private final int radius;
+  private int blackScore;
+  private int whiteScore;
+  private int passCounter;
 
   public ReversiModelImpl(int radius) {
+    this.blackScore = 3;
+    this.whiteScore = 3;
+    this.passCounter = 0;
     this.radius = radius;
     this.board = new ArrayList<>();
     this.turn = TileType.BLACK;
@@ -56,20 +62,26 @@ public class ReversiModelImpl implements IReversiModel {
   }
 
   @Override
-  public void pass() {
+  public void pass() throws IllegalStateException {
+    if (this.isGameOver()) {
+      throw new IllegalStateException("The game is over");
+    }
     if (this.turn == TileType.BLACK) {
       this.turn = TileType.WHITE;
     } else {
       this.turn = TileType.BLACK;
     }
+    this.passCounter += 1;
   }
 
   private void placeTileBasicExceptions(Position3D pos) {
+    if (this.isGameOver()) {
+      throw new IllegalStateException("The game is over");
+    }
     if (pos.getFarthestDirection() >= radius) {
       throw new IllegalArgumentException("Position out of bounds for game board");
     }
-    if (!this.getTileAt(pos).getTileType()
-            .equals(TileType.EMPTY)) {
+    if (!this.getTileAt(pos).getTileType().equals(TileType.EMPTY)) {
       throw new IllegalStateException("There already is a tile in this position");
     }
   }
@@ -113,6 +125,21 @@ public class ReversiModelImpl implements IReversiModel {
     }
   }
 
+  private void updateScore() {
+    int b = 0;
+    int w = 0;
+    for (Tile t : this.board) {
+      if (t.getTileType().equals(TileType.BLACK)) {
+        b += 1;
+      }
+      if (t.getTileType().equals(TileType.WHITE)) {
+        w += 1;
+      }
+    }
+    this.blackScore = b;
+    this.whiteScore = w;
+  }
+
   @Override
   public void placeTile(Position3D pos) throws IllegalStateException, IllegalArgumentException {
     placeTileBasicExceptions(pos);
@@ -130,7 +157,13 @@ public class ReversiModelImpl implements IReversiModel {
       this.flipBridge(l);
     }
     this.getTileAt(pos).setTileType(this.turn);
-    this.pass();
+    this.updateScore();
+    if (this.turn == TileType.BLACK) {
+      this.turn = TileType.WHITE;
+    } else {
+      this.turn = TileType.BLACK;
+    }
+    this.passCounter = 0;
   }
 
   @Override
@@ -139,7 +172,17 @@ public class ReversiModelImpl implements IReversiModel {
   }
 
   @Override
+  public int getBlackScore() {
+    return this.blackScore;
+  }
+
+  @Override
+  public int getWhiteScore() {
+    return this.whiteScore;
+  }
+
+  @Override
   public boolean isGameOver() {
-    return false;
+    return this.passCounter == 2;
   }
 }
