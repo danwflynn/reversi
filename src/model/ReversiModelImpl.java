@@ -3,6 +3,9 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Manages the board and the rules.
+ */
 public class ReversiModelImpl implements IReversiModel {
   private final List<Tile> board;
   private TileType turn;
@@ -11,7 +14,15 @@ public class ReversiModelImpl implements IReversiModel {
   private int whiteScore;
   private int passCounter;
 
-  public ReversiModelImpl(int radius) {
+  /**
+   * Constructor for the class.
+   * @param radius amount of hexagons from the center (included) to the edge in a straight line
+   * @throws IllegalArgumentException if the radius is too short
+   */
+  public ReversiModelImpl(int radius) throws IllegalArgumentException {
+    if (radius < 2) {
+      throw new IllegalArgumentException("Radius must be 2 or greater");
+    }
     this.blackScore = 3;
     this.whiteScore = 3;
     this.passCounter = 0;
@@ -86,7 +97,8 @@ public class ReversiModelImpl implements IReversiModel {
     }
   }
 
-  private void getAvailableBridgesHelper(Position3D pos, List<List<Tile>> bridges, int qInc, int rInc, int sInc) {
+  private void getAvailableBridgesHelper(Position3D pos, List<List<Tile>> bridges,
+                                         int qInc, int rInc, int sInc) {
     Position3D p = new Position3D(pos);
     List<Tile> bridge = new ArrayList<>();
     while (true) {

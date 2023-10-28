@@ -34,4 +34,15 @@ public class GameTile implements Tile {
   public Position3D getPos() {
     return this.pos;
   }
+
+  @Override
+  public String toString() {
+    if (this.tileType.equals(TileType.BLACK)) {
+      return "X";
+    } else if (this.tileType.equals(TileType.WHITE)) {
+      return "O";
+    } else {
+      return "_";
+    }
+  }
 }

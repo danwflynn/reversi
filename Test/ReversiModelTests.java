@@ -6,6 +6,8 @@ import model.Position3D;
 import model.ReversiModelImpl;
 import model.GameTile;
 import model.TileType;
+import view.ReversiTextualView;
+import view.TextualView;
 
 
 public class ReversiModelTests {
@@ -16,9 +18,6 @@ public class ReversiModelTests {
     Position3D pos2 = new Position3D(0, 0, 0);
     Assert.assertEquals(pos1, pos2);
   }
-
-
-
 
   @Test
   public void testPosition3DEqualsOtherButQIsDifferent() {
@@ -274,5 +273,104 @@ public class ReversiModelTests {
     model.pass();
     model.pass();
     model.placeTile(new Position3D(-2, 1, 1));
+  }
+
+  @Test
+  public void testToStringOfInitialGameRadius6() {
+    String resultStr = "     _ _ _ _ _ _ \n" +
+            "    _ _ _ _ _ _ _ \n" +
+            "   _ _ _ _ _ _ _ _ \n" +
+            "  _ _ _ _ _ _ _ _ _ \n" +
+            " _ _ _ _ X O _ _ _ _ \n" +
+            "_ _ _ _ O _ X _ _ _ _ \n" +
+            " _ _ _ _ X O _ _ _ _ \n" +
+            "  _ _ _ _ _ _ _ _ _ \n" +
+            "   _ _ _ _ _ _ _ _ \n" +
+            "    _ _ _ _ _ _ _ \n" +
+            "     _ _ _ _ _ _ \n";
+    IReversiModel model = new ReversiModelImpl(6);
+    TextualView tv = new ReversiTextualView(model);
+    Assert.assertEquals(resultStr, tv.toString());
+  }
+
+  @Test
+  public void testToStringOfInitialGameRadius4() {
+    String resultStr = "   _ _ _ _ \n" +
+            "  _ _ _ _ _ \n" +
+            " _ _ X O _ _ \n" +
+            "_ _ O _ X _ _ \n" +
+            " _ _ X O _ _ \n" +
+            "  _ _ _ _ _ \n" +
+            "   _ _ _ _ \n";
+    IReversiModel model = new ReversiModelImpl(4);
+    TextualView tv = new ReversiTextualView(model);
+    Assert.assertEquals(resultStr, tv.toString());
+  }
+
+  @Test
+  public void testToStringOfMoveRadius4() {
+    String resultStr = "   _ _ _ _ \n" +
+            "  _ _ _ _ _ \n" +
+            " _ _ X O _ _ \n" +
+            "_ _ X _ X _ _ \n" +
+            " _ X X O _ _ \n" +
+            "  _ _ _ _ _ \n" +
+            "   _ _ _ _ \n";
+    IReversiModel model = new ReversiModelImpl(4);
+    model.placeTile(new Position3D(-2, 1, 1));
+    TextualView tv = new ReversiTextualView(model);
+    Assert.assertEquals(resultStr, tv.toString());
+  }
+
+  @Test
+  public void testToStringOfSecondMoveRadius4() {
+    String resultStr = "   _ _ _ _ \n" +
+            "  _ _ _ _ _ \n" +
+            " _ _ X O _ _ \n" +
+            "_ _ X _ X _ _ \n" +
+            " O O O O _ _ \n" +
+            "  _ _ _ _ _ \n" +
+            "   _ _ _ _ \n";
+    IReversiModel model = new ReversiModelImpl(4);
+    model.placeTile(new Position3D(-2, 1, 1));
+    model.placeTile(new Position3D(-3, 1, 2));
+    TextualView tv = new ReversiTextualView(model);
+    Assert.assertEquals(resultStr, tv.toString());
+  }
+
+  @Test
+  public void testToStringOfPassThenMoveRadius4() {
+    String resultStr = "   _ _ _ _ \n" +
+            "  _ _ O _ _ \n" +
+            " _ _ O O _ _ \n" +
+            "_ _ O _ X _ _ \n" +
+            " O O O O _ _ \n" +
+            "  _ _ _ _ _ \n" +
+            "   _ _ _ _ \n";
+    IReversiModel model = new ReversiModelImpl(4);
+    model.placeTile(new Position3D(-2, 1, 1));
+    model.placeTile(new Position3D(-3, 1, 2));
+    model.pass();
+    model.placeTile(new Position3D(1, -2, 1));
+    TextualView tv = new ReversiTextualView(model);
+    Assert.assertEquals(resultStr, tv.toString());
+  }
+
+  @Test
+  public void testToStringOfPassThenMoveDoubleFlipRadius4() {
+    String resultStr = "   _ _ _ _ \n" +
+            "  _ _ _ _ _ \n" +
+            " _ O O O _ _ \n" +
+            "_ _ O _ X _ _ \n" +
+            " O O O O _ _ \n" +
+            "  _ _ _ _ _ \n" +
+            "   _ _ _ _ \n";
+    IReversiModel model = new ReversiModelImpl(4);
+    model.placeTile(new Position3D(-2, 1, 1));
+    model.placeTile(new Position3D(-3, 1, 2));
+    model.pass();
+    model.placeTile(new Position3D(-1, -1, 2));
+    TextualView tv = new ReversiTextualView(model);
+    Assert.assertEquals(resultStr, tv.toString());
   }
 }
