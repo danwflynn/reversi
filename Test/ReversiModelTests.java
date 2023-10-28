@@ -1,16 +1,10 @@
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.experimental.theories.suppliers.TestedOn;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import javax.swing.text.Position;
 
 import rmodel.IReversiModel;
 import rmodel.Position3D;
 import rmodel.ReversiModelImpl;
-import rmodel.Tile;
+import rmodel.GameTile;
 import rmodel.TileType;
 
 
@@ -63,7 +57,7 @@ public class ReversiModelTests {
   @Test
   public void testSetTileTypeChangesProperly() {
     Position3D pos1 = new Position3D(0, 0, 0);
-    Tile tile = new Tile(pos1, TileType.EMPTY);
+    GameTile tile = new GameTile(pos1, TileType.EMPTY);
     tile.setTileType(TileType.WHITE);
     Assert.assertEquals(TileType.WHITE, tile.getTileType());
   }
@@ -71,7 +65,7 @@ public class ReversiModelTests {
   @Test
   public void testSetTileDoesNotWorkIfTileAlreadySet() {
     Position3D pos1 = new Position3D(0, 0, 0);
-    Tile tile = new Tile(pos1, TileType.WHITE);
+    GameTile tile = new GameTile(pos1, TileType.WHITE);
     Assert.assertThrows(IllegalStateException.class, () -> {
       tile.setTileType(TileType.EMPTY);
     });
@@ -124,7 +118,7 @@ public class ReversiModelTests {
 
   @Test
   public void testTileGetPosition() {
-    Tile tile = new Tile(new Position3D(1, 1,  -2), TileType.BLACK);
+    GameTile tile = new GameTile(new Position3D(1, 1,  -2), TileType.BLACK);
     Assert.assertEquals(new Position3D(1, 1, -2), tile.getPos());
   }
 

@@ -26,12 +26,12 @@ public class ReversiModelImpl implements IReversiModel {
               if ((q == 0 && r == -1 && s == 1)
               || (q == 1 && r == 0 && s == -1)
               || (q == -1 && r == 1 && s == 0)) {
-                this.board.add(new Tile(new Position3D(q, r, s), TileType.BLACK));
+                this.board.add(new GameTile(new Position3D(q, r, s), TileType.BLACK));
               } else {
-                this.board.add(new Tile(new Position3D(q, r, s), TileType.WHITE));
+                this.board.add(new GameTile(new Position3D(q, r, s), TileType.WHITE));
               }
             } else {
-              this.board.add(new Tile(new Position3D(q, r, s), TileType.EMPTY));
+              this.board.add(new GameTile(new Position3D(q, r, s), TileType.EMPTY));
             }
           }
         }
