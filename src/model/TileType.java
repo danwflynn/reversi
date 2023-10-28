@@ -1,4 +1,4 @@
-package rmodel;
+package model;
 
 /**
  * An enum representing what is on a tile in Reversi.

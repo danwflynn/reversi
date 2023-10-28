@@ -1,4 +1,4 @@
-package rmodel;
+package model;
 
 /**
  * Class to represent a tile on the board.

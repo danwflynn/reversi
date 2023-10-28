@@ -1,4 +1,4 @@
-package rmodel;
+package model;
 
 public interface IReversiModel {
   /**

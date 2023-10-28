@@ -1,11 +1,11 @@
 import org.junit.Assert;
 import org.junit.Test;
 
-import rmodel.IReversiModel;
-import rmodel.Position3D;
-import rmodel.ReversiModelImpl;
-import rmodel.GameTile;
-import rmodel.TileType;
+import model.IReversiModel;
+import model.Position3D;
+import model.ReversiModelImpl;
+import model.GameTile;
+import model.TileType;
 
 
 public class ReversiModelTests {

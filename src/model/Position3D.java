@@ -1,4 +1,4 @@
-package rmodel;
+package model;
 
 /**
  * Represents coordinates for a place on the board using 3d q r s system.

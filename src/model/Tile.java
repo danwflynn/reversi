@@ -1,4 +1,4 @@
-package rmodel;
+package model;
 
 /**
  * This is the player interface.

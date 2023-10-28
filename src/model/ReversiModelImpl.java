@@ -1,4 +1,4 @@
-package rmodel;
+package model;
 
 import java.util.ArrayList;
 import java.util.List;
