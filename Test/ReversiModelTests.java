@@ -9,7 +9,9 @@ import model.TileType;
 import view.ReversiTextualView;
 import view.TextualView;
 
-
+/**
+ * Tests for the reversi model.
+ */
 public class ReversiModelTests {
 
   @Test

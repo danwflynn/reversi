@@ -24,6 +24,10 @@ public final class Position3D {
     this.s = s;
   }
 
+  /**
+   * Make a copy of position.
+   * @param pos position to copy
+   */
   public Position3D(Position3D pos) {
     this.q = pos.getQ();
     this.r = pos.getR();
@@ -54,5 +58,14 @@ public final class Position3D {
       Position3D otherPosition = (Position3D) other;
       return this.q == otherPosition.q && this.r == otherPosition.r && this.s == otherPosition.s;
     }
+  }
+
+  @Override
+  public int hashCode() {
+    int result = 17; // A prime number to start with
+    result = 31 * result + q;
+    result = 31 * result + r;
+    result = 31 * result + s;
+    return result;
   }
 }

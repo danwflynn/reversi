@@ -35,8 +35,8 @@ public class ReversiModelImpl implements IReversiModel {
           if (q + r + s == 0) {
             if (Math.abs(q) + Math.abs(r) + Math.abs(s) == 2) {
               if ((q == 0 && r == -1 && s == 1)
-              || (q == 1 && r == 0 && s == -1)
-              || (q == -1 && r == 1 && s == 0)) {
+                      || (q == 1 && r == 0 && s == -1)
+                      || (q == -1 && r == 1 && s == 0)) {
                 this.board.add(new GameTile(new Position3D(q, r, s), TileType.BLACK));
               } else {
                 this.board.add(new GameTile(new Position3D(q, r, s), TileType.WHITE));
@@ -103,7 +103,8 @@ public class ReversiModelImpl implements IReversiModel {
     List<Tile> bridge = new ArrayList<>();
     while (true) {
       p = new Position3D(p.getQ() + qInc, p.getR() + rInc, p.getS() + sInc);
-      if (p.getFarthestDirection() >= radius || this.getTileAt(p).getTileType().equals(TileType.EMPTY)) {
+      if (p.getFarthestDirection() >= radius
+              || this.getTileAt(p).getTileType().equals(TileType.EMPTY)) {
         break;
       }
       if (getTileAt(p).getTileType().equals(this.turn)) {

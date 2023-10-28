@@ -1,5 +1,8 @@
 package model;
 
+/**
+ * Reversi model interface.
+ */
 public interface IReversiModel {
   /**
    * Get tile at a given position.
