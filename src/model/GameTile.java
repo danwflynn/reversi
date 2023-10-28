@@ -17,6 +17,15 @@ public class GameTile implements Tile {
     this.tileType = tileType;
   }
 
+  /**
+   * Copy constructor.
+   * @param t old tile
+   */
+  public GameTile(Tile t) {
+    this.pos = t.getPos();
+    this.tileType = t.getTileType();
+  }
+
   @Override
   public void setTileType(TileType t) {
     if (!this.tileType.equals(TileType.EMPTY) && t.equals(TileType.EMPTY)) {
@@ -32,7 +41,7 @@ public class GameTile implements Tile {
 
   @Override
   public Position3D getPos() {
-    return this.pos;
+    return new Position3D(this.pos);
   }
 
   @Override

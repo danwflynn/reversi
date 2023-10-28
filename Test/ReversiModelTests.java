@@ -385,4 +385,16 @@ public class ReversiModelTests {
     TextualView tv = new ReversiTextualView(model);
     Assert.assertEquals(resultStr, tv.toString());
   }
+
+  @Test
+  public void testReversiModelImplCopyConstructor() {
+    IReversiModel oldModel = new ReversiModelImpl(4);
+    TextualView oldTextView = new ReversiTextualView(oldModel);
+    oldModel.placeTile(new Position3D(-2, 1, 1));
+    IReversiModel copyModel = new ReversiModelImpl(oldModel);
+    TextualView newTextView = new ReversiTextualView(copyModel);
+    Assert.assertEquals(oldTextView.toString(), newTextView.toString());
+    copyModel.placeTile(new Position3D(-3, 1, 2));
+    Assert.assertNotEquals(oldTextView.toString(), newTextView.toString());
+  }
 }

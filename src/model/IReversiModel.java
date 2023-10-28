@@ -1,11 +1,13 @@
 package model;
 
+import java.util.List;
+
 /**
  * Reversi model interface.
  */
 public interface IReversiModel {
   /**
-   * Get tile at a given position.
+   * Get tile at a given position (intentionally mutable so that we can flip them when necessary).
    * @param pos coordinates as a position type
    * @return the tile type at the given
    * @throws IllegalArgumentException if provided position is out of the bounds of the board
@@ -62,4 +64,16 @@ public interface IReversiModel {
    * @return true if the game is over
    */
   boolean isGameOver();
+
+  /**
+   * Get how many passes were made in a row at the given moment.
+   * @return passes in a row
+   */
+  int getPassesInARow();
+
+  /**
+   * Get a copy of the board, so you can do stuff with it without mutating the original game.
+   * @return copy of board
+   */
+  List<Tile> getCopyOfBoard();
 }

@@ -51,6 +51,18 @@ public class ReversiModelImpl implements IReversiModel {
     // INVARIANT: The q r and s values of every position on the board add to 0
   }
 
+  /**
+   * Constructor to make a copy of the game.
+   * @param rm model to copy
+   */
+  public ReversiModelImpl(IReversiModel rm) {
+    this.board = rm.getCopyOfBoard();
+    this.turn = rm.getTurn();
+    this.radius = rm.getRadius();
+    this.blackScore = rm.getBlackScore();
+    this.whiteScore = rm.getWhiteScore();
+    this.passCounter = rm.getPassesInARow();
+  }
 
   @Override
   public Tile getTileAt(Position3D pos) throws IllegalArgumentException {
@@ -197,5 +209,19 @@ public class ReversiModelImpl implements IReversiModel {
   @Override
   public boolean isGameOver() {
     return this.passCounter == 2;
+  }
+
+  @Override
+  public int getPassesInARow() {
+    return this.passCounter;
+  }
+
+  @Override
+  public List<Tile> getCopyOfBoard() {
+    List<Tile> copyBoard = new ArrayList<>();
+    for (Tile t : this.board) {
+      copyBoard.add(new GameTile(t));
+    }
+    return copyBoard;
   }
 }
