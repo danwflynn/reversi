@@ -278,6 +278,16 @@ public class ReversiModelTests {
   }
 
   @Test
+  public void testSmallestToStringPossible() {
+    String resultStr = " X O \n" +
+            "O _ X \n" +
+            " X O \n";
+    IReversiModel model = new ReversiModelImpl(2);
+    TextualView tv = new ReversiTextualView(model);
+    Assert.assertEquals(resultStr, tv.toString());
+  }
+
+  @Test
   public void testToStringOfInitialGameRadius6() {
     String resultStr = "     _ _ _ _ _ _ \n" +
             "    _ _ _ _ _ _ _ \n" +
