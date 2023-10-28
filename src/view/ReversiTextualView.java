@@ -28,9 +28,13 @@ public class ReversiTextualView implements TextualView {
         int s = Math.min(this.model.getRadius() - 1 - col,
                 2 * this.model.getRadius() - 2 - row - col);
         drawString.append(this.model.getTileAt(new Position3D(q, r, s)).toString());
-        drawString.append(" ");
+        if (col < 2 * this.model.getRadius() - 2 - Math.abs(r)) {
+          drawString.append(" ");
+        }
       }
-      drawString.append("\n");
+      if (row < 2 * this.model.getRadius() - 2) {
+        drawString.append("\n");
+      }
     }
     return drawString.toString();
   }

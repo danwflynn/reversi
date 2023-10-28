@@ -1,7 +1,7 @@
 package model;
 
 /**
- * This is the player interface.
+ * This is the tile interface.
  * Each player is represented by a black or white tile.
  * Tiles can also be empty to represent a space where nobody has placed their piece yet.
  */

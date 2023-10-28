@@ -279,9 +279,9 @@ public class ReversiModelTests {
 
   @Test
   public void testSmallestToStringPossible() {
-    String resultStr = " X O \n" +
-            "O _ X \n" +
-            " X O \n";
+    String resultStr = " X O\n" +
+            "O _ X\n" +
+            " X O";
     IReversiModel model = new ReversiModelImpl(2);
     TextualView tv = new ReversiTextualView(model);
     Assert.assertEquals(resultStr, tv.toString());
@@ -289,17 +289,17 @@ public class ReversiModelTests {
 
   @Test
   public void testToStringOfInitialGameRadius6() {
-    String resultStr = "     _ _ _ _ _ _ \n" +
-            "    _ _ _ _ _ _ _ \n" +
-            "   _ _ _ _ _ _ _ _ \n" +
-            "  _ _ _ _ _ _ _ _ _ \n" +
-            " _ _ _ _ X O _ _ _ _ \n" +
-            "_ _ _ _ O _ X _ _ _ _ \n" +
-            " _ _ _ _ X O _ _ _ _ \n" +
-            "  _ _ _ _ _ _ _ _ _ \n" +
-            "   _ _ _ _ _ _ _ _ \n" +
-            "    _ _ _ _ _ _ _ \n" +
-            "     _ _ _ _ _ _ \n";
+    String resultStr = "     _ _ _ _ _ _\n" +
+            "    _ _ _ _ _ _ _\n" +
+            "   _ _ _ _ _ _ _ _\n" +
+            "  _ _ _ _ _ _ _ _ _\n" +
+            " _ _ _ _ X O _ _ _ _\n" +
+            "_ _ _ _ O _ X _ _ _ _\n" +
+            " _ _ _ _ X O _ _ _ _\n" +
+            "  _ _ _ _ _ _ _ _ _\n" +
+            "   _ _ _ _ _ _ _ _\n" +
+            "    _ _ _ _ _ _ _\n" +
+            "     _ _ _ _ _ _";
     IReversiModel model = new ReversiModelImpl(6);
     TextualView tv = new ReversiTextualView(model);
     Assert.assertEquals(resultStr, tv.toString());
@@ -307,13 +307,13 @@ public class ReversiModelTests {
 
   @Test
   public void testToStringOfInitialGameRadius4() {
-    String resultStr = "   _ _ _ _ \n" +
-            "  _ _ _ _ _ \n" +
-            " _ _ X O _ _ \n" +
-            "_ _ O _ X _ _ \n" +
-            " _ _ X O _ _ \n" +
-            "  _ _ _ _ _ \n" +
-            "   _ _ _ _ \n";
+    String resultStr = "   _ _ _ _\n" +
+            "  _ _ _ _ _\n" +
+            " _ _ X O _ _\n" +
+            "_ _ O _ X _ _\n" +
+            " _ _ X O _ _\n" +
+            "  _ _ _ _ _\n" +
+            "   _ _ _ _";
     IReversiModel model = new ReversiModelImpl(4);
     TextualView tv = new ReversiTextualView(model);
     Assert.assertEquals(resultStr, tv.toString());
@@ -321,13 +321,13 @@ public class ReversiModelTests {
 
   @Test
   public void testToStringOfMoveRadius4() {
-    String resultStr = "   _ _ _ _ \n" +
-            "  _ _ _ _ _ \n" +
-            " _ _ X O _ _ \n" +
-            "_ _ X _ X _ _ \n" +
-            " _ X X O _ _ \n" +
-            "  _ _ _ _ _ \n" +
-            "   _ _ _ _ \n";
+    String resultStr = "   _ _ _ _\n" +
+            "  _ _ _ _ _\n" +
+            " _ _ X O _ _\n" +
+            "_ _ X _ X _ _\n" +
+            " _ X X O _ _\n" +
+            "  _ _ _ _ _\n" +
+            "   _ _ _ _";
     IReversiModel model = new ReversiModelImpl(4);
     model.placeTile(new Position3D(-2, 1, 1));
     TextualView tv = new ReversiTextualView(model);
@@ -336,13 +336,13 @@ public class ReversiModelTests {
 
   @Test
   public void testToStringOfSecondMoveRadius4() {
-    String resultStr = "   _ _ _ _ \n" +
-            "  _ _ _ _ _ \n" +
-            " _ _ X O _ _ \n" +
-            "_ _ X _ X _ _ \n" +
-            " O O O O _ _ \n" +
-            "  _ _ _ _ _ \n" +
-            "   _ _ _ _ \n";
+    String resultStr = "   _ _ _ _\n" +
+            "  _ _ _ _ _\n" +
+            " _ _ X O _ _\n" +
+            "_ _ X _ X _ _\n" +
+            " O O O O _ _\n" +
+            "  _ _ _ _ _\n" +
+            "   _ _ _ _";
     IReversiModel model = new ReversiModelImpl(4);
     model.placeTile(new Position3D(-2, 1, 1));
     model.placeTile(new Position3D(-3, 1, 2));
@@ -352,13 +352,13 @@ public class ReversiModelTests {
 
   @Test
   public void testToStringOfPassThenMoveRadius4() {
-    String resultStr = "   _ _ _ _ \n" +
-            "  _ _ O _ _ \n" +
-            " _ _ O O _ _ \n" +
-            "_ _ O _ X _ _ \n" +
-            " O O O O _ _ \n" +
-            "  _ _ _ _ _ \n" +
-            "   _ _ _ _ \n";
+    String resultStr = "   _ _ _ _\n" +
+            "  _ _ O _ _\n" +
+            " _ _ O O _ _\n" +
+            "_ _ O _ X _ _\n" +
+            " O O O O _ _\n" +
+            "  _ _ _ _ _\n" +
+            "   _ _ _ _";
     IReversiModel model = new ReversiModelImpl(4);
     model.placeTile(new Position3D(-2, 1, 1));
     model.placeTile(new Position3D(-3, 1, 2));
@@ -370,13 +370,13 @@ public class ReversiModelTests {
 
   @Test
   public void testToStringOfPassThenMoveDoubleFlipRadius4() {
-    String resultStr = "   _ _ _ _ \n" +
-            "  _ _ _ _ _ \n" +
-            " _ O O O _ _ \n" +
-            "_ _ O _ X _ _ \n" +
-            " O O O O _ _ \n" +
-            "  _ _ _ _ _ \n" +
-            "   _ _ _ _ \n";
+    String resultStr = "   _ _ _ _\n" +
+            "  _ _ _ _ _\n" +
+            " _ O O O _ _\n" +
+            "_ _ O _ X _ _\n" +
+            " O O O O _ _\n" +
+            "  _ _ _ _ _\n" +
+            "   _ _ _ _";
     IReversiModel model = new ReversiModelImpl(4);
     model.placeTile(new Position3D(-2, 1, 1));
     model.placeTile(new Position3D(-3, 1, 2));

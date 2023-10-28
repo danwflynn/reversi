@@ -3,15 +3,16 @@ Overview:
 This project is a model and textview implementation of the game Reversi with a hexagonal grid as
 the game board as opposed to other versions which use a square or rectangle to represent a board.
 This code base contains 2 packages in its current state. There is a model package which manages
-the players (represented by their respective tiles), the board (which is inside the Reversi model
+the players (having their respective tiles), the board (which is inside the Reversi model
 class), and the rules of the game (also managed in Reversi model class). This code allows for
-multiple forms of extensibility. If someone wanted to add a third player, they could simply add a
-new tile type to the TileType enum, change the turn counter so that it cycles through 3 players
-instead of 2, and change the limit of the passes in a row counter to 3. If someone wanted to make
-a new version of the game (similar but with slightly different rules), they could extend the
-ReversiModelImpl class and override the necessary methods. In that case, the private fields and
-methods would need to become protected to be used. This current codebase also allows room for a
-controller and gui to be implemented as they are going to be future assignments.
+multiple forms of extensibility. If someone wanted to make a new version of the game (similar but
+with slightly different rules), they could extend the ReversiModelImpl class and override the
+necessary methods. In that case, the private fields and methods would need to become protected to
+be used. This current codebase also allows room for a controller and gui to be implemented as they
+are going to be future assignments. In addition to this, the player interface allows extensibility
+for future implementation with human and AI players. The player interface lets players make moves
+in the game, check their attributes, and see which moves are optimal (likely to be useful for AI
+version).
 
 Quick Start:
 @Test
@@ -74,6 +75,15 @@ Text view:
 There is a text view class and interface just like in the klondike project. Right now, there is
 just a toString method that gives the string representation of the game as specified by the
 assignment.
+
+Player Interface:
+The player interface currently doesn't have any class(es) that implement it because the assignment
+only requires that we DESIGN the interface. The player interface allows players to make moves when
+it is their turn by calling their respective pass and placeTile methods. There are also getters
+written to get the players' scores and tile types because they are going to be needed in certain
+situations. There are also 2 methods that get all available moves and the highest scoring move for
+a player. This could be especially useful for an AI implementation because an AI might want that
+specific information.
 
 Key Subcomponents:
 
