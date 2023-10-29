@@ -125,5 +125,6 @@ TileType: BLACK, WHITE, EMPTY enum
 TIle: Tile interface which represents player
 ReversiModelImpl: Manages the game's state, rules, and moves
 Position3D: Position represented by q r s cube coordinates (q + r + s == 0)
+Player: Player interface
 IReversiModel: Reversi model interface containing all methods that alter/check the game state
 GameTile: Implementation of a tile to be used in game

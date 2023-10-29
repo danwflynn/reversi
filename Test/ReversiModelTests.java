@@ -397,4 +397,45 @@ public class ReversiModelTests {
     copyModel.placeTile(new Position3D(-3, 1, 2));
     Assert.assertNotEquals(oldTextView.toString(), newTextView.toString());
   }
+
+  @Test
+  public void testFullGameRadius4() {
+    String resultStr = "   O O O O\n" +
+            "  O _ O _ O\n" +
+            " O X O O O O\n" +
+            "_ _ O _ O _ O\n" +
+            " X O X X X X\n" +
+            "  X _ X _ O\n" +
+            "   X O O O";
+    IReversiModel model = new ReversiModelImpl(4);
+    model.placeTile(new Position3D(2, -1, -1));
+    model.placeTile(new Position3D(3, -2, -1));
+    model.placeTile(new Position3D(3, -1, -2));
+    model.placeTile(new Position3D(3, 0, -3));
+    model.placeTile(new Position3D(-1, 2, -1));
+    model.placeTile(new Position3D(-2, 3, -1));
+    model.placeTile(new Position3D(-1, -1, 2));
+    model.placeTile(new Position3D(-2, -1, 3));
+    model.placeTile(new Position3D(-1, 3, -2));
+    model.placeTile(new Position3D(0, 3, -3));
+    model.placeTile(new Position3D(1, -2, 1));
+    model.placeTile(new Position3D(1, -3, 2));
+    model.placeTile(new Position3D(2, -3, 1));
+    model.placeTile(new Position3D(3, -3, 0));
+    model.placeTile(new Position3D(1, 1, -2));
+    model.placeTile(new Position3D(1, 2, -3));
+    model.placeTile(new Position3D(2, 1, -3));
+    model.placeTile(new Position3D(-2, 1, 1));
+    model.placeTile(new Position3D(-1, -2, 3));
+    model.placeTile(new Position3D(0, -3, 3));
+    model.placeTile(new Position3D(-3, 1, 2));
+    model.placeTile(new Position3D(-3, 2, 1));
+    model.placeTile(new Position3D(-3, 3, 0));
+    model.pass();
+    model.pass();
+    TextualView tv = new ReversiTextualView(model);
+    Assert.assertEquals(resultStr, tv.toString());
+    Assert.assertTrue(model.isGameOver());
+    Assert.assertTrue(model.getWhiteScore() > model.getBlackScore());
+  }
 }
