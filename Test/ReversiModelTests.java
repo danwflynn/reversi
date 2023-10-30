@@ -261,6 +261,16 @@ public class ReversiModelTests {
     Assert.assertTrue(model.isGameOver());
   }
 
+  @Test
+  public void testPassThrowsExceptionAfterGameEnds() {
+    IReversiModel model = new ReversiModelImpl(5);
+    model.pass();
+    model.pass();
+    Assert.assertThrows(IllegalStateException.class, () -> {
+      model.pass();
+    });
+  }
+
   @Test (expected = IllegalStateException.class)
   public void testGameOverPassException() {
     IReversiModel model = new ReversiModelImpl(6);
@@ -437,5 +447,26 @@ public class ReversiModelTests {
     Assert.assertEquals(resultStr, tv.toString());
     Assert.assertTrue(model.isGameOver());
     Assert.assertTrue(model.getWhiteScore() > model.getBlackScore());
+  }
+
+  @Test
+  public void testInitializeReversiModelRadiusOfOne() {
+    Assert.assertThrows(IllegalArgumentException.class, () -> {
+      IReversiModel model = new ReversiModelImpl(1);
+    });
+  }
+
+  @Test
+  public void testInitializeReversiModelRadiusOfZero() {
+    Assert.assertThrows(IllegalArgumentException.class, () -> {
+      IReversiModel model = new ReversiModelImpl(0);
+    });
+  }
+
+  @Test
+  public void testInitializeReversiModelRadiusOfNegativeOne() {
+    Assert.assertThrows(IllegalArgumentException.class, () -> {
+      IReversiModel model = new ReversiModelImpl(-1);
+    });
   }
 }

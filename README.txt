@@ -9,7 +9,7 @@ multiple forms of extensibility. If someone wanted to make a new version of the 
 with slightly different rules), they could extend the ReversiModelImpl class and override the
 necessary methods. In that case, the private fields and methods would need to become protected to
 be used. This current codebase also allows room for a controller and gui to be implemented as they
-are going to be future assignments. In addition to this, the player interface allows extensibility
+will be in future assignments. In addition to this, the player interface allows extensibility
 for future implementation with human and AI players. The player interface lets players make moves
 in the game, check their attributes, and see which moves are optimal (likely to be useful for AI
 version).

@@ -48,7 +48,7 @@ public class ReversiModelImpl implements IReversiModel {
         }
       }
     }
-    // INVARIANT: The q r and s values of every position on the board add to 0
+    // INVARIANT: The q, r, and s values of every position on the board add to 0
   }
 
   /**
@@ -97,7 +97,8 @@ public class ReversiModelImpl implements IReversiModel {
     this.passCounter += 1;
   }
 
-  private void placeTileBasicExceptions(Position3D pos) {
+  private void placeTileBasicExceptions(Position3D pos) throws IllegalStateException,
+          IllegalArgumentException {
     if (this.isGameOver()) {
       throw new IllegalStateException("The game is over");
     }
