@@ -27,18 +27,18 @@ public class ExampleTests {
   }
 
   /**
-   * Test exceptions for illegal arguments in constructors
+   * Test exceptions for illegal arguments in constructors.
    */
   @Test (expected = IllegalArgumentException.class)
   public void testPosition3DIllegalArguments() {
     // We use the cubic coordinate system for hexagonal grids
     // q r and s values must add to 0
-    Position3D badPos = new Position3D(1, 1, 1);
+    new Position3D(1, 1, 1);
   }
 
   @Test (expected = IllegalArgumentException.class)
   public void testBoardTooSmall() {
-    IReversiModel badModel = new ReversiModelImpl(1);
+    new ReversiModelImpl(1);
   }
 
   /**
