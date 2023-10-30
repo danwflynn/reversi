@@ -87,29 +87,44 @@ specific information.
 
 Key Subcomponents:
 
-Managing tiles:
-The GameTile class contains the TileType and its position using cube coordinates. The board field
-inside the model class is a list of Tile. There is a getTileAt(Position3D pos) which searches the
-list of the tile at that position. We return the actual tile (not a copy) because want to be able
-to flip the tile by using the setter that we created. The GameTile class implements a tile
-interface because the assignment specified that we need an interface for players and in this
-codebase, the players are represented by their given tiles.
+The game of Reversi is represented by the IReversiModel interface. Its implementation,
+ReversiModelImpl, acts as the base for all code related to the board and rule keeping.
+ - 'board' is the entire board of Reversi, which holds every Tile and their position.
+ - 'turn' marks whose turn it is. The game starts with Black, and alternates with White each turn.
+ - 'radius' is the radius of the hexagon, which is the distance from the center to a corner edge.
+ - 'blackScore' is the score of the player playing Black tiles.
+ - 'whiteScore' is the score of the player playing White tiles.
+ - 'passCounter' keeps track of the number of passes done in a row in the game. Two passes will
+        end the game.
 
-Flipping tiles when placing a tile:
-When you place a tile in Reversi, you flip over any tile lying along the straight line(s) starting
-at the tile you just places and ending at the tile(s) along the line(s) that is/are of the type of
-the placed tile. In our program, these lines are referred to as bridges. When you place a tile,
-you DFS for all available bridges from the position (throw illegal state if there are none) and
-then add the bridges (represented by List<Tile>) to a list of bridges (List<List<Tile>>). Once the
-list of generated, every tile inside of this 2d list that isn't of the turn type is flipped. These
-steps are all executed through the following private helper methods:
-private void placeTileBasicExceptions(Position3D pos)
-private void getAvailableBridgesHelper(Position3D pos, List<List<Tile>> bridges,
-                                        int qInc, int rInc, int sInc)
-private List<List<Tile>> getAvailableBridges(Position3D pos)
-private void flipBridge(List<Tile> bridge)
+Each tile's position is represented by the Position3D class. This class keeps track of where each
+tile is on the board, based on Cube Coordinates. A Position3D has three integer fields: q, r, and s.
+Each coordinate is one line slicing the hexagon grid in some way. As a position moves along these
+slices, its three values change to represent its coordinates:
+- 'q' represents one coordinate axis. This is a line slicing the hexagon grid from top left to
+        bottom right; as a Position3D moves perpendicular to this line, this value increases
+        (right) or decreases (left) in value.
+- 'r' represents another coordinate axis. This is a line slicing the hexagon grid from left to
+              right; as a Position3D moves perpendicular to this line, this value increases
+              (down) or decreases (up) in value.
+- 's' represents another coordinate axis. This is a line slicing the hexagon grid from top right to
+                    bottom left; as a Position3D moves perpendicular to this line, this value
+                    increases (right) or decreases (down) in value.
 
-There is also a private void helper called updateScore() which is called during placeTile().
+A TileType represents the values of each player in the game. These are used to represent tiles on
+the board, as well as whose turn it currently is in a game.
+- 'BLACK' represents the Black player.
+- 'WHITE' represents the White player.
+- 'EMPTY' represents an empty tile; this is not used in tracking whose turn it is.
+
+A Tile is the interface for a tile on the board. Its implementation, GameTile, has two fields: pos
+and tileType.
+- 'pos' The Position3D of this tile, which is where this tile can be found on the board.
+- 'tileType' What is on this tile, be it a white or black piece, or nothing.
+
+The TextualView is an interface for handling the textual representation of the game. Its
+implementation, ReversiTextualModel, has one field.
+- 'model' Is the model which the textual view is trying to visually recreate.
 
 Source Organization:
 
