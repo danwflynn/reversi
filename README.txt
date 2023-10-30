@@ -1,3 +1,14 @@
+IMPORTANT:
+The testing of this code base is split into two files that serve 2 different purposes.
+ReversiModelTests is all the testing done alongside the development of the components of the
+reversi model. ExampleTests is a reversi model tutorial for whoever is reading this. The setup for
+the ExampleTests class creates a reversi game model with radius 5 along with its text view. The
+tutorial starts with exceptions thrown by illegal constructor arguments, then it tests and
+demonstrates the starting conditions of the game. The next section is exceptions for moves that
+cannot be made. The next section demonstrates a play-through of a game where legal moves are being
+made in different situations that cover different cases. The final sections just verifies that the
+text view will work on different sizes.
+
 Overview:
 
 This project is a model and textview implementation of the game Reversi with a hexagonal grid as
@@ -38,6 +49,7 @@ This is an example of a test that makes legal moves and checks to see if the sco
 every single move.
 
 Key Components:
+Everything About Reversi Model:
 
 Here is how you create a new game:
 IReversi model = new ReversiModelImpl(4);
@@ -60,7 +72,7 @@ There is a field in the model (TileType turn) that keeps track of who's turn it 
 will switch back and forth between black and white whenever somebody passes or places a tile.
 
 How to place tiles:
-model.placeTile(new Position3D(-2, 1, 1);
+model.placeTile(new Position3D(-2, 1, 1));
 
 This method places a tile at the given position (using the q r s cube coordinate system for
 hexagonal grids) for whoever turn it is. Just like pass, it already knows whose turn it is because
@@ -98,7 +110,8 @@ ReversiModelImpl, acts as the base for all code related to the board and rule ke
         end the game.
 
 Each tile's position is represented by the Position3D class. This class keeps track of where each
-tile is on the board, based on Cube Coordinates. A Position3D has three integer fields: q, r, and s.
+tile is on the board, based on Cube Coordinates. A Position3D has three integer fields: q, r, and
+s.
 Each coordinate is one line slicing the hexagon grid in some way. As a position moves along these
 slices, its three values change to represent its coordinates:
 - 'q' represents one coordinate axis. This is a line slicing the hexagon grid from top left to
@@ -129,7 +142,9 @@ implementation, ReversiTextualModel, has one field.
 Source Organization:
 
 Test:
-ReversiModelTests: The entirety of the testing
+ReversiModelTests: The testing done alongside the development of the code base
+ExampleTests: A series of tests made after the model development with the purpose of showcasing
+important aspects of the game
 
 view:
 TextualView: Text view interface
