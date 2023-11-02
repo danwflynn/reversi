@@ -1,5 +1,3 @@
-package cs3500.reversi;
-
 import model.IReversiModel;
 import model.ReversiModelImpl;
 import view.IGraphicalView;
