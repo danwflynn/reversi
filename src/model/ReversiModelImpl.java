@@ -235,4 +235,46 @@ public class ReversiModelImpl implements IReversiModel {
     }
     return copyBoard;
   }
+
+  /**
+   * Is the move at the given position legal for whoever turn it is?
+   * @param pos position of potential move
+   * @return true if legal
+   */
+  @Override
+  public boolean isMoveLegal(Position3D pos) {
+    if (this.isGameOver()) {
+      return false;
+    }
+    if (!this.getTileAt(pos).getTileType().equals(TileType.EMPTY)) {
+      return false;
+    }
+    if (this.getAvailableBridges(pos).isEmpty()) {
+      return false;
+    }
+    boolean legality = false;
+    for (Tile t : this.board) {
+      if (t.getPos().equals(pos)) {
+        legality = true;
+      }
+    }
+    return legality;
+  }
+
+  /**
+   * Does the current player have a legal move?
+   *
+   * @return true if current player has legal move
+   */
+  @Override
+  public boolean hasLegalMove() {
+    for (Tile t : this.board) {
+      if (this.isMoveLegal(t.getPos())) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+
 }
