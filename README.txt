@@ -158,3 +158,15 @@ Position3D: Position represented by q r s cube coordinates (q + r + s == 0)
 Player: Player interface
 IReversiModel: Reversi model interface containing all methods that alter/check the game state
 GameTile: Implementation of a tile to be used in game
+
+____________________
+Changes for part 2
+
+We have created two new methods, isLegalMove and hasLegalMove, which check if there is the given
+position is a legal move for the current player in the model, and checks if there is any legal move
+on the board at all for the current player, respectively. isLegalMove takes a Position3D argument,
+and hasLegalMove takes no arguments.
+
+There is a new function, getCopyOfTileAt which returns a copy of the tile at the given position
+on the model's board which is only observable. The other method, getTileAt, returns the reference
+of the actual tile for mutation purposes.
