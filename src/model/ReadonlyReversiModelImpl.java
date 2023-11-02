@@ -124,4 +124,14 @@ public class ReadonlyReversiModelImpl implements ReadonlyIReversiModel {
   public boolean isMoveLegal(Position3D pos) {
     return this.model.isMoveLegal(pos);
   }
+
+  /**
+   * Does the current player have a legal move?
+   *
+   * @return true if current player has legal move
+   */
+  @Override
+  public boolean hasLegalMove() {
+    return this.model.hasLegalMove();
+  }
 }
