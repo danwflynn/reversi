@@ -2,6 +2,9 @@ package model;
 
 import java.util.List;
 
+/**
+ * A read only version of the IReversiModel. This cannot make changes to the model itself.
+ */
 public interface ReadonlyIReversiModel {
   /**
    * Gets a copy of the tile at a given position on the board.
