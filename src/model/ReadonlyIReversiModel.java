@@ -2,6 +2,9 @@ package model;
 
 import java.util.List;
 
+/**
+ * A read only version of the IReversiModel. This cannot make changes to the model itself.
+ */
 public interface ReadonlyIReversiModel {
   /**
    * Get the amount of hexagons starting from the center making a straight line to the edge.
