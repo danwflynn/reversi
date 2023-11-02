@@ -24,6 +24,13 @@ public class ReadonlyReversiModelImpl implements ReadonlyIReversiModel {
     this.model = new ReversiModelImpl(radius);
   }
 
+  /**
+   * Gets a copy of the tile at a given position on the board.
+   *
+   * @param pos position of tile
+   * @return copy of tile at the position
+   * @throws IllegalArgumentException if provided position is out of the bounds of the board
+   */
   @Override
   public Tile getCopyOfTileAt(Position3D pos) throws IllegalArgumentException {
     return this.model.getCopyOfTileAt(pos);
