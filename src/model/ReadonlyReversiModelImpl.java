@@ -23,6 +23,12 @@ public class ReadonlyReversiModelImpl implements ReadonlyIReversiModel {
   ReadonlyReversiModelImpl(int radius) {
     this.model = new ReversiModelImpl(radius);
   }
+
+  @Override
+  public Tile getCopyOfTileAt(Position3D pos) throws IllegalArgumentException {
+    return this.model.getCopyOfTileAt(pos);
+  }
+
   /**
    * Get the amount of hexagons starting from the center making a straight line to the edge.
    *
