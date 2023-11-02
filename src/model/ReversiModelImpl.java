@@ -75,6 +75,16 @@ public class ReversiModelImpl implements IReversiModel {
   }
 
   @Override
+  public Tile getCopyOfTileAt(Position3D pos) throws IllegalArgumentException {
+    for (Tile tile : this.board) {
+      if (tile.getPos().equals(pos)) {
+        return new GameTile(tile);
+      }
+    }
+    throw new IllegalArgumentException("This position is not on the board");
+  }
+
+  @Override
   public int getRadius() {
     return this.radius;
   }

@@ -7,6 +7,14 @@ import java.util.List;
  */
 public interface ReadonlyIReversiModel {
   /**
+   * Gets a copy of the tile at a given position on the board.
+   * @param pos position of tile
+   * @return copy of tile at the position
+   * @throws IllegalArgumentException if provided position is out of the bounds of the board
+   */
+  Tile getCopyOfTileAt(Position3D pos) throws IllegalArgumentException;
+
+  /**
    * Get the amount of hexagons starting from the center making a straight line to the edge.
    * @return radius
    */
