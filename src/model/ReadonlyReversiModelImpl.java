@@ -115,4 +115,13 @@ public class ReadonlyReversiModelImpl implements ReadonlyIReversiModel {
   public List<Tile> getCopyOfBoard() {
     return this.model.getCopyOfBoard();
   }
+
+  /**
+   * Is the move at the given position legal for whoever turn it is?
+   * @param pos position of potential move
+   * @return true if legal
+   */
+  public boolean isMoveLegal(Position3D pos) {
+    return this.model.isMoveLegal(pos);
+  }
 }

@@ -18,6 +18,7 @@ public interface ReadonlyIReversiModel {
    * Get the amount of hexagons starting from the center making a straight line to the edge.
    * @return radius
    */
+
   int getRadius();
 
   /**
@@ -62,5 +63,16 @@ public interface ReadonlyIReversiModel {
    */
   List<Tile> getCopyOfBoard();
 
+  /**
+   * Is the move at the given position legal for whoever turn it is?
+   * @param pos position of potential move
+   * @return true if legal
+   */
+  boolean isMoveLegal(Position3D pos);
 
+  /**
+   * Does the current player have a legal move?
+   * @return true if current player has legal move
+   */
+  boolean hasLegalMove();
 }
