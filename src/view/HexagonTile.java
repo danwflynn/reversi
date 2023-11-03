@@ -1,33 +1,53 @@
 package view;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.Path2D;
 
 public class HexagonTile extends JButton {
-  private Path2D hexTile = new Path2D.Float();
+  private Polygon hexagon;
+  private boolean isHighlighted;
 
-  public HexagonTile(String label) {
-    super(label);
-    setPreferredSize(new Dimension(100, 100));
-    int w = getWidth();
-    int h = getHeight();
-    hexTile.reset();
-    hexTile.moveTo(w / 2, 0);
-    hexTile.lineTo(w, h / 4);
-    hexTile.lineTo(w, 3 * h / 4);
-    hexTile.lineTo(w / 2, h);
-    hexTile.lineTo(0, 3 * h / 4);
-    hexTile.lineTo(0, h / 4);
-    hexTile.closePath();
+  public HexagonTile() {
+    hexagon = createHexagon();
+    setContentAreaFilled(false);
+    setBorderPainted(false);
+    isHighlighted = false;
+    addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        // Toggle the state when the button is clicked
+        isHighlighted = !isHighlighted;
+        // Repaint the button to reflect the change
+        repaint();
+      }
+    });
+  }
 
-
+  private Polygon createHexagon() {
+    Polygon polygon = new Polygon();
+    for (int i = 0; i < 6; i++) {
+      int x = (int) (50 * Math.cos(i * 2 * Math.PI / 6));
+      int y = (int) (50 * Math.sin(i * 2 * Math.PI / 6));
+      polygon.addPoint(x, y);
+    }
+    return polygon;
   }
 
   @Override
   protected void paintComponent(Graphics g) {
-    Graphics2D g2 = (Graphics2D) g;
-    g2.setColor(getBackground());
-    g2.fill(this.hexTile);
     super.paintComponent(g);
+    if (isHighlighted) {
+      g.setColor(Color.CYAN);
+      g.fillPolygon(hexagon);
+    }
+    g.setColor(Color.BLACK);
+    g.drawPolygon(hexagon);
+  }
+
+  @Override
+  public boolean contains(int x, int y) {
+    return hexagon.contains(x, y);
   }
 }
