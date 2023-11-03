@@ -68,4 +68,9 @@ public final class Position3D {
     result = 31 * result + s;
     return result;
   }
+
+  @Override
+  public String toString() {
+    return this.q + ", " + this.r + ", " + this.s;
+  }
 }

@@ -1,32 +1,22 @@
 package view;
 
-import java.awt.*;
-
 import javax.swing.*;
 
 import model.ReadonlyIReversiModel;
-import model.ReadonlyReversiModelImpl;
 
 public class ReversiGraphicalView extends JFrame implements IGraphicalView {
-  //private final ReadonlyIReversiModel model;
-  //private final JPanel canvas;
-  //private final JButton testButton;
+  private final ReadonlyIReversiModel model;
+
+  private BoardPanel boardPanel;
 
 
   public ReversiGraphicalView(ReadonlyIReversiModel model) {
-    /*
+    super();
     this.model = model;
-    //this.canvas = new JPanel();
-    this.testButton = new HexagonTile("testing");
-    this.setSize(1000, 1000);
+    this.setSize(800, 800);
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    getContentPane().add(testButton);
-    //canvas.setBackground(Color.BLUE);
-    //this.add(canvas, BorderLayout.EAST);
-    setVisible(true);*/
 
-
-
+    this.add(new BoardPanel(this.model));
   }
 
   /**
