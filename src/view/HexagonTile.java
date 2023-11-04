@@ -12,6 +12,7 @@ public class HexagonTile extends JButton {
   public HexagonTile() {
     hexagon = createHexagon();
     setContentAreaFilled(false);
+    setPreferredSize(new Dimension(150, 150));
     setBorderPainted(false);
     isHighlighted = false;
     addActionListener(new ActionListener() {

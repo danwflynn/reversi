@@ -22,6 +22,7 @@ public class BoardPanel extends JPanel {
     this.radius = model.getRadius();
     this.model = model;
     this.setLayout(null);
+    this.setPreferredSize(new Dimension(120 * radius, (int)(60 * radius * Math.sqrt(3))));
   }
 
   @Override
