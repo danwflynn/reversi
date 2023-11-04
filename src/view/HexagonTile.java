@@ -28,8 +28,8 @@ public class HexagonTile extends JButton {
   private Polygon createHexagon() {
     Polygon polygon = new Polygon();
     for (int i = 0; i < 6; i++) {
-      int x = (int) (50 * Math.cos(i * 2 * Math.PI / 6));
-      int y = (int) (50 * Math.sin(i * 2 * Math.PI / 6));
+      int x = (int) (50 + 50 * Math.cos(i * 2 * Math.PI / 6));
+      int y = (int) (50 + 50 * Math.sin(i * 2 * Math.PI / 6));
       polygon.addPoint(x, y);
     }
     return polygon;

@@ -20,10 +20,12 @@ public class ReversiGraphicalView extends JFrame implements IGraphicalView {
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     setLayout(new BorderLayout());
 
-    //this.add(new BoardPanel(this.model));
-    this.hex = new HexagonTile();
-    this.add(hex, BorderLayout.CENTER);
+    this.boardPanel = new BoardPanel(this.model);
+    this.add(boardPanel, BorderLayout.CENTER);
 
+    this.hex = new HexagonTile();
+    this.hex.setPreferredSize(new Dimension(100, 100));
+    this.add(hex, BorderLayout.EAST);
     this.setVisible(true);
   }
 

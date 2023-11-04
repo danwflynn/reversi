@@ -8,22 +8,27 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Path2D;
+import java.util.ArrayList;
 
 public class BoardPanel extends JPanel {
   private final int size; // Side length of the hexagon
   private final int radius;
   private final ReadonlyIReversiModel model;
 
+  private ArrayList<HexagonTile> hexagonTiles;
+
   public BoardPanel(ReadonlyIReversiModel model) {
     this.size = 30;
     this.radius = model.getRadius();
     this.model = model;
+    this.setLayout(null);
   }
 
   @Override
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
     Graphics2D g2d = (Graphics2D) g;
+    hexagonTiles = new ArrayList<HexagonTile>();
 
     // Get the size of the panel
     int width = getWidth();
