@@ -24,7 +24,6 @@ public class ReversiGraphicalView extends JFrame implements IGraphicalView {
     this.boardPanel.setBounds(50, 50, boardPrefSize.width, boardPrefSize.height);
     this.add(boardPanel);
 
-    System.out.println(this.boardPanel.getButtons().size() + " is the size");
     int ind = 1;
     for (HexagonTile h : this.boardPanel.getButtons()) {
       this.add(h);

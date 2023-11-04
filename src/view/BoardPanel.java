@@ -35,7 +35,8 @@ public class BoardPanel extends JPanel {
           if (t.getTileType().equals(TileType.EMPTY)) {
             HexagonTile hex = new HexagonTile();
             Dimension hexPrefSize = hex.getPreferredSize();
-            hex.setBounds((int) (385 + x), (int) (366 + y), hexPrefSize.width, hexPrefSize.height);
+//            System.out.println(hexPrefSize);
+            hex.setBounds((int) (385 + x), (int) (366 + y), 60, 60);
             this.hexagonTiles.add(hex);
           }
         } catch (IllegalArgumentException ignored) {
