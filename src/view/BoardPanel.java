@@ -2,6 +2,7 @@ package view;
 
 import model.Position3D;
 import model.ReadonlyIReversiModel;
+import model.Tile;
 import model.TileType;
 
 import javax.swing.*;
@@ -18,18 +19,36 @@ public class BoardPanel extends JPanel {
   private ArrayList<HexagonTile> hexagonTiles;
 
   public BoardPanel(ReadonlyIReversiModel model) {
-    this.size = 30;
     this.radius = model.getRadius();
+    this.size = 30;
     this.model = model;
+    this.hexagonTiles = new ArrayList<>();
     this.setLayout(null);
     this.setPreferredSize(new Dimension(120 * radius, (int)(60 * radius * Math.sqrt(3))));
+
+    int row = 0;
+    for (double y = -45 * this.radius + 45; y < 45 * this.radius; y = y + 45) {
+      double xStart = (-30 * Math.sqrt(3) * this.radius + Math.sqrt(3) * 30) + (15 * Math.sqrt(3) * Math.abs(model.getRadius() - 1 - row));
+      for (double x = xStart; x < 30 * Math.sqrt(3) * this.radius; x = x + 30 * Math.sqrt(3)) {
+        try {
+          Tile t = this.model.getCopyOfTileAt(this.getCubeCoordinates(x, y));
+          if (t.getTileType().equals(TileType.EMPTY)) {
+            HexagonTile hex = new HexagonTile();
+            Dimension hexPrefSize = hex.getPreferredSize();
+            hex.setBounds((int) (385 + x), (int) (366 + y), hexPrefSize.width, hexPrefSize.height);
+            this.hexagonTiles.add(hex);
+          }
+        } catch (IllegalArgumentException ignored) {
+        }
+      }
+      row += 1;
+    }
   }
 
   @Override
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
     Graphics2D g2d = (Graphics2D) g;
-    hexagonTiles = new ArrayList<HexagonTile>();
 
     // Get the size of the panel
     int width = getWidth();
@@ -51,7 +70,7 @@ public class BoardPanel extends JPanel {
 
   private void drawHexagon(Graphics2D g2d, double x, double y, int size) {
     Path2D path = new Path2D.Double();
-    double angle = Math.toRadians(60); // 30 degrees in radians
+    double angle = Math.toRadians(60); // 60 degrees in radians
 
     for (int i = 0; i < 6; i++) {
       double xPoint = x + size * Math.cos(i * angle);
@@ -79,12 +98,12 @@ public class BoardPanel extends JPanel {
 
     // Draw a small black circle if needed
     if (this.model.getCopyOfTileAt(this.getCubeCoordinates(x, y)).getTileType().equals(TileType.BLACK)) {
-      g2d.fillOval((int) x + 15, (int) y - 15, 30, 30);
+      g2d.fillOval((int) x + size / 2, (int) y - size / 2, size, size);
     }
     // Draw a white circle
     if (this.model.getCopyOfTileAt(this.getCubeCoordinates(x, y)).getTileType().equals(TileType.WHITE)) {
       g2d.setColor(Color.WHITE);
-      g2d.fillOval((int) x + 15, (int) y - 15, 30, 30);
+      g2d.fillOval((int) x + size / 2, (int) y - size / 2, size, size);
     }
     g2d.setColor(Color.GRAY);
   }
@@ -97,10 +116,13 @@ public class BoardPanel extends JPanel {
         }
       }
       if (row != 0 && row != 2 * ring) {
-        for (int i = 0; i < ring - Math.abs(ring - row); i ++) {
-          drawHexagon(g2d, x - ring * size * (Math.sqrt(3) / 2) + (ring - Math.abs(ring - row)) * size * (Math.sqrt(3) / 2) - Math.sqrt(3) * size - i * Math.sqrt(3) * size, 1.5 * size * (ring - row) + y, size);
-          drawHexagon(g2d, x + ring * size * (Math.sqrt(3) / 2) - (ring - Math.abs(ring - row)) * size * (Math.sqrt(3) / 2) + Math.sqrt(3) * size + i * Math.sqrt(3) * size, 1.5 * size * (ring - row) + y, size);
+        int i1 = ring - Math.abs(ring - row);
+        for (int i = 0; i < i1; i ++) {
+          double y1 = 1.5 * size * (ring - row) + y;
+          drawHexagon(g2d, x - ring * size * (Math.sqrt(3) / 2) + (i1) * size * (Math.sqrt(3) / 2) - Math.sqrt(3) * size - i * Math.sqrt(3) * size, y1, size);
+          drawHexagon(g2d, x + ring * size * (Math.sqrt(3) / 2) - (i1) * size * (Math.sqrt(3) / 2) + Math.sqrt(3) * size + i * Math.sqrt(3) * size, y1, size);
         }
+
       }
       if (row == 2 * ring) {
         for (int i = 0; i < ring + 1; i++) {
@@ -117,5 +139,9 @@ public class BoardPanel extends JPanel {
     int q = Math.max(col - row, -1 * this.model.getRadius() + 1 + col);
     int s = -1 * q - r;
     return new Position3D(q, r, s);
+  }
+
+  public ArrayList<HexagonTile> getButtons() {
+    return this.hexagonTiles;
   }
 }

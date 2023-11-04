@@ -8,7 +8,6 @@ import model.ReadonlyIReversiModel;
 
 public class ReversiGraphicalView extends JFrame implements IGraphicalView {
   private final ReadonlyIReversiModel model;
-  private final HexagonTile hex;
 
   private BoardPanel boardPanel;
 
@@ -25,19 +24,16 @@ public class ReversiGraphicalView extends JFrame implements IGraphicalView {
     this.boardPanel.setBounds(50, 50, boardPrefSize.width, boardPrefSize.height);
     this.add(boardPanel);
 
-    this.hex = new HexagonTile();
-    Dimension hexPrefSize = this.hex.getPreferredSize();
-    this.hex.setBounds(400, 400, hexPrefSize.width, hexPrefSize.height);
-    this.add(hex);
-
-    this.setComponentZOrder(this.hex, 1);
-    this.setComponentZOrder(this.boardPanel, 2);
+    System.out.println(this.boardPanel.getButtons().size() + " is the size");
+    int ind = 1;
+    for (HexagonTile h : this.boardPanel.getButtons()) {
+      this.add(h);
+      this.setComponentZOrder(h, ind);
+      ind++;
+    }
+    this.setComponentZOrder(this.boardPanel, ind);
 
     this.setVisible(true);
-
-    System.out.println(boardPrefSize);
-    System.out.println(hexPrefSize);
-
   }
 
   /**
