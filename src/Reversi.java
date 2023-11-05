@@ -6,7 +6,7 @@ import view.ReversiGraphicalView;
 
 public final class Reversi {
   public static void main(String[] args) {
-    IReversiModel model = new ReversiModelImpl(4);
+    IReversiModel model = new ReversiModelImpl(7);
 //    model.placeTile(new Position3D(2, -1, -1));
 //    model.placeTile(new Position3D(3, -2, -1));
 //    model.placeTile(new Position3D(3, -1, -2));

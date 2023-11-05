@@ -3,7 +3,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.geom.Path2D;
 
 public class HexagonTile extends JButton {
   private Polygon hexagon;
@@ -43,8 +42,8 @@ public class HexagonTile extends JButton {
       g.setColor(Color.CYAN);
       g.fillPolygon(hexagon);
     }
-    g.setColor(Color.BLACK);
-    g.drawPolygon(hexagon);
+//    g.setColor(Color.BLACK);
+//    g.drawPolygon(hexagon);
   }
 
   @Override
