@@ -10,10 +10,12 @@ public class HexagonTile extends JButton {
   private Polygon hexagon;
   private static HexagonTile highlightedButton;
   private BoardPanel boardPanel;
+  private ReversiGraphicalView reversiGraphicalView;
 
-  public HexagonTile(BoardPanel boardPanel) {
+  public HexagonTile(BoardPanel boardPanel, ReversiGraphicalView reversiGraphicalView) {
     hexagon = createHexagon();
     this.boardPanel = boardPanel;
+    this.reversiGraphicalView = reversiGraphicalView;
     setContentAreaFilled(false);
     setPreferredSize(new Dimension(150, 150));
     setBorderPainted(false);
@@ -29,6 +31,16 @@ public class HexagonTile extends JButton {
           }
           highlight();
           printCoordinates();
+        }
+      }
+    });
+
+    // Add a global mouse listener to detect clicks outside of buttons
+    this.reversiGraphicalView.addMouseListener(new MouseAdapter() {
+      @Override
+      public void mouseClicked(MouseEvent e) {
+        if (highlightedButton != null) {
+          highlightedButton.unhighlight();
         }
       }
     });

@@ -17,11 +17,13 @@ public class BoardPanel extends JPanel {
   private final ReadonlyIReversiModel model;
 
   private ArrayList<HexagonTile> hexagonTiles;
+  private ReversiGraphicalView reversiGraphicalView;
 
-  public BoardPanel(ReadonlyIReversiModel model) {
+  public BoardPanel(ReadonlyIReversiModel model, ReversiGraphicalView reversiGraphicalView) {
     this.radius = model.getRadius();
     this.size = 30;
     this.model = model;
+    this.reversiGraphicalView = reversiGraphicalView;
     this.hexagonTiles = new ArrayList<>();
     this.setLayout(null);
     this.setPreferredSize(new Dimension(120 * radius, (int)(60 * radius * Math.sqrt(3))));
@@ -37,7 +39,7 @@ public class BoardPanel extends JPanel {
         if (position3DArrayList.contains(this.getCubeCoordinates(x, y))) {
           Tile t = this.model.getCopyOfTileAt(this.getCubeCoordinates(x, y));
           if (t.getTileType().equals(TileType.EMPTY)) {
-            HexagonTile hex = new HexagonTile(this);
+            HexagonTile hex = new HexagonTile(this, this.reversiGraphicalView);
             hex.setBounds((int) (385.5 + x), (int) (366 + y), 60, 60);
             this.hexagonTiles.add(hex);
           }

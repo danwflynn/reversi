@@ -9,7 +9,7 @@ import model.ReadonlyIReversiModel;
 public class ReversiGraphicalView extends JFrame implements IGraphicalView {
   private final ReadonlyIReversiModel model;
 
-  private BoardPanel boardPanel;
+  private final BoardPanel boardPanel;
 
 
   public ReversiGraphicalView(ReadonlyIReversiModel model) {
@@ -19,7 +19,7 @@ public class ReversiGraphicalView extends JFrame implements IGraphicalView {
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     setLayout(null);
 
-    this.boardPanel = new BoardPanel(this.model);
+    this.boardPanel = new BoardPanel(this.model, this);
     Dimension boardPrefSize = this.boardPanel.getPreferredSize();
     this.boardPanel.setBounds(50, 50, boardPrefSize.width, boardPrefSize.height);
     this.add(boardPanel);
