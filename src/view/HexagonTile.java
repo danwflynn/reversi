@@ -3,24 +3,33 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class HexagonTile extends JButton {
   private Polygon hexagon;
-  private boolean isHighlighted;
+  private static HexagonTile highlightedButton;
+  private BoardPanel boardPanel;
 
-  public HexagonTile() {
+  public HexagonTile(BoardPanel boardPanel) {
     hexagon = createHexagon();
+    this.boardPanel = boardPanel;
     setContentAreaFilled(false);
     setPreferredSize(new Dimension(150, 150));
     setBorderPainted(false);
-    isHighlighted = false;
+
     addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        // Toggle the state when the button is clicked
-        isHighlighted = !isHighlighted;
-        // Repaint the button to reflect the change
-        repaint();
+        if (highlightedButton == HexagonTile.this) {
+          unhighlight();
+        } else {
+          if (highlightedButton != null) {
+            highlightedButton.unhighlight();
+          }
+          highlight();
+          printCoordinates();
+        }
       }
     });
   }
@@ -38,16 +47,25 @@ public class HexagonTile extends JButton {
   @Override
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
-    if (isHighlighted) {
+    if (this == highlightedButton) {
       g.setColor(Color.CYAN);
       g.fillPolygon(hexagon);
     }
-//    g.setColor(Color.BLACK);
-//    g.drawPolygon(hexagon);
   }
 
-  @Override
-  public boolean contains(int x, int y) {
-    return hexagon.contains(x, y);
+  private void highlight() {
+    highlightedButton = this;
+    repaint();
+  }
+
+  private void unhighlight() {
+    highlightedButton = null;
+    repaint();
+  }
+
+  private void printCoordinates() {
+    int xCoord = this.getLocation().x;
+    int yCoord = this.getLocation().y;
+    System.out.println("Button cube coordinates: " + this.boardPanel.getCubeCoordinates(xCoord, yCoord));
   }
 }

@@ -30,15 +30,17 @@ public class BoardPanel extends JPanel {
     for (double y = -45 * this.radius + 45; y < 45 * this.radius; y = y + 45) {
       double xStart = (-30 * Math.sqrt(3) * this.radius + Math.sqrt(3) * 30) + (15 * Math.sqrt(3) * Math.abs(model.getRadius() - 1 - row));
       for (double x = xStart; x < 30 * Math.sqrt(3) * this.radius; x = x + 30 * Math.sqrt(3)) {
-        try {
+        ArrayList<Position3D> position3DArrayList = new ArrayList<>();
+        for (Tile t : this.model.getCopyOfBoard()) {
+          position3DArrayList.add(t.getPos());
+        }
+        if (position3DArrayList.contains(this.getCubeCoordinates(x, y))) {
           Tile t = this.model.getCopyOfTileAt(this.getCubeCoordinates(x, y));
           if (t.getTileType().equals(TileType.EMPTY)) {
-            HexagonTile hex = new HexagonTile();
-            Dimension hexPrefSize = hex.getPreferredSize();
+            HexagonTile hex = new HexagonTile(this);
             hex.setBounds((int) (385.5 + x), (int) (366 + y), 60, 60);
             this.hexagonTiles.add(hex);
           }
-        } catch (IllegalArgumentException ignored) {
         }
       }
       row += 1;
@@ -132,7 +134,7 @@ public class BoardPanel extends JPanel {
     }
   }
 
-  private Position3D getCubeCoordinates(double x, double y) {
+  public Position3D getCubeCoordinates(double x, double y) {
     int r = (int)Math.ceil((y - getHeight() / 2 - size / 2) / (1.5 * size));
     int row = r + this.model.getRadius() - 1;
     int col = ((int)((x - getWidth() / 2 - size / 2 + size) / (Math.sqrt(3) / 2 * size)) + 2 * (this.model.getRadius() - 1) - Math.abs(r)) / 2;
