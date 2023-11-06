@@ -1,4 +1,6 @@
 package view;
+import model.Position3D;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,15 +9,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class HexagonTile extends JButton {
-  private Polygon hexagon;
+  private final Polygon hexagon;
   private static HexagonTile highlightedButton;
-  private BoardPanel boardPanel;
-  private ReversiGraphicalView reversiGraphicalView;
+  private final Position3D cubeCoords;
 
-  public HexagonTile(BoardPanel boardPanel, ReversiGraphicalView reversiGraphicalView) {
+  public HexagonTile(Position3D cubeCoords, ReversiGraphicalView reversiGraphicalView) {
+    this.cubeCoords = cubeCoords;
     hexagon = createHexagon();
-    this.boardPanel = boardPanel;
-    this.reversiGraphicalView = reversiGraphicalView;
     setContentAreaFilled(false);
     setPreferredSize(new Dimension(150, 150));
     setBorderPainted(false);
@@ -36,7 +36,7 @@ public class HexagonTile extends JButton {
     });
 
     // Add a global mouse listener to detect clicks outside of buttons
-    this.reversiGraphicalView.addMouseListener(new MouseAdapter() {
+    reversiGraphicalView.addMouseListener(new MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
         if (highlightedButton != null) {
@@ -76,8 +76,6 @@ public class HexagonTile extends JButton {
   }
 
   private void printCoordinates() {
-    int xCoord = this.getLocation().x;
-    int yCoord = this.getLocation().y;
-    System.out.println("Button cube coordinates: " + this.boardPanel.getCubeCoordinates(xCoord, yCoord));
+    System.out.println("Button cube coordinates: " + this.cubeCoords);
   }
 }
