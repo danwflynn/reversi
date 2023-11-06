@@ -5,15 +5,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class HexagonTile extends JButton {
   private final Polygon hexagon;
   private static HexagonTile highlightedButton;
   private final Position3D cubeCoords;
 
-  public HexagonTile(Position3D cubeCoords, ReversiGraphicalView reversiGraphicalView) {
+  public HexagonTile(Position3D cubeCoords) {
     this.cubeCoords = cubeCoords;
     hexagon = createHexagon();
     setContentAreaFilled(false);
@@ -31,16 +29,6 @@ public class HexagonTile extends JButton {
           }
           highlight();
           printCoordinates();
-        }
-      }
-    });
-
-    // Add a global mouse listener to detect clicks outside of buttons
-    reversiGraphicalView.addMouseListener(new MouseAdapter() {
-      @Override
-      public void mouseClicked(MouseEvent e) {
-        if (highlightedButton != null) {
-          highlightedButton.unhighlight();
         }
       }
     });
@@ -65,6 +53,10 @@ public class HexagonTile extends JButton {
     }
   }
 
+  HexagonTile getHighlightedButton() {
+    return highlightedButton;
+  }
+
   private void highlight() {
     highlightedButton = this;
     repaint();
@@ -73,6 +65,10 @@ public class HexagonTile extends JButton {
   private void unhighlight() {
     highlightedButton = null;
     repaint();
+  }
+
+  void changeSelection() {
+    highlightedButton.unhighlight();
   }
 
   private void printCoordinates() {

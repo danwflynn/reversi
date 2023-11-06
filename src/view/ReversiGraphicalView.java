@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.*;
 
@@ -19,13 +21,21 @@ public class ReversiGraphicalView extends JFrame implements IGraphicalView {
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     setLayout(null);
 
-    this.boardPanel = new BoardPanel(this.model, this);
+    this.boardPanel = new BoardPanel(this.model);
     Dimension boardPrefSize = this.boardPanel.getPreferredSize();
     this.boardPanel.setBounds(50, 50, boardPrefSize.width, boardPrefSize.height);
     this.add(boardPanel);
 
     int ind = 1;
     for (HexagonTile h : this.boardPanel.getButtons()) {
+      this.addMouseListener(new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+          if (h.getHighlightedButton() != null) {
+            h.changeSelection();
+          }
+        }
+      });
       this.add(h);
       this.setComponentZOrder(h, ind);
       ind++;
@@ -33,6 +43,7 @@ public class ReversiGraphicalView extends JFrame implements IGraphicalView {
     this.setComponentZOrder(this.boardPanel, ind);
 
     this.setVisible(true);
+    this.setResizable(false);
   }
 
   /**

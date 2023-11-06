@@ -19,7 +19,7 @@ public class BoardPanel extends JPanel {
   private final ArrayList<HexagonTile> hexagonTiles;
   // reversi graphical view is passed down through the constructor to the buttons
 
-  public BoardPanel(ReadonlyIReversiModel model, ReversiGraphicalView reversiGraphicalView) {
+  public BoardPanel(ReadonlyIReversiModel model) {
     this.radius = model.getRadius();
     this.size = 30;
     this.model = model;
@@ -38,7 +38,8 @@ public class BoardPanel extends JPanel {
         if (position3DArrayList.contains(this.getCubeCoordinates(x, y))) {
           // Tile t = this.model.getCopyOfTileAt(this.getCubeCoordinates(x, y));
           // You can make it so buttons only go on empty cells by adding an if block (t = empty)
-          HexagonTile hex = new HexagonTile(this.getCubeCoordinates(x, y), reversiGraphicalView);
+
+          HexagonTile hex = new HexagonTile(this.getCubeCoordinates(x, y));
           hex.setBounds((int) (385.5 + x), (int) (366 + y), 60, 60);
           this.hexagonTiles.add(hex);
         }
