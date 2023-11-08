@@ -18,4 +18,25 @@ public class ReadOnlyReversiModelTests {
     Position3D pos = new Position3D(-3, -2, 5);
     Assert.assertEquals("-3, -2, 5", pos.toString());
   }
+
+  @Test
+  public void testGetDistanceFromTwoBelow() {
+    Position3D pos1 = new Position3D(0, -3, 3);
+    Position3D pos2 = new Position3D(-2, -1, 3);
+    Assert.assertEquals(2, pos1.getDistanceFrom(pos2));
+  }
+
+  @Test
+  public void testGetDistanceFromTwoRight() {
+    Position3D pos1 = new Position3D(0, -3, 3);
+    Position3D pos2 = new Position3D(2, -3, 1);
+    Assert.assertEquals(2, pos1.getDistanceFrom(pos2));
+  }
+
+  @Test
+  public void testGetDistanceFromOneRight() {
+    Position3D pos1 = new Position3D(0, -3, 3);
+    Position3D pos2 = new Position3D(1, -3, 2);
+    Assert.assertEquals(1, pos1.getDistanceFrom(pos2));
+  }
 }
