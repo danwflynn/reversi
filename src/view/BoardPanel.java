@@ -19,18 +19,28 @@ public class BoardPanel extends JPanel {
   private final ArrayList<HexagonTile> hexagonTiles;
   // reversi graphical view is passed down through the constructor to the buttons
 
-  public BoardPanel(ReadonlyIReversiModel model) {
+  private final int width;
+  private final int height;
+
+  public BoardPanel(ReadonlyIReversiModel model, int width, int height) {
+    int size1;
     this.radius = model.getRadius();
-    this.size = 30;
+    size1 = 30;
+    if (this.radius > 8) {
+      size1 = 25;
+    }
+    this.size = size1;
     this.model = model;
+    this.width = width;
+    this.height = height;
     this.hexagonTiles = new ArrayList<>();
     this.setLayout(null);
     this.setPreferredSize(new Dimension(120 * radius, (int)(60 * radius * Math.sqrt(3))));
 
     int row = 0;
-    for (double y = -45 * this.radius + 45; y < 45 * this.radius; y = y + 45) {
-      double xStart = (-30 * Math.sqrt(3) * this.radius + Math.sqrt(3) * 30) + (15 * Math.sqrt(3) * Math.abs(model.getRadius() - 1 - row));
-      for (double x = xStart; x < 30 * Math.sqrt(3) * this.radius; x = x + 30 * Math.sqrt(3)) {
+    for (double y = -1.5 * size * this.radius + 1.5 * size; y < 1.5 * size * this.radius; y = y + 1.5 * size) {
+      double xStart = (-1 * size * Math.sqrt(3) * this.radius + Math.sqrt(3) * size) + (size / 2 * Math.sqrt(3) * Math.abs(model.getRadius() - 1 - row));
+      for (double x = xStart; x < size * Math.sqrt(3) * this.radius; x = x + size * Math.sqrt(3)) {
         ArrayList<Position3D> position3DArrayList = new ArrayList<>();
         for (Tile t : this.model.getCopyOfBoard()) {
           position3DArrayList.add(t.getPos());
@@ -39,8 +49,19 @@ public class BoardPanel extends JPanel {
           // Tile t = this.model.getCopyOfTileAt(this.getCubeCoordinates(x, y));
           // You can make it so buttons only go on empty cells by adding an if block (t = empty)
 
-          HexagonTile hex = new HexagonTile(this.getCubeCoordinates(x, y));
-          hex.setBounds((int) (385.5 + x), (int) (366 + y), 60, 60);
+          HexagonTile hex = new HexagonTile(this.getCubeCoordinates(x, y), this.size);
+          int yOffset = 0;
+          if (this.size == 25) {
+            yOffset = 2;
+          }
+          int xOffset = 0;
+          if (this.size == 25) {
+            xOffset = (int)(-1 * Math.abs(y / 40));
+          }
+          int xBound = (int) (this.width / 2 - size / 2 + x + 0.5) - xOffset;
+          int yBound = (int) (this.height / 2 - 34 * size / 30 + y) + yOffset;
+
+          hex.setBounds(xBound, yBound, size * 2, size * 2);
           this.hexagonTiles.add(hex);
         }
       }
