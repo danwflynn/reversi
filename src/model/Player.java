@@ -43,6 +43,7 @@ public interface Player {
    * Gets the position that increases the player's score the most out of all possible moves.
    * @return position for move that maximizes score increase
    * @throws IllegalStateException if it isn't the player's turn
+   * @throws IllegalStateException if there are no legal moves
    */
   Position3D getHighestScoringMove() throws IllegalStateException;
 }

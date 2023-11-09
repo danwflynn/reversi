@@ -50,6 +50,10 @@ public final class Position3D {
     return Math.max(Math.max(Math.abs(q), Math.abs(r)), Math.abs(s));
   }
 
+  public int getDistanceFrom(Position3D pos) {
+    return (Math.abs(this.q - pos.q) + Math.abs(this.r - pos.r) + Math.abs(this.s - pos.s)) / 2;
+  }
+
   @Override
   public boolean equals(Object other) {
     if (!(other instanceof Position3D)) {

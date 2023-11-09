@@ -249,7 +249,14 @@ public class ReversiModelImpl implements IReversiModel {
     if (!this.getTileAt(pos).getTileType().equals(TileType.EMPTY)) {
       return false;
     }
-    if (this.getAvailableBridges(pos).isEmpty()) {
+    boolean noBridges = true;
+    for (List<Tile> l : this.getAvailableBridges(pos)) {
+      if (!l.isEmpty()) {
+        noBridges = false;
+        break;
+      }
+    }
+    if (noBridges) {
       return false;
     }
     boolean legality = false;
