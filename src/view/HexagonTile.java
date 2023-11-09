@@ -83,6 +83,10 @@ public class HexagonTile extends JButton {
       g.setColor(Color.CYAN);
       g.fillPolygon(hexagon);
     }
+//    } else {
+//      g.setColor(Color.GREEN);
+//      g.fillPolygon(hexagon);
+//    }
   }
 
   HexagonTile getHighlightedButton() {
