@@ -34,26 +34,52 @@ public final class Position3D {
     this.s = pos.getS();
   }
 
+  /**
+   * Get the Q value for this Position3D.
+   * @return This Position3D's 'q' value.
+   */
   public int getQ() {
     return q;
   }
 
+  /**
+   * Get the R value for this Position3D.
+   * @return This Position3D's 'r' value.
+   */
   public int getR() {
     return r;
   }
 
+  /**
+   * Get the S value for this Position3D.
+   * @return This Position3D's 's' value.
+   */
   public int getS() {
     return s;
   }
 
+  /**
+   * Gets the farthest direction of the three values of the Position3D.
+   * @return The furthest direction as an int
+   */
   public int getFarthestDirection() {
     return Math.max(Math.max(Math.abs(q), Math.abs(r)), Math.abs(s));
   }
 
+  /**
+   * Gets the distance from this Position3D to the given Position3D.
+   * @param pos The other position to compare to
+   * @return The distance in number of hexagons to traverse to get to the given Position3D
+   */
   public int getDistanceFrom(Position3D pos) {
     return (Math.abs(this.q - pos.q) + Math.abs(this.r - pos.r) + Math.abs(this.s - pos.s)) / 2;
   }
 
+  /**
+   * Determines if this Position3D is the same position as the given Object.
+   * @param other The object to compare to
+   * @return 'true' if the two Position3D's are the same, and false otherwise.
+   */
   @Override
   public boolean equals(Object other) {
     if (!(other instanceof Position3D)) {
@@ -64,6 +90,10 @@ public final class Position3D {
     }
   }
 
+  /**
+   * Gets the hashCode of this Position3D, which is made by its three parameters.
+   * @return The hashCode of this Position3D as an int
+   */
   @Override
   public int hashCode() {
     int result = 17; // A prime number to start with
@@ -73,6 +103,10 @@ public final class Position3D {
     return result;
   }
 
+  /**
+   * Represents this Position3D as a String.
+   * @return This Position3D's values in a comma separated String.
+   */
   @Override
   public String toString() {
     return this.q + ", " + this.r + ", " + this.s;
