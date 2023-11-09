@@ -26,6 +26,10 @@ public class GameTile implements Tile {
     this.tileType = t.getTileType();
   }
 
+  /**
+   * Sets the tile type of this Tile.
+   * @param t The tileType to set on this Tile.
+   */
   @Override
   public void setTileType(TileType t) {
     if (!this.tileType.equals(TileType.EMPTY) && t.equals(TileType.EMPTY)) {
@@ -34,16 +38,28 @@ public class GameTile implements Tile {
     this.tileType = t;
   }
 
+  /**
+   * Gets this Tile's tile type.
+   * @return The tileType parameter of this Tile.
+   */
   @Override
   public TileType getTileType() {
     return tileType;
   }
 
+  /**
+   * Gets this Tile's position.
+   * @return The position of this Tile
+   */
   @Override
   public Position3D getPos() {
     return new Position3D(this.pos);
   }
 
+  /**
+   * Turns the Tile into its respective String representative.
+   * @return 'X' for player black, 'O' for player white, and '_' if empty.
+   */
   @Override
   public String toString() {
     if (this.tileType.equals(TileType.BLACK)) {
