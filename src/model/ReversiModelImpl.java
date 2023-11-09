@@ -64,6 +64,12 @@ public class ReversiModelImpl implements IReversiModel {
     this.passCounter = rm.getPassesInARow();
   }
 
+  /**
+   * Gets the Tile on the board at the given position.
+   * @param pos coordinates as a position type
+   * @return The Tile at the given position.
+   * @throws IllegalArgumentException If the position is not on the board.
+   */
   @Override
   public Tile getTileAt(Position3D pos) throws IllegalArgumentException {
     for (Tile tile : this.board) {
@@ -74,6 +80,12 @@ public class ReversiModelImpl implements IReversiModel {
     throw new IllegalArgumentException("This position is not on the board");
   }
 
+  /**
+   * Gets a copy of the tile at the given position.
+   * @param pos position of tile
+   * @return A copy of the Tile at the given position.
+   * @throws IllegalArgumentException If the position is not on the board.
+   */
   @Override
   public Tile getCopyOfTileAt(Position3D pos) throws IllegalArgumentException {
     for (Tile tile : this.board) {
@@ -84,16 +96,28 @@ public class ReversiModelImpl implements IReversiModel {
     throw new IllegalArgumentException("This position is not on the board");
   }
 
+  /**
+   * Gets the radius of the board.
+   * @return The radius as an int.
+   */
   @Override
   public int getRadius() {
     return this.radius;
   }
 
+  /**
+   * Gets whose turn it currently is.
+   * @return The player whose turn it is.
+   */
   @Override
   public TileType getTurn() {
     return this.turn;
   }
 
+  /**
+   * Passes to the next player.
+   * @throws IllegalStateException If the game is already over.
+   */
   @Override
   public void pass() throws IllegalStateException {
     if (this.isGameOver()) {
@@ -107,6 +131,12 @@ public class ReversiModelImpl implements IReversiModel {
     this.passCounter += 1;
   }
 
+  /**
+   * Finds exceptions to placing Tiles and throws appropriate exceptions.
+   * @param pos The position that is being placed on.
+   * @throws IllegalStateException If the game is over or if there is already a tile there
+   * @throws IllegalArgumentException If the position is not on the board.
+   */
   private void placeTileBasicExceptions(Position3D pos) throws IllegalStateException,
           IllegalArgumentException {
     if (this.isGameOver()) {
