@@ -3,6 +3,10 @@ import org.junit.Test;
 
 import javax.swing.text.Position;
 
+import model.AIPlayer;
+import model.IReversiModel;
+import model.MockModel;
+import model.Player;
 import model.Position3D;
 
 public class ReadOnlyReversiModelTests {
@@ -45,5 +49,11 @@ public class ReadOnlyReversiModelTests {
     Position3D pos1 = new Position3D(0, -3, 3);
     Position3D pos2 = new Position3D(0, -3, 3);
     Assert.assertEquals(0, pos1.getDistanceFrom(pos2));
+  }
+
+  @Test
+  public void testMockChecksAllPositionsForBestMove() {
+    IReversiModel mock = new MockModel();
+    Player player = new AIPlayer();
   }
 }

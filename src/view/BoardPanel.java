@@ -35,7 +35,7 @@ public class BoardPanel extends JPanel {
     this.height = height;
     this.hexagonTiles = new ArrayList<>();
     this.setLayout(null);
-    this.setPreferredSize(new Dimension(120 * radius, (int)(60 * radius * Math.sqrt(3))));
+    //this.setPreferredSize(new Dimension(120 * radius, (int)(60 * radius * Math.sqrt(3))));
 
     int row = 0;
     for (double y = -1.5 * size * this.radius + 1.5 * size; y < 1.5 * size * this.radius; y = y + 1.5 * size) {

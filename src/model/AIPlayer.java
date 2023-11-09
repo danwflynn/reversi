@@ -3,11 +3,19 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A class representing an AI Player.
+ */
 public class AIPlayer implements Player {
 
   private final TileType playerColor;
   private final IReversiModel model;
 
+  /**
+   * Constructs an AIPlayer.
+   * @param playerColor The color of the player
+   * @param model The model to use as reference for the player
+   */
   public AIPlayer(TileType playerColor, IReversiModel model) {
     if (playerColor.equals(TileType.EMPTY)) {
       throw new IllegalArgumentException("Player cannot be represented by an empty piece.");
