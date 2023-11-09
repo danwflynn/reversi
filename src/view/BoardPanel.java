@@ -25,10 +25,10 @@ public class BoardPanel extends JPanel {
   public BoardPanel(ReadonlyIReversiModel model, int width, int height) {
     int size1;
     this.radius = model.getRadius();
-    size1 = 30;
-    if (this.radius > 8) {
-      size1 = 25;
-    }
+    size1 = 240 / radius;
+//    if (this.radius > 8) {
+//      size1 = 25;
+//    }
     this.size = size1;
     this.model = model;
     this.width = width;
@@ -120,15 +120,26 @@ public class BoardPanel extends JPanel {
     g2d.setStroke(new BasicStroke(2.0f));
     g2d.draw(path);
 
-    // Draw a small black circle if needed
-    if (this.model.getCopyOfTileAt(this.getCubeCoordinates(x, y)).getTileType().equals(TileType.BLACK)) {
-      g2d.fillOval((int) x + size / 2, (int) y - size / 2, size, size);
-    }
-    // Draw a white circle
-    if (this.model.getCopyOfTileAt(this.getCubeCoordinates(x, y)).getTileType().equals(TileType.WHITE)) {
-      g2d.setColor(Color.WHITE);
-      g2d.fillOval((int) x + size / 2, (int) y - size / 2, size, size);
-    }
+//    // Draw a small black circle if needed
+//    if (this.model.getCopyOfTileAt(this.getCubeCoordinates(x, y)).getTileType().equals(TileType.BLACK)) {
+//      drawBlackPiece(g2d, x, y, size);
+//    }
+//    // Draw a white circle
+//    if (this.model.getCopyOfTileAt(this.getCubeCoordinates(x, y)).getTileType().equals(TileType.WHITE)) {
+//      drawWhitePiece(g2d, x, y, size);
+//    }
+    g2d.setColor(Color.GRAY);
+  }
+
+  private void drawBlackPiece(Graphics2D g2d, double x, double y, int size) {
+    g2d.setColor(Color.BLACK);
+    g2d.fillOval((int) x + size / 2, (int) y - size / 2, size, size);
+    g2d.setColor(Color.GRAY);
+  }
+
+  private void drawWhitePiece(Graphics2D g2d, double x, double y, int size) {
+    g2d.setColor(Color.WHITE);
+    g2d.fillOval((int) x + size / 2, (int) y - size / 2, size, size);
     g2d.setColor(Color.GRAY);
   }
 
@@ -136,23 +147,71 @@ public class BoardPanel extends JPanel {
     for (int row = 0; row < 2 * ring + 1; row++) {
       if (row == 0) {
         for (int i = 0; i < ring + 1; i++) {
-          drawHexagon(g2d, -1 * size * (Math.sqrt(3) / 2) * ring + Math.sqrt(3) * size * i + x, 1.5 * size * ring + y, size);
+          double x1 = -1 * size * (Math.sqrt(3) / 2) * ring + Math.sqrt(3) * size * i + x;
+          drawHexagon(g2d, x1, 1.5 * size * ring + y, size);
+          int s = -1 * i;
+          int q = -1 * s - ring;
+          if (this.model.getCopyOfTileAt(new Position3D(q, ring, s)).getTileType().equals(TileType.BLACK)) {
+            drawBlackPiece(g2d, x1, 1.5 * size * ring + y, size);
+          }
+          if (this.model.getCopyOfTileAt(new Position3D(q, ring, s)).getTileType().equals(TileType.WHITE)) {
+            drawWhitePiece(g2d, x1, 1.5 * size * ring + y, size);
+          }
         }
       }
       if (row != 0 && row != 2 * ring) {
         int i1 = ring - Math.abs(ring - row);
-        for (int i = 0; i < i1; i ++) {
+        for (int i = 0; i < i1; i++) {
           double y1 = 1.5 * size * (ring - row) + y;
-          drawHexagon(g2d, x - ring * size * (Math.sqrt(3) / 2) + (i1) * size * (Math.sqrt(3) / 2) - Math.sqrt(3) * size - i * Math.sqrt(3) * size, y1, size);
-          drawHexagon(g2d, x + ring * size * (Math.sqrt(3) / 2) - (i1) * size * (Math.sqrt(3) / 2) + Math.sqrt(3) * size + i * Math.sqrt(3) * size, y1, size);
+          double x1 = x - ring * size * (Math.sqrt(3) / 2) + (i1) * size
+                  * (Math.sqrt(3) / 2) - Math.sqrt(3) * size - i * Math.sqrt(3) * size;
+          drawHexagon(g2d, x1, y1, size);
+          double x2 = x + ring * size * (Math.sqrt(3) / 2) - (i1) * size
+                  * (Math.sqrt(3) / 2) + Math.sqrt(3) * size + i * Math.sqrt(3) * size;
+          drawHexagon(g2d, x2, y1, size);
+          int r = -1 * (row - radius + 1);
+          int q = -1 * i - 1;
+          if (row < ring) {
+            q *= -1;
+          }
+          int s = -1 * q - r;
+          if (row >= ring) {
+            drawingPiecesHelper(g2d, y1, x1, x2, r, q, s);
+          } else {
+            drawingPiecesHelper(g2d, y1, x1, x2, r, s, q);
+          }
         }
 
       }
       if (row == 2 * ring) {
         for (int i = 0; i < ring + 1; i++) {
-          drawHexagon(g2d, -1 * size * (Math.sqrt(3) / 2) * ring + Math.sqrt(3) * size * i + x, -1.5 * size * ring + y, size);
+          double x1 = -1 * size * (Math.sqrt(3) / 2) * ring + Math.sqrt(3) * size * i + x;
+          drawHexagon(g2d, x1, -1.5 * size * ring + y, size);
+          int r = -1 * ring;
+          int q = -1 * i - r;
+          if (this.model.getCopyOfTileAt(new Position3D(i, r, q)).getTileType().equals(TileType.BLACK)) {
+            drawBlackPiece(g2d, x1, -1.5 * size * ring + y, size);
+          }
+          if (this.model.getCopyOfTileAt(new Position3D(i, r, q)).getTileType().equals(TileType.WHITE)) {
+            drawWhitePiece(g2d, x1, -1.5 * size * ring + y, size);
+          }
         }
       }
+    }
+  }
+
+  private void drawingPiecesHelper(Graphics2D g2d, double y1, double x1, double x2, int r, int q, int s) {
+    if (this.model.getCopyOfTileAt(new Position3D(q, r, s)).getTileType().equals(TileType.BLACK)) {
+      drawBlackPiece(g2d, x1, y1, size);
+    }
+    if (this.model.getCopyOfTileAt(new Position3D(q, r, s)).getTileType().equals(TileType.WHITE)) {
+      drawWhitePiece(g2d, x1, y1, size);
+    }
+    if (this.model.getCopyOfTileAt(new Position3D(s, r, q)).getTileType().equals(TileType.BLACK)) {
+      drawBlackPiece(g2d, x2, y1, size);
+    }
+    if (this.model.getCopyOfTileAt(new Position3D(s, r, q)).getTileType().equals(TileType.WHITE)) {
+      drawWhitePiece(g2d, x2, y1, size);
     }
   }
 
