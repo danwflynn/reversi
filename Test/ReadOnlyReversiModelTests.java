@@ -53,7 +53,7 @@ public class ReadOnlyReversiModelTests {
 
   @Test
   public void testMockChecksAllPositionsForBestMove() {
-    IReversiModel mock = new MockModel();
-    Player player = new AIPlayer();
+    //IReversiModel mock = new MockModel();
+    //Player player = new AIPlayer();
   }
 }

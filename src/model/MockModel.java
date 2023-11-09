@@ -2,6 +2,9 @@ package model;
 
 import java.util.List;
 
+/**
+ * A Mock model of Reversi for testing the validity of inputs and checks.
+ */
 public class MockModel extends ReversiModelImpl {
 
   private StringBuilder log;
@@ -166,7 +169,7 @@ public class MockModel extends ReversiModelImpl {
   }
 
   /**
-   * Returns this mock's log.
+   * Returns the log of this mock.
    * @return The log value of this mock.
    */
   public StringBuilder getLog() {
