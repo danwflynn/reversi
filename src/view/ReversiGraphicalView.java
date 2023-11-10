@@ -12,7 +12,6 @@ public class ReversiGraphicalView extends JFrame implements IGraphicalView {
   private final ReadonlyIReversiModel model;
 
   private final BoardPanel boardPanel;
-  JScrollPane scrollbarPanel;
 
 
   public ReversiGraphicalView(ReadonlyIReversiModel model) {
@@ -24,11 +23,10 @@ public class ReversiGraphicalView extends JFrame implements IGraphicalView {
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     setLayout(null);
 
-
-
-    this.boardPanel = new BoardPanel(this.model, windowWidth, windowHeight);
+    this.boardPanel = new BoardPanel(this.model);
     Dimension boardPrefSize = this.boardPanel.getPreferredSize();
-    //this.boardPanel.setBounds(50, 50, boardPrefSize.width, boardPrefSize.height);
+    this.boardPanel.setBounds(50, 50, 1000, 800);
+    this.add(boardPanel);
 
     int ind = 1;
     for (HexagonTile h : this.boardPanel.getButtons()) {
@@ -45,18 +43,7 @@ public class ReversiGraphicalView extends JFrame implements IGraphicalView {
       ind++;
     }
 
-    // ....
-
-    this.scrollbarPanel = new JScrollPane(this.boardPanel
-            , JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS
-    );
-
-    this.getContentPane().add(scrollbarPanel);
-
-
     this.setComponentZOrder(this.boardPanel, ind);
-    this.scrollbarPanel.setPreferredSize(new Dimension(300, 300));
-    this.setPreferredSize(new Dimension(1500, 1500));
     this.setVisible(true);
     this.setResizable(false);
 
