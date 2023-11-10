@@ -8,12 +8,17 @@ import javax.swing.*;
 
 import model.ReadonlyIReversiModel;
 
+/**
+ * An implementation of the GUI view for a game of Reversi.
+ */
 public class ReversiGraphicalView extends JFrame implements IGraphicalView {
   private final ReadonlyIReversiModel model;
-
   private final BoardPanel boardPanel;
 
-
+  /**
+   * Constructs a graphical view with the given model.
+   * @param model The model to represent in the GUI.
+   */
   public ReversiGraphicalView(ReadonlyIReversiModel model) {
     super();
     this.model = model;
