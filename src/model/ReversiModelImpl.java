@@ -150,6 +150,14 @@ public class ReversiModelImpl implements IReversiModel {
     }
   }
 
+  /**
+   * Helps getAvailableBridges by filling bridges of tiles to be flipped with the given destination.
+   * @param pos The position to place a tile on
+   * @param bridges The list of bridges to fill with Tiles to flip
+   * @param qInc How much (if at all) the q value increases in the direction of the bridge
+   * @param rInc How much (if at all) the r value increases in the direction of the bridge
+   * @param sInc How much (if at all) the s value increases in the direction of the bridge
+   */
   private void getAvailableBridgesHelper(Position3D pos, List<List<Tile>> bridges,
                                          int qInc, int rInc, int sInc) {
     Position3D p = new Position3D(pos);
@@ -169,6 +177,11 @@ public class ReversiModelImpl implements IReversiModel {
     }
   }
 
+  /**
+   * Gets the available bridges that will be flipped if a tile is placed in the given position.
+   * @param pos The destination position
+   * @return The list of bridges containing tiles to be flipped.
+   */
   private List<List<Tile>> getAvailableBridges(Position3D pos) {
     List<List<Tile>> bridges = new ArrayList<>();
     placeTileBasicExceptions(pos);
@@ -183,6 +196,10 @@ public class ReversiModelImpl implements IReversiModel {
     return bridges;
   }
 
+  /**
+   * Flips the tiles of a bridge for tile capture.
+   * @param bridge The bridge of Tiles to flip.
+   */
   private void flipBridge(List<Tile> bridge) {
     for (Tile t : bridge) {
       if (!t.getTileType().equals(this.turn)) {
@@ -191,6 +208,9 @@ public class ReversiModelImpl implements IReversiModel {
     }
   }
 
+  /**
+   * Updates the score based on the number of white and black tiles on the board.
+   */
   private void updateScore() {
     int b = 0;
     int w = 0;
@@ -206,6 +226,13 @@ public class ReversiModelImpl implements IReversiModel {
     this.whiteScore = w;
   }
 
+  /**
+   * Places a tile at the position given, based on whose turn it is.
+   * @param pos coordinates as position type
+   * @throws IllegalStateException If the move does not capture any pieces,
+   *                                or if the move is illegal.
+   * @throws IllegalArgumentException If the position argument is not on the board.
+   */
   @Override
   public void placeTile(Position3D pos) throws IllegalStateException, IllegalArgumentException {
     placeTileBasicExceptions(pos);
@@ -232,31 +259,55 @@ public class ReversiModelImpl implements IReversiModel {
     this.passCounter = 0;
   }
 
+  /**
+   * Gets the size of the board in tiles.
+   * @return The size of the board
+   */
   @Override
   public int getBoardSize() {
     return this.board.size();
   }
 
+  /**
+   * Gets the score of the black player.
+   * @return this model's blackScore
+   */
   @Override
   public int getBlackScore() {
     return this.blackScore;
   }
 
+  /**
+   * Gets the score of the white player.
+   * @return this model's whiteScore
+   */
   @Override
   public int getWhiteScore() {
     return this.whiteScore;
   }
 
+  /**
+   * Determines if the game has ended.
+   * @return 'true' is the game has ended, and false otherwise
+   */
   @Override
   public boolean isGameOver() {
     return this.passCounter == 2;
   }
 
+  /**
+   * Returns how many times players have passed, in a row.
+   * @return this model's passCounter
+   */
   @Override
   public int getPassesInARow() {
     return this.passCounter;
   }
 
+  /**
+   * Returns a copy of this model's board.
+   * @return this model's board field
+   */
   @Override
   public List<Tile> getCopyOfBoard() {
     List<Tile> copyBoard = new ArrayList<>();
@@ -312,6 +363,4 @@ public class ReversiModelImpl implements IReversiModel {
     }
     return false;
   }
-
-
 }
