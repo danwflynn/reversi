@@ -17,6 +17,10 @@ public class ReversiTextualView implements TextualView {
     this.model = model;
   }
 
+  /**
+   * Returns a String, which is the textual representation of the state of the game.
+   * @return A string representing the game state
+   */
   @Override
   public String toString() {
     StringBuilder drawString = new StringBuilder();
