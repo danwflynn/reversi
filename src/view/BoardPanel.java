@@ -10,14 +10,20 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Path2D;
 import java.util.ArrayList;
 
+/**
+ * A class representing the board panel for a game of Reversi.
+ */
 public class BoardPanel extends JPanel {
   private final int size; // Side length of the hexagon
   private final int radius;
   private final ReadonlyIReversiModel model;
-
   private final ArrayList<HexagonTile> hexagonTiles;
   // reversi graphical view is passed down through the constructor to the buttons
 
+  /**
+   * Constrcuts a BoardPanel based on the given model.
+   * @param model The model of the Reversi game
+   */
   public BoardPanel(ReadonlyIReversiModel model) {
     this.radius = model.getRadius();
     this.size = 240 / radius;
@@ -85,6 +91,10 @@ public class BoardPanel extends JPanel {
     }
   }
 
+  /**
+   * Draws this board and its hex tiles in its entirety.
+   * @param g the <code>Graphics</code> object to protect
+   */
   @Override
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
@@ -108,6 +118,13 @@ public class BoardPanel extends JPanel {
     }
   }
 
+  /**
+   * Draws a Hexagon tile with the given specifications.
+   * @param g2d The Graphics2D used to draw
+   * @param x The x-coordinate value of the screen
+   * @param y The y-coordinate value of the screen.
+   * @param size The size of the hexagon
+   */
   private void drawHexagon(Graphics2D g2d, double x, double y, int size) {
     Path2D path = new Path2D.Double();
     double angle = Math.toRadians(60); // 60 degrees in radians
@@ -138,18 +155,39 @@ public class BoardPanel extends JPanel {
     g2d.setColor(Color.GRAY);
   }
 
+  /**
+   * Draws a black piece on a tile with the given specifications.
+   * @param g2d The Graphics2D used to draw
+   * @param x The x-coordinate value of the screen
+   * @param y The y-coordinate value of the screen
+   * @param size The size of the piece
+   */
   private void drawBlackPiece(Graphics2D g2d, double x, double y, int size) {
     g2d.setColor(Color.BLACK);
     g2d.fillOval((int) x + size / 2, (int) y - size / 2, size, size);
     g2d.setColor(Color.GRAY);
   }
 
+  /**
+   * Draws a white piece on a tile with the given specifications.
+   * @param g2d The Graphics2D used to draw
+   * @param x The x-coordinate value of the screen
+   * @param y The y-coordinate value of the screen
+   * @param size The size of the piece
+   */
   private void drawWhitePiece(Graphics2D g2d, double x, double y, int size) {
     g2d.setColor(Color.WHITE);
     g2d.fillOval((int) x + size / 2, (int) y - size / 2, size, size);
     g2d.setColor(Color.GRAY);
   }
 
+  /**
+   * Draws one ring of hexagon tiles around the center with the given specifications.
+   * @param ring The ring number (increasingly from the center)
+   * @param g2d The Graphics2D used to draw
+   * @param x The x-coordinate value of the screen
+   * @param y The y-coordinate value of the screen
+   */
   private void drawHexRing(int ring, Graphics2D g2d, double x, double y) {
     for (int row = 0; row < 2 * ring + 1; row++) {
       if (row == 0) {
@@ -207,11 +245,30 @@ public class BoardPanel extends JPanel {
     }
   }
 
+  /**
+   * Checks if the Tiles at given locations on the left and right need pieces, and draws them if so.
+   * @param g2d The Graphics2D used to draw
+   * @param y1 The y-coordinate value of the screen
+   * @param x1 The x-coordinate value of the screen on the left
+   * @param x2 The x-coordinate value of the screen on the right
+   * @param r The r value in hex coordinates on the hex grid
+   * @param q The q value in hex coordinates on the hex grid
+   * @param s The s value in hex coordinates on the hex grid
+   */
   private void drawingPiecesHelper(Graphics2D g2d, double y1, double x1, double x2, int r, int q, int s) {
     checkForBlackAndWhite(g2d, y1, x1, r, s, q);
     checkForBlackAndWhite(g2d, y1, x2, r, q, s);
   }
 
+  /**
+   * Checks if the Tile needs a black or white piece, and draws it if so.
+   * @param g2d The Graphics2D used to draw.
+   * @param y1 The y-coordinate value of the screen
+   * @param x2 The x-coordinate value of the screen
+   * @param r The r value in hex coordinates on the hex grid
+   * @param q The q value in hex coordinates on the hex grid
+   * @param s The s value in hex coordinates on the hex grid
+   */
   private void checkForBlackAndWhite(Graphics2D g2d, double y1, double x2, int r, int q, int s) {
     if (this.model.getCopyOfTileAt(new Position3D(s, r, q)).getTileType().equals(TileType.BLACK)) {
       drawBlackPiece(g2d, x2, y1, size);
@@ -221,6 +278,10 @@ public class BoardPanel extends JPanel {
     }
   }
 
+  /**
+   * Gets all buttons drawn on this board panel.
+   * @return a list of all hexagon tiles.
+   */
   public ArrayList<HexagonTile> getButtons() {
     return this.hexagonTiles;
   }
