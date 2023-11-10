@@ -1,5 +1,8 @@
 package view;
 
+/**
+ * An interface for a graphical GUI view.
+ */
 public interface IGraphicalView {
 
   /**
