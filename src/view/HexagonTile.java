@@ -8,12 +8,20 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ * A class representing a HexagonTile in Reversi.
+ */
 public class HexagonTile extends JButton {
   private final Polygon hexagon;
   private static HexagonTile highlightedButton;
   private final Position3D cubeCoords;
   private final int size;
 
+  /**
+   * Constructs a Hexagon Tile with the given coordinates and size.
+   * @param cubeCoords The cube coordinates of the tile
+   * @param size The size of the tile
+   */
   public HexagonTile(Position3D cubeCoords, int size) {
     this.cubeCoords = cubeCoords;
     this.size = size;
@@ -66,6 +74,10 @@ public class HexagonTile extends JButton {
     setFocusable(true); // Allow the button to receive keyboard focus
   }
 
+  /**
+   * Returns a Polygon representing the Hexagon Tile.
+   * @return A Polygon of the tile
+   */
   private Polygon createHexagon() {
     Polygon polygon = new Polygon();
     for (int i = 0; i < 6; i++) {
@@ -76,6 +88,10 @@ public class HexagonTile extends JButton {
     return polygon;
   }
 
+  /**
+   * Draws the tile, lighting it up if needed.
+   * @param g the <code>Graphics</code> object to protect
+   */
   @Override
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
@@ -89,24 +105,40 @@ public class HexagonTile extends JButton {
 //    }
   }
 
+  /**
+   * Gets the button on the board that is highlighted.
+   * @return The HexagonTile highlightedButton
+   */
   HexagonTile getHighlightedButton() {
     return highlightedButton;
   }
 
+  /**
+   * Makes this HexagonTile light up.
+   */
   private void highlight() {
     highlightedButton = this;
     repaint();
   }
 
+  /**
+   * Removes the light on this Hexagon tile.
+   */
   private void unhighlight() {
     highlightedButton = null;
     repaint();
   }
 
+  /**
+   * Removes the highlight of the previously lit-up tile.
+   */
   void changeSelection() {
     highlightedButton.unhighlight();
   }
 
+  /**
+   * Prints the coordinates of this tile to the System console.
+   */
   private void printCoordinates() {
     System.out.println("Button cube coordinates: " + this.cubeCoords);
   }
