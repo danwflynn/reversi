@@ -16,6 +16,9 @@ public class ExampleTests {
   IReversiModel model;
   TextualView tv;
 
+  /**
+   * Sets up conditions for testing.
+   */
   @Before
   public void setup() {
     // Radius of the game is 5
