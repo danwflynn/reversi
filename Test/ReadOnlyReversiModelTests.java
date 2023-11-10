@@ -9,6 +9,9 @@ import model.MockModel;
 import model.Player;
 import model.Position3D;
 
+/**
+ * A class for tests involving the ReadOnly class, or code made after its creation.
+ */
 public class ReadOnlyReversiModelTests {
   //TODO: Make tests for the read only methods to make sure they return the right stuff and
   //can't mutate the model
