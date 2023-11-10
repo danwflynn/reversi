@@ -29,4 +29,12 @@ public interface Tile {
    * @return one of _ O X
    */
   String toString();
+
+  /**
+   * Overriding equals.
+   * @param other object to compare
+   * @return true if equal
+   */
+  @Override
+  boolean equals(Object other);
 }
