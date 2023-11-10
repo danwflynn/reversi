@@ -70,4 +70,21 @@ public class GameTile implements Tile {
       return "_";
     }
   }
+
+  /**
+   * Determines if this GameTile is the same as the given Object.
+   * @param o The object to compare this GameTile to
+   * @return True if this GameTile and the given object have the same attributes, false otherwise.
+   */
+  @Override
+  public boolean equals(Object o) {
+    if (!(o instanceof GameTile)) {
+      return false;
+    }
+    else {
+      GameTile other = (GameTile) o;
+      return other.tileType.equals(this.tileType)
+              && other.pos.equals(this.pos);
+    }
+  }
 }

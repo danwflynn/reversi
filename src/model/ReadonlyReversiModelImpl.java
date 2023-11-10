@@ -12,7 +12,7 @@ public class ReadonlyReversiModelImpl implements ReadonlyIReversiModel {
    * Constructs a ReadonlyReversiModelImpl with the given model.
    * @param model The model to call observer methods.
    */
-  ReadonlyReversiModelImpl(ReversiModelImpl model) {
+  public ReadonlyReversiModelImpl(ReversiModelImpl model) {
     this.model = model;
   }
 
@@ -20,7 +20,7 @@ public class ReadonlyReversiModelImpl implements ReadonlyIReversiModel {
    * Constructs a ReadonlyReversiModelImpl with a new model using the given radius.
    * @param radius The radius used to make the model from which observer methods are called.
    */
-  ReadonlyReversiModelImpl(int radius) {
+  public ReadonlyReversiModelImpl(int radius) {
     this.model = new ReversiModelImpl(radius);
   }
 

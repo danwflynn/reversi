@@ -1,24 +1,82 @@
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.List;
+
 import javax.swing.text.Position;
 
 import model.AIPlayer;
+import model.GameTile;
 import model.IReversiModel;
 import model.MockModel;
 import model.Player;
 import model.Position3D;
+import model.ReadonlyIReversiModel;
+import model.ReadonlyReversiModelImpl;
+import model.ReversiModelImpl;
+import model.Tile;
+import model.TileType;
 
 /**
  * A class for tests involving the ReadOnly class, or code made after its creation.
  */
 public class ReadOnlyReversiModelTests {
-  //TODO: Make tests for the read only methods to make sure they return the right stuff and
-  //can't mutate the model
+  @Test
+  public void testReadOnlyCannotMutate() {
+    Position3D pos = new Position3D(0, 0, 0);
+    ReadonlyIReversiModel model = new ReadonlyReversiModelImpl(4);
+    Tile tile = model.getCopyOfTileAt(pos);
+    tile.setTileType(TileType.BLACK);
+    Assert.assertEquals(TileType.EMPTY, model.getCopyOfTileAt(pos).getTileType());
+  }
 
-  //TODO: test isMoveLegal thoroughly (can just use prior examples)
+  @Test
+  public void testReadOnlyObservesSameAsNormalModelForAllMethods() {
+    IReversiModel model = new ReversiModelImpl(5);
+    ReadonlyIReversiModel observer = new ReadonlyReversiModelImpl(5);
 
-  //TODO: test hasLegalMove
+    Assert.assertEquals(model.getCopyOfTileAt(new Position3D(0, 0, 0)),
+                          observer.getCopyOfTileAt(new Position3D(0, 0, 0)));
+
+    Assert.assertEquals(model.isGameOver(), observer.isGameOver());
+    Assert.assertEquals(model.getWhiteScore(), observer.getWhiteScore());
+    Assert.assertEquals(model.getBlackScore(), observer.getBlackScore());
+    Assert.assertEquals(model.getRadius(), observer.getRadius());
+    Assert.assertEquals(model.getBoardSize(), observer.getBoardSize());
+    List<Tile> modelList = model.getCopyOfBoard();
+    List<Tile> observerList = observer.getCopyOfBoard();
+    for (int tileNum = 0; tileNum < modelList.size(); tileNum++) {
+      Assert.assertEquals(modelList.get(tileNum), observerList.get(tileNum));
+    }
+  }
+
+  @Test
+  public void testEqualsGameTileTrue() {
+    GameTile tile1 = new GameTile(new Position3D(0, 0, 0), TileType.EMPTY);
+    GameTile tile2 = new GameTile(new Position3D(0, 0, 0), TileType.EMPTY);
+    Assert.assertTrue(tile1.equals(tile2));
+  }
+
+  @Test
+  public void testEqualsGameTileFalseDifferentPosition() {
+    GameTile tile1 = new GameTile(new Position3D(0, 0, 0), TileType.EMPTY);
+    GameTile tile2 = new GameTile(new Position3D(1, -1, 0), TileType.EMPTY);
+    Assert.assertFalse(tile1.equals(tile2));
+  }
+
+  @Test
+  public void testEqualsGameTileFalseDifferentTileType() {
+    GameTile tile1 = new GameTile(new Position3D(0, 0, 0), TileType.EMPTY);
+    GameTile tile2 = new GameTile(new Position3D(0, 0, 0), TileType.WHITE);
+    Assert.assertFalse(tile1.equals(tile2));
+  }
+
+  @Test
+  public void testEqualsGameTileFalseDifferentObjectType() {
+    GameTile tile1 = new GameTile(new Position3D(0, 0, 0), TileType.EMPTY);
+    GameTile tile2 = new GameTile(new Position3D(0, 0, 0), TileType.WHITE);
+    Assert.assertFalse(tile1.equals(tile2));
+  }
 
   @Test
   public void testPosition3DToString() {
@@ -54,6 +112,7 @@ public class ReadOnlyReversiModelTests {
     Assert.assertEquals(0, pos1.getDistanceFrom(pos2));
   }
 
+  //TODO: mock tests
   @Test
   public void testMockChecksAllPositionsForBestMove() {
     //IReversiModel mock = new MockModel();

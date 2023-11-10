@@ -586,4 +586,33 @@ public class AIPlayerTests {
             "   O _ X _ _ _\n" +
             "    _ X _ _ _", tv.toString());
   }
+
+  @Test
+  public void testIsLegalMoveTrue() {
+    Assert.assertTrue(this.model.isMoveLegal(new Position3D(1, -2, 1)));
+  }
+
+  @Test
+  public void testIsLegalMoveNoBridge() {
+    Assert.assertFalse(this.model.isMoveLegal(new Position3D(2, -2, 0)));
+  }
+
+  @Test
+  public void testIsLegalMoveOutOfBoundsThrows() {
+    Assert.assertThrows(IllegalArgumentException.class, () -> {
+      this.model.isMoveLegal(new Position3D(7, -7, 0));
+    });
+  }
+
+  @Test
+  public void testHasLegalMoveTrue() {
+    Assert.assertTrue(this.model.hasLegalMove());
+  }
+
+  @Test
+  public void testHasNoLegalMoveSmallBoard() {
+    ReversiModelImpl board = new ReversiModelImpl(2);
+
+    Assert.assertFalse(board.hasLegalMove());
+  }
 }
