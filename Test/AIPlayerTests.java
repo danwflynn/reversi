@@ -5,6 +5,9 @@ import org.junit.Test;
 import view.ReversiTextualView;
 import view.TextualView;
 
+/**
+ * A class for testing the AI playing Reversi.
+ */
 public class AIPlayerTests {
   private IReversiModel model;
   private TextualView tv;
@@ -12,6 +15,9 @@ public class AIPlayerTests {
   private Player p2;
 
 
+  /**
+   * Sets up some testing conditions.
+   */
   @Before
   public void setup() {
     // Radius of the game is 5
