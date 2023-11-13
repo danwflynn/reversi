@@ -105,7 +105,8 @@ public class AIPlayer implements Player {
     if (this.getAvailableMoves().isEmpty()) {
       throw new IllegalStateException("No available moves.");
     }
-    Position3D topLeftPos = this.model.getCopyOfTileAt(new Position3D(0, -1 * this.model.getRadius() + 1, this.model.getRadius() - 1)).getPos();
+    Position3D topLeftPos = this.model.getCopyOfTileAt(new Position3D(0,
+            -1 * this.model.getRadius() + 1, this.model.getRadius() - 1)).getPos();
     Position3D currentHighestScoringMove = null;
     int currentMaxScoreIncrease = 0;
     int oldScore;
@@ -128,9 +129,11 @@ public class AIPlayer implements Player {
         currentMaxScoreIncrease = newScore - oldScore;
       } else if (newScore - oldScore == currentMaxScoreIncrease) {
         assert currentHighestScoringMove != null;
-        if (pos.getDistanceFrom(topLeftPos) < currentHighestScoringMove.getDistanceFrom(topLeftPos)) {
+        if (pos.getDistanceFrom(topLeftPos)
+                < currentHighestScoringMove.getDistanceFrom(topLeftPos)) {
           currentHighestScoringMove = pos;
-        } else if (pos.getDistanceFrom(topLeftPos) == currentHighestScoringMove.getDistanceFrom(topLeftPos)) {
+        } else if (pos.getDistanceFrom(topLeftPos)
+                == currentHighestScoringMove.getDistanceFrom(topLeftPos)) {
           if (pos.getR() < currentHighestScoringMove.getR()) {
             currentHighestScoringMove = pos;
           }

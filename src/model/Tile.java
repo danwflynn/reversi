@@ -37,4 +37,11 @@ public interface Tile {
    */
   @Override
   boolean equals(Object other);
+
+  /**
+   * Override hashcode.
+   * @return hashcode
+   */
+  @Override
+  int hashCode();
 }

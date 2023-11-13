@@ -1,15 +1,8 @@
 import org.junit.Assert;
 import org.junit.Test;
-
 import java.util.List;
-
-import javax.swing.text.Position;
-
-import model.AIPlayer;
 import model.GameTile;
 import model.IReversiModel;
-import model.MockModel;
-import model.Player;
 import model.Position3D;
 import model.ReadonlyIReversiModel;
 import model.ReadonlyReversiModelImpl;
@@ -54,28 +47,28 @@ public class ReadOnlyReversiModelTests {
   public void testEqualsGameTileTrue() {
     GameTile tile1 = new GameTile(new Position3D(0, 0, 0), TileType.EMPTY);
     GameTile tile2 = new GameTile(new Position3D(0, 0, 0), TileType.EMPTY);
-    Assert.assertTrue(tile1.equals(tile2));
+    Assert.assertEquals(tile1, tile2);
   }
 
   @Test
   public void testEqualsGameTileFalseDifferentPosition() {
     GameTile tile1 = new GameTile(new Position3D(0, 0, 0), TileType.EMPTY);
     GameTile tile2 = new GameTile(new Position3D(1, -1, 0), TileType.EMPTY);
-    Assert.assertFalse(tile1.equals(tile2));
+    Assert.assertNotEquals(tile1, tile2);
   }
 
   @Test
   public void testEqualsGameTileFalseDifferentTileType() {
     GameTile tile1 = new GameTile(new Position3D(0, 0, 0), TileType.EMPTY);
     GameTile tile2 = new GameTile(new Position3D(0, 0, 0), TileType.WHITE);
-    Assert.assertFalse(tile1.equals(tile2));
+    Assert.assertNotEquals(tile1, tile2);
   }
 
   @Test
   public void testEqualsGameTileFalseDifferentObjectType() {
     GameTile tile1 = new GameTile(new Position3D(0, 0, 0), TileType.EMPTY);
     GameTile tile2 = new GameTile(new Position3D(0, 0, 0), TileType.WHITE);
-    Assert.assertFalse(tile1.equals(tile2));
+    Assert.assertNotEquals(tile1, tile2);
   }
 
   @Test
@@ -113,9 +106,4 @@ public class ReadOnlyReversiModelTests {
   }
 
   //TODO: mock tests
-  @Test
-  public void testMockChecksAllPositionsForBestMove() {
-    //IReversiModel mock = new MockModel();
-    //Player player = new AIPlayer();
-  }
 }

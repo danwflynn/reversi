@@ -4,14 +4,22 @@ import model.Position3D;
 import model.ReadonlyIReversiModel;
 import model.TileType;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JPanel;
+import java.awt.FlowLayout;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Color;
+import java.awt.BasicStroke;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Path2D;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Board panel class.
+ */
 public class BoardPanel extends JPanel {
   private final int size; // Side length of the hexagon
   private final int radius;
@@ -20,8 +28,12 @@ public class BoardPanel extends JPanel {
   private final ArrayList<HexagonTile> hexagonTiles;
   // reversi graphical view is passed down through the constructor to the buttons
 
-  private final Map<Integer, Integer> offets;
+  private final Map<Integer, Integer> offsets;
 
+  /**
+   * Constructor for board panel which sets up all the buttons.
+   * @param model reversi game
+   */
   public BoardPanel(ReadonlyIReversiModel model) {
     this.radius = model.getRadius();
     this.size = 240 / radius;
@@ -32,36 +44,36 @@ public class BoardPanel extends JPanel {
     int xBound = 500 - size;
     int yBound = 400 - size;
 
-    this.offets = new HashMap<>();
-    this.offets.put(2, 110);
-    this.offets.put(3, 70);
-    this.offets.put(4, 50);
-    this.offets.put(5, 37);
-    this.offets.put(6, 30);
-    this.offets.put(7, 23);
-    this.offets.put(8, 19);
-    this.offets.put(9, 15);
-    this.offets.put(10, 13);
-    this.offets.put(11, 11);
-    this.offets.put(12, 9);
-    this.offets.put(13, 7);
-    this.offets.put(14, 6);
-    this.offets.put(15, 5);
-    this.offets.put(16, 4);
-    this.offets.put(17, 3);
-    this.offets.put(18, 2);
-    this.offets.put(19, 1);
-    this.offets.put(20, 1);
-    this.offets.put(21, 0);
-    this.offets.put(22, -1);
-    this.offets.put(23, -1);
-    this.offets.put(24, -1);
-    this.offets.put(25, -2);
-    this.offets.put(26, -2);
-    this.offets.put(27, -2);
-    this.offets.put(28, -2);
-    this.offets.put(29, -2);
-    this.offets.put(30, -2);
+    this.offsets = new HashMap<>();
+    this.offsets.put(2, 110);
+    this.offsets.put(3, 70);
+    this.offsets.put(4, 50);
+    this.offsets.put(5, 37);
+    this.offsets.put(6, 30);
+    this.offsets.put(7, 23);
+    this.offsets.put(8, 19);
+    this.offsets.put(9, 15);
+    this.offsets.put(10, 13);
+    this.offsets.put(11, 11);
+    this.offsets.put(12, 9);
+    this.offsets.put(13, 7);
+    this.offsets.put(14, 6);
+    this.offsets.put(15, 5);
+    this.offsets.put(16, 4);
+    this.offsets.put(17, 3);
+    this.offsets.put(18, 2);
+    this.offsets.put(19, 1);
+    this.offsets.put(20, 1);
+    this.offsets.put(21, 0);
+    this.offsets.put(22, -1);
+    this.offsets.put(23, -1);
+    this.offsets.put(24, -1);
+    this.offsets.put(25, -2);
+    this.offsets.put(26, -2);
+    this.offsets.put(27, -2);
+    this.offsets.put(28, -2);
+    this.offsets.put(29, -2);
+    this.offsets.put(30, -2);
 
     for (int ring = 0; ring < radius; ring++) {
       for (int row = 0; row < 2 * ring + 1; row++) {
@@ -71,7 +83,8 @@ public class BoardPanel extends JPanel {
             int s = -1 * i;
             int q = -1 * s - ring;
             HexagonTile hex = new HexagonTile(new Position3D(q, ring, s), this.size);
-            hex.setBounds((int)x1, (int) Math.round(1.5 * size * ring + yBound), size * 2, size * 2);
+            hex.setBounds((int)x1, (int) Math.round(1.5 * size * ring + yBound),
+                    size * 2,size * 2);
             this.hexagonTiles.add(hex);
           }
         }
@@ -112,7 +125,8 @@ public class BoardPanel extends JPanel {
             int r = -1 * ring;
             int q = -1 * i - r;
             HexagonTile hex = new HexagonTile(new Position3D(i, r, q), this.size);
-            hex.setBounds((int)x1, (int)Math.round(-1.5 * size * ring + yBound), size * 2, size * 2);
+            hex.setBounds((int)x1, (int)Math.round(-1.5 * size * ring + yBound),
+                    size * 2,size * 2);
             this.hexagonTiles.add(hex);
           }
         }
@@ -133,7 +147,7 @@ public class BoardPanel extends JPanel {
     if (this.radius > 30) {
       offsetY = -4;
     } else {
-      offsetY = this.offets.get(this.radius);
+      offsetY = this.offsets.get(this.radius);
     }
 
     // Calculate the starting position of the board based on the center
@@ -164,7 +178,8 @@ public class BoardPanel extends JPanel {
     path.closePath();
 
     // Rotate the hexagon by 90 degrees
-    AffineTransform rotateTransform = AffineTransform.getRotateInstance(Math.toRadians(90), x + size / 2, y + size / 2);
+    AffineTransform rotateTransform = AffineTransform.getRotateInstance(Math.toRadians(90),
+            x + (double) size / 2, y + (double) size / 2);
     path.transform(rotateTransform);
 
     g2d.fill(path);
@@ -196,10 +211,12 @@ public class BoardPanel extends JPanel {
           drawHexagon(g2d, x1, 1.5 * size * ring + y, size);
           int s = -1 * i;
           int q = -1 * s - ring;
-          if (this.model.getCopyOfTileAt(new Position3D(q, ring, s)).getTileType().equals(TileType.BLACK)) {
+          if (this.model.getCopyOfTileAt(new Position3D(q, ring, s))
+                  .getTileType().equals(TileType.BLACK)) {
             drawBlackPiece(g2d, x1, 1.5 * size * ring + y, size);
           }
-          if (this.model.getCopyOfTileAt(new Position3D(q, ring, s)).getTileType().equals(TileType.WHITE)) {
+          if (this.model.getCopyOfTileAt(new Position3D(q, ring, s))
+                  .getTileType().equals(TileType.WHITE)) {
             drawWhitePiece(g2d, x1, 1.5 * size * ring + y, size);
           }
         }
@@ -234,10 +251,12 @@ public class BoardPanel extends JPanel {
           drawHexagon(g2d, x1, -1.5 * size * ring + y, size);
           int r = -1 * ring;
           int q = -1 * i - r;
-          if (this.model.getCopyOfTileAt(new Position3D(i, r, q)).getTileType().equals(TileType.BLACK)) {
+          if (this.model.getCopyOfTileAt(new Position3D(i, r, q))
+                  .getTileType().equals(TileType.BLACK)) {
             drawBlackPiece(g2d, x1, -1.5 * size * ring + y, size);
           }
-          if (this.model.getCopyOfTileAt(new Position3D(i, r, q)).getTileType().equals(TileType.WHITE)) {
+          if (this.model.getCopyOfTileAt(new Position3D(i, r, q))
+                  .getTileType().equals(TileType.WHITE)) {
             drawWhitePiece(g2d, x1, -1.5 * size * ring + y, size);
           }
         }
@@ -245,7 +264,8 @@ public class BoardPanel extends JPanel {
     }
   }
 
-  private void drawingPiecesHelper(Graphics2D g2d, double y1, double x1, double x2, int r, int q, int s) {
+  private void drawingPiecesHelper(Graphics2D g2d,
+                                   double y1, double x1, double x2, int r, int q, int s) {
     checkForBlackAndWhite(g2d, y1, x1, r, s, q);
     checkForBlackAndWhite(g2d, y1, x2, r, q, s);
   }

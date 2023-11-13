@@ -18,6 +18,7 @@ public class MockModel extends ReversiModelImpl {
     this.log = new StringBuilder();
 
   }
+
   /**
    * Get tile at a given position (intentionally mutable so that we can flip them when necessary).
    *
@@ -36,6 +37,7 @@ public class MockModel extends ReversiModelImpl {
    *
    * @throws IllegalStateException if the game is over
    */
+
   @Override
   public void pass() throws IllegalStateException {
     super.pass();
@@ -148,7 +150,7 @@ public class MockModel extends ReversiModelImpl {
   }
 
   /**
-   * Is the move at the given position legal for whoever turn it is?
+   * Is the move at the given position legal for whoever turn it is.
    *
    * @param pos position of potential move
    * @return true if legal
@@ -159,7 +161,7 @@ public class MockModel extends ReversiModelImpl {
   }
 
   /**
-   * Does the current player have a legal move?
+   * Does the current player have a legal move.
    *
    * @return true if current player has legal move
    */

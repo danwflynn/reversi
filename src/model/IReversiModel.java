@@ -1,7 +1,5 @@
 package model;
 
-import java.util.List;
-
 /**
  * Reversi model interface.
  */

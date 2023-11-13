@@ -318,7 +318,7 @@ public class ReversiModelImpl implements IReversiModel {
   }
 
   /**
-   * Is the move at the given position legal for whoever turn it is?
+   * Is the move at the given position legal for whoever turn it is.
    * @param pos position of potential move
    * @return true if legal
    */
@@ -350,7 +350,7 @@ public class ReversiModelImpl implements IReversiModel {
   }
 
   /**
-   * Does the current player have a legal move?
+   * Does the current player have a legal move.
    *
    * @return true if current player has legal move
    */

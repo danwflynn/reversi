@@ -2,7 +2,7 @@ package model;
 
 import java.util.List;
 
-/*
+/**
   A class for the implementation of a Readonly version of the Reversi model.
  */
 public class ReadonlyReversiModelImpl implements ReadonlyIReversiModel {
@@ -117,7 +117,7 @@ public class ReadonlyReversiModelImpl implements ReadonlyIReversiModel {
   }
 
   /**
-   * Is the move at the given position legal for whoever turn it is?
+   * Is the move at the given position legal for whoever turn it is.
    * @param pos position of potential move
    * @return true if legal
    */
@@ -126,7 +126,7 @@ public class ReadonlyReversiModelImpl implements ReadonlyIReversiModel {
   }
 
   /**
-   * Does the current player have a legal move?
+   * Does the current player have a legal move.
    *
    * @return true if current player has legal move
    */

@@ -1,4 +1,9 @@
-import model.*;
+import model.IReversiModel;
+import model.Player;
+import model.ReversiModelImpl;
+import model.TileType;
+import model.AIPlayer;
+import model.Position3D;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -597,11 +602,9 @@ public class AIPlayerTests {
     Assert.assertFalse(this.model.isMoveLegal(new Position3D(2, -2, 0)));
   }
 
-  @Test
+  @Test (expected = IllegalArgumentException.class)
   public void testIsLegalMoveOutOfBoundsThrows() {
-    Assert.assertThrows(IllegalArgumentException.class, () -> {
-      this.model.isMoveLegal(new Position3D(7, -7, 0));
-    });
+    this.model.isMoveLegal(new Position3D(7, -7, 0));
   }
 
   @Test

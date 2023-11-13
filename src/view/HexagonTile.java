@@ -1,8 +1,12 @@
 package view;
+
 import model.Position3D;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JButton;
+import java.awt.Polygon;
+import java.awt.Graphics;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -99,10 +103,6 @@ public class HexagonTile extends JButton {
       g.setColor(Color.CYAN);
       g.fillPolygon(hexagon);
     }
-//    } else {
-//      g.setColor(Color.GREEN);
-//      g.fillPolygon(hexagon);
-//    }
   }
 
   /**

@@ -87,4 +87,16 @@ public class GameTile implements Tile {
               && other.pos.equals(this.pos);
     }
   }
+
+  /**
+   * Override hashcode.
+   * @return hashcode.
+   */
+  @Override
+  public int hashCode() {
+    int result = 17;
+    result = 31 * result + pos.hashCode();
+    result = 31 * result + tileType.hashCode();
+    return result;
+  }
 }
