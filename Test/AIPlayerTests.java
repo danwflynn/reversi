@@ -1,6 +1,9 @@
 import model.IReversiModel;
+import model.MockModelFakeMoveLegality;
+import model.MockModelLoggingObservations;
 import model.Player;
 import model.ReversiModelImpl;
+import model.Tile;
 import model.TileType;
 import model.AIPlayer;
 import model.Position3D;
@@ -617,5 +620,49 @@ public class AIPlayerTests {
     ReversiModelImpl board = new ReversiModelImpl(2);
 
     Assert.assertFalse(board.hasLegalMove());
+  }
+
+  @Test
+  public void testCheckingAllTilesForAvailableMovesViaMock() {
+    ReversiModelImpl model = new ReversiModelImpl(4);
+    MockModelLoggingObservations mock = new MockModelLoggingObservations(model);
+    AIPlayer player = new AIPlayer(TileType.BLACK, mock);
+    player.getAvailableMoves();
+    for (Tile tile : model.getCopyOfBoard()) {
+      //for every tile on the board, confirm it checks that position
+      Assert.assertTrue(mock.getLog().toString().contains("Checking tile at "
+                                                                          + tile.getPos()));
+    }
+  }
+
+  @Test
+  public void testAIPlayerCheckingLegalityOfTilesViaMock() {
+    ReversiModelImpl model = new ReversiModelImpl(4);
+    MockModelLoggingObservations mock = new MockModelLoggingObservations(model);
+    AIPlayer player = new AIPlayer(TileType.BLACK, mock);
+    player.getAvailableMoves();
+    for (Tile tile : model.getCopyOfBoard()) {
+      //for every tile on the board, confirm it checks legality of position
+      Assert.assertTrue(mock.getLog().toString().contains("Checks legality of position "
+                                                                         + tile.getPos()));
+    }
+  }
+
+  @Test
+  public void testAIPlayerFindingBestMoveObligesToArbitraryLegalityDecisionsByMockModel() {
+    ReversiModelImpl model = new ReversiModelImpl(4);
+    MockModelFakeMoveLegality mock = new MockModelFakeMoveLegality(model);
+    AIPlayer mockPlayer = new AIPlayer(TileType.BLACK, mock);
+    AIPlayer realPlayer = new AIPlayer(TileType.BLACK, model);
+
+    // position q = 0, r = 0, s = 0 is illegal at start of game for black, there is no bridge
+    Assert.assertFalse(realPlayer.getAvailableMoves().contains(new Position3D(0, 0, 0)));
+    // same move is allowed by arbitrary rule in mock that this position is legal
+    Assert.assertTrue(mockPlayer.getAvailableMoves().contains(new Position3D(0, 0, 0)));
+
+    // position q = 1, r = -2, s = 1 is legal at start of game for black
+    Assert.assertTrue(realPlayer.getAvailableMoves().contains(new Position3D(1, -2, 1)));
+    // same move is blocked by arbitrary rule that r < 1 makes a move illegal
+    Assert.assertFalse(mockPlayer.getAvailableMoves().contains(new Position3D(1, -2, 1)));
   }
 }
