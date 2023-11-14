@@ -40,10 +40,10 @@ public interface Player {
   List<Position3D> getAvailableMoves() throws IllegalStateException;
 
   /**
-   * Gets the position that increases the player's score the most out of all possible moves.
-   * @return position for move that maximizes score increase
+   * Gets the optimal move for the player.
+   * @return position for optimal move
    * @throws IllegalStateException if it isn't the player's turn
    * @throws IllegalStateException if there are no legal moves
    */
-  Position3D getHighestScoringMove() throws IllegalStateException;
+  Position3D getOptimalMove() throws IllegalStateException;
 }

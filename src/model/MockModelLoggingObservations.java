@@ -5,9 +5,9 @@ import java.util.List;
 /**
  * A Mock model of Reversi for testing the validity of inputs and checks.
  */
-public class MockModelLoggingObservations extends ReversiModelImpl {
+public class MockModelLoggingObservations extends ReversiModelImpl implements IReversiModel {
 
-  private StringBuilder log;
+  private final StringBuilder log;
 
   /**
    * A constructor for creating a mock model out of a pre-existing model.
@@ -16,7 +16,6 @@ public class MockModelLoggingObservations extends ReversiModelImpl {
   public MockModelLoggingObservations(IReversiModel model) {
     super(model);
     this.log = new StringBuilder();
-
   }
 
   /**
@@ -42,7 +41,7 @@ public class MockModelLoggingObservations extends ReversiModelImpl {
   @Override
   public Tile getCopyOfTileAt(Position3D pos) throws IllegalArgumentException {
     log.append("Checks and gets copy at ").append(pos).append("\n");
-    return null;
+    return super.getCopyOfTileAt(pos);
   }
 
   /**

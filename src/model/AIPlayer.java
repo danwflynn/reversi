@@ -8,8 +8,8 @@ import java.util.List;
  */
 public class AIPlayer implements Player {
 
-  private final TileType playerColor;
-  private final IReversiModel model;
+  protected final TileType playerColor;
+  protected final IReversiModel model;
 
   /**
    * Constructs an AIPlayer.
@@ -91,18 +91,18 @@ public class AIPlayer implements Player {
   }
 
   /**
-   * Gets the position that increases the player's score the most out of all possible moves.
+   * Gets the position that increases the player's score the most out of provided possible moves.
    *
+   * @param possibleMoves moves to choose from
    * @return position for move that maximizes score increase
    * @throws IllegalStateException if it isn't the player's turn
    * @throws IllegalStateException if there are no legal moves
    */
-  @Override
-  public Position3D getHighestScoringMove() throws IllegalStateException {
+  protected Position3D getHighestScoringMove(List<Position3D> possibleMoves) throws IllegalStateException {
     if (!this.model.getTurn().equals(this.playerColor)) {
       throw new IllegalStateException("Not the player's turn.");
     }
-    if (this.getAvailableMoves().isEmpty()) {
+    if (possibleMoves.isEmpty()) {
       throw new IllegalStateException("No available moves.");
     }
     Position3D topLeftPos = this.model.getCopyOfTileAt(new Position3D(0,
@@ -115,7 +115,7 @@ public class AIPlayer implements Player {
     } else {
       oldScore = this.model.getWhiteScore();
     }
-    for (Position3D pos : this.getAvailableMoves()) {
+    for (Position3D pos : possibleMoves) {
       int newScore;
       IReversiModel tempModel = new ReversiModelImpl(this.model);
       tempModel.placeTile(pos);
@@ -141,5 +141,16 @@ public class AIPlayer implements Player {
       }
     }
     return currentHighestScoringMove;
+  }
+
+  /**
+   * Gets the optimal move for the player.
+   * @return position for optimal move
+   * @throws IllegalStateException if it isn't the player's turn
+   * @throws IllegalStateException if there are no legal moves
+   */
+  @Override
+  public Position3D getOptimalMove() throws IllegalStateException {
+    return this.getHighestScoringMove(this.getAvailableMoves());
   }
 }

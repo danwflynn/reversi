@@ -104,6 +104,4 @@ public class ReadOnlyReversiModelTests {
     Position3D pos2 = new Position3D(0, -3, 3);
     Assert.assertEquals(0, pos1.getDistanceFrom(pos2));
   }
-
-  //TODO: mock tests
 }
