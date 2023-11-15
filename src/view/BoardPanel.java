@@ -19,6 +19,10 @@ import java.util.Map;
 
 /**
  * Board panel class.
+ * This represents the actual board being printed on to the frame.
+ * For the board and buttons generation, the loops first gets everything below the center in
+ * between the q and s axis. It then gets everything outside the q and s axis. Finally,
+ * it gets everything above the center in between the q and s axis.
  */
 public class BoardPanel extends JPanel {
   private final int size; // Side length of the hexagon
@@ -29,6 +33,8 @@ public class BoardPanel extends JPanel {
   // reversi graphical view is passed down through the constructor to the buttons
 
   private final Map<Integer, Integer> offsets;
+  // offsets is for shifting the board so that it is always in the center of the screen no matter
+  // the overall size
 
   /**
    * Constructor for board panel which sets up all the buttons.
@@ -75,6 +81,7 @@ public class BoardPanel extends JPanel {
     this.offsets.put(29, -2);
     this.offsets.put(30, -2);
 
+    // This 2d loop places all the buttons in their corresponding locations
     for (int ring = 0; ring < radius; ring++) {
       for (int row = 0; row < 2 * ring + 1; row++) {
         if (row == 0) {
@@ -160,6 +167,7 @@ public class BoardPanel extends JPanel {
     }
   }
 
+  // Draws an individual hexagon at its coordinates on the board
   private void drawHexagon(Graphics2D g2d, double x, double y, int size) {
     Path2D path = new Path2D.Double();
     double angle = Math.toRadians(60); // 60 degrees in radians
@@ -191,18 +199,22 @@ public class BoardPanel extends JPanel {
     g2d.setColor(Color.GRAY);
   }
 
+  // Draws a black piece over a tile
   private void drawBlackPiece(Graphics2D g2d, double x, double y, int size) {
     g2d.setColor(Color.BLACK);
     g2d.fillOval((int) x + size / 2, (int) y - size / 2, size, size);
     g2d.setColor(Color.GRAY);
   }
 
+  // Draws a white piece over a tile
   private void drawWhitePiece(Graphics2D g2d, double x, double y, int size) {
     g2d.setColor(Color.WHITE);
     g2d.fillOval((int) x + size / 2, (int) y - size / 2, size, size);
     g2d.setColor(Color.GRAY);
   }
 
+  // Draws the outermost ring of tiles around the center
+  // This method is iteratively called to draw all the rings
   private void drawHexRing(int ring, Graphics2D g2d, double x, double y) {
     for (int row = 0; row < 2 * ring + 1; row++) {
       if (row == 0) {
@@ -264,12 +276,14 @@ public class BoardPanel extends JPanel {
     }
   }
 
+  // Helper to check if pieces need to be drawn on each side.
   private void drawingPiecesHelper(Graphics2D g2d,
                                    double y1, double x1, double x2, int r, int q, int s) {
     checkForBlackAndWhite(g2d, y1, x1, r, s, q);
     checkForBlackAndWhite(g2d, y1, x2, r, q, s);
   }
 
+  // Draws the corresponding black and white pieces when necessary.
   private void checkForBlackAndWhite(Graphics2D g2d, double y1, double x2, int r, int q, int s) {
     if (this.model.getCopyOfTileAt(new Position3D(s, r, q)).getTileType().equals(TileType.BLACK)) {
       drawBlackPiece(g2d, x2, y1, size);
@@ -279,6 +293,7 @@ public class BoardPanel extends JPanel {
     }
   }
 
+  // Gets all the buttons to be placed over the board.
   public ArrayList<HexagonTile> getButtons() {
     return this.hexagonTiles;
   }

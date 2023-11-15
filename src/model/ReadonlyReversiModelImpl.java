@@ -3,7 +3,7 @@ package model;
 import java.util.List;
 
 /**
-  A class for the implementation of a Readonly version of the Reversi model.
+ * A class for the implementation of a Readonly version of the Reversi model.
  */
 public class ReadonlyReversiModelImpl implements ReadonlyIReversiModel {
   private final IReversiModel model;

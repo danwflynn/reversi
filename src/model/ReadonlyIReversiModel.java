@@ -4,6 +4,8 @@ import java.util.List;
 
 /**
  * A read only version of the IReversiModel. This cannot make changes to the model itself.
+ * The purpose is to provide all the information of the model to the GUI without any possible
+ * mutation.
  */
 public interface ReadonlyIReversiModel {
   /**

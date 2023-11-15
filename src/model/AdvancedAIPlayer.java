@@ -3,6 +3,9 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class represents the advanced AI that implements all the strategies for the extra credit.
+ */
 public class AdvancedAIPlayer extends AIPlayer implements Player {
   /**
    * Constructs an AIPlayer.

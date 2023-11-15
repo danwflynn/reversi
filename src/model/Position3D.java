@@ -2,6 +2,10 @@ package model;
 
 /**
  * Represents coordinates for a place on the board using 3d q r s system.
+ * These are cube coordinates.
+ * The q axis runs from top left corner to bottom right.
+ * The r axis is horizontal.
+ * The s axis runs from top right corner to bottom left.
  */
 public final class Position3D {
   private final int q;

@@ -14,6 +14,8 @@ import java.awt.event.KeyListener;
 
 /**
  * A class representing a HexagonTile in Reversi.
+ * These are the clickable buttons that can be selected.
+ * They are placed over the board and are invisible when not selected.
  */
 public class HexagonTile extends JButton {
   private final Polygon hexagon;

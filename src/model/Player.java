@@ -40,7 +40,7 @@ public interface Player {
   List<Position3D> getAvailableMoves() throws IllegalStateException;
 
   /**
-   * Gets the optimal move for the player.
+   * Gets the optimal move for the player based on their optimization rules.
    * @return position for optimal move
    * @throws IllegalStateException if it isn't the player's turn
    * @throws IllegalStateException if there are no legal moves

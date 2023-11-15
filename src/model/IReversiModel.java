@@ -2,6 +2,9 @@ package model;
 
 /**
  * Reversi model interface.
+ * All the immutable methods are inherited from the read only interface.
+ * The functionality remains the same as part 1 but with some extra methods.
+ * This interface governs the game through its board and rules.
  */
 public interface IReversiModel extends ReadonlyIReversiModel {
   /**

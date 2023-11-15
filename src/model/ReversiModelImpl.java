@@ -5,6 +5,9 @@ import java.util.List;
 
 /**
  * Manages the board and the rules.
+ * The board is a list of tiles (all tiles contain their own position).
+ * The scores are kept and updated every time a move is made.
+ * There is a counter to detect 2 passes in a row.
  */
 public class ReversiModelImpl implements IReversiModel {
   private final List<Tile> board;

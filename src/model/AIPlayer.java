@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * A class representing an AI Player.
+ * This is the basic version that makes the highest scoring move every time.
  */
 public class AIPlayer implements Player {
 
@@ -92,6 +93,7 @@ public class AIPlayer implements Player {
 
   /**
    * Gets the position that increases the player's score the most out of provided possible moves.
+   * Tie-break is made by minimizing distance from top left corner.
    *
    * @param possibleMoves moves to choose from
    * @return position for move that maximizes score increase
@@ -144,7 +146,7 @@ public class AIPlayer implements Player {
   }
 
   /**
-   * Gets the optimal move for the player.
+   * Gets the optimal move for the player based on the rules of the AI.
    * @return position for optimal move
    * @throws IllegalStateException if it isn't the player's turn
    * @throws IllegalStateException if there are no legal moves
