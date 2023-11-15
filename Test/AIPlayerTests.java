@@ -1,4 +1,13 @@
-import model.*;
+import model.Player;
+import model.IReversiModel;
+import model.ReversiModelImpl;
+import model.TileType;
+import model.AIPlayer;
+import model.AdvancedAIPlayer;
+import model.Position3D;
+import model.MockModelFakeMoveLegality;
+import model.MockModelLoggingObservations;
+import model.Tile;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

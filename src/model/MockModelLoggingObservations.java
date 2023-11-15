@@ -1,7 +1,5 @@
 package model;
 
-import java.util.List;
-
 /**
  * A Mock model of Reversi for testing the validity of inputs and checks.
  */

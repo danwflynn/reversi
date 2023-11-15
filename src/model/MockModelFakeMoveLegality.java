@@ -27,6 +27,8 @@ public class MockModelFakeMoveLegality extends ReversiModelImpl implements IReve
       return true;
     }
     //Arbitrary rule: a move is never legal if the 'r' value of pos is less than positive 1
-    else return pos.getR() >= 1;
+    else {
+      return pos.getR() >= 1;
+    }
   }
 }

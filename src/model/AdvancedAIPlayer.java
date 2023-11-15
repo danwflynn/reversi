@@ -60,42 +60,42 @@ public class AdvancedAIPlayer extends AIPlayer implements Player {
       throw new IllegalStateException("Not the player's turn.");
     }
     List<Position3D> availableMovesNotNextToCorners = new ArrayList<>(this.getAvailableMoves());
-    availableMovesNotNextToCorners.removeIf(pos
-            -> pos.getQ() == 1 && pos.getR() == -1 * (this.model.getRadius() - 1));
-    availableMovesNotNextToCorners.removeIf(pos
-            -> pos.getQ() == 0 && pos.getR() == -1 * (this.model.getRadius() - 2));
-    availableMovesNotNextToCorners.removeIf(pos
-            -> pos.getQ() == -1 && pos.getR() == -1 * (this.model.getRadius() - 2));
-    availableMovesNotNextToCorners.removeIf(pos
-            -> pos.getS() == 1 && pos.getR() == -1 * (this.model.getRadius() - 1));
-    availableMovesNotNextToCorners.removeIf(pos
-            -> pos.getS() == 0 && pos.getR() == -1 * (this.model.getRadius() - 2));
-    availableMovesNotNextToCorners.removeIf(pos
-            -> pos.getS() == -1 && pos.getR() == -1 * (this.model.getRadius() - 2));
-    availableMovesNotNextToCorners.removeIf(pos
-            -> pos.getQ() == -1 && pos.getR() == this.model.getRadius() - 1);
-    availableMovesNotNextToCorners.removeIf(pos
-            -> pos.getQ() == 0 && pos.getR() == this.model.getRadius() - 2);
-    availableMovesNotNextToCorners.removeIf(pos
-            -> pos.getQ() == 1 && pos.getR() == this.model.getRadius() - 2);
-    availableMovesNotNextToCorners.removeIf(pos
-            -> pos.getS() == -1 && pos.getR() == this.model.getRadius() - 1);
-    availableMovesNotNextToCorners.removeIf(pos
-            -> pos.getS() == 0 && pos.getR() == this.model.getRadius() - 2);
-    availableMovesNotNextToCorners.removeIf(pos
-            -> pos.getS() == 1 && pos.getR() == this.model.getRadius() - 2);
-    availableMovesNotNextToCorners.removeIf(pos
-            -> pos.getR() == 1 && pos.getQ() == -1 * (this.model.getRadius() - 1));
-    availableMovesNotNextToCorners.removeIf(pos
-            -> pos.getR() == 0 && pos.getQ() == -1 * (this.model.getRadius() - 2));
-    availableMovesNotNextToCorners.removeIf(pos
-            -> pos.getR() == -1 && pos.getQ() == -1 * (this.model.getRadius() - 2));
-    availableMovesNotNextToCorners.removeIf(pos
-            -> pos.getR() == 1 && pos.getS() == -1 * (this.model.getRadius() - 1));
-    availableMovesNotNextToCorners.removeIf(pos
-            -> pos.getR() == 0 && pos.getS() == -1 * (this.model.getRadius() - 2));
-    availableMovesNotNextToCorners.removeIf(pos
-            -> pos.getR() == -1 && pos.getS() == -1 * (this.model.getRadius() - 2));
+    availableMovesNotNextToCorners
+            .removeIf(pos -> pos.getQ() == 1 && pos.getR() == -1 * (this.model.getRadius() - 1));
+    availableMovesNotNextToCorners
+            .removeIf(pos -> pos.getQ() == 0 && pos.getR() == -1 * (this.model.getRadius() - 2));
+    availableMovesNotNextToCorners
+            .removeIf(pos -> pos.getQ() == -1 && pos.getR() == -1 * (this.model.getRadius() - 2));
+    availableMovesNotNextToCorners
+            .removeIf(pos -> pos.getS() == 1 && pos.getR() == -1 * (this.model.getRadius() - 1));
+    availableMovesNotNextToCorners
+            .removeIf(pos -> pos.getS() == 0 && pos.getR() == -1 * (this.model.getRadius() - 2));
+    availableMovesNotNextToCorners
+            .removeIf(pos -> pos.getS() == -1 && pos.getR() == -1 * (this.model.getRadius() - 2));
+    availableMovesNotNextToCorners
+            .removeIf(pos -> pos.getQ() == -1 && pos.getR() == this.model.getRadius() - 1);
+    availableMovesNotNextToCorners
+            .removeIf(pos -> pos.getQ() == 0 && pos.getR() == this.model.getRadius() - 2);
+    availableMovesNotNextToCorners
+            .removeIf(pos -> pos.getQ() == 1 && pos.getR() == this.model.getRadius() - 2);
+    availableMovesNotNextToCorners
+            .removeIf(pos -> pos.getS() == -1 && pos.getR() == this.model.getRadius() - 1);
+    availableMovesNotNextToCorners
+            .removeIf(pos -> pos.getS() == 0 && pos.getR() == this.model.getRadius() - 2);
+    availableMovesNotNextToCorners
+            .removeIf(pos -> pos.getS() == 1 && pos.getR() == this.model.getRadius() - 2);
+    availableMovesNotNextToCorners
+            .removeIf(pos -> pos.getR() == 1 && pos.getQ() == -1 * (this.model.getRadius() - 1));
+    availableMovesNotNextToCorners
+            .removeIf(pos -> pos.getR() == 0 && pos.getQ() == -1 * (this.model.getRadius() - 2));
+    availableMovesNotNextToCorners
+            .removeIf(pos -> pos.getR() == -1 && pos.getQ() == -1 * (this.model.getRadius() - 2));
+    availableMovesNotNextToCorners
+            .removeIf(pos -> pos.getR() == 1 && pos.getS() == -1 * (this.model.getRadius() - 1));
+    availableMovesNotNextToCorners
+            .removeIf(pos -> pos.getR() == 0 && pos.getS() == -1 * (this.model.getRadius() - 2));
+    availableMovesNotNextToCorners
+            .removeIf(pos -> pos.getR() == -1 && pos.getS() == -1 * (this.model.getRadius() - 2));
     return availableMovesNotNextToCorners;
   }
 

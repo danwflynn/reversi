@@ -100,7 +100,8 @@ public class AIPlayer implements Player {
    * @throws IllegalStateException if it isn't the player's turn
    * @throws IllegalStateException if there are no legal moves
    */
-  protected Position3D getHighestScoringMove(List<Position3D> possibleMoves) throws IllegalStateException {
+  protected Position3D getHighestScoringMove(List<Position3D> possibleMoves)
+          throws IllegalStateException {
     if (!this.model.getTurn().equals(this.playerColor)) {
       throw new IllegalStateException("Not the player's turn.");
     }

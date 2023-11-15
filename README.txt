@@ -256,6 +256,15 @@ In the Graphical User Interface, the user is able to do three things:
 - Pass: To pass, a player can press 'p', ending their turn without placing a tile.
         The current implementation prints pass to the console when p is pressed
 
+Math used for GUI hexagons:
+- In order to place a hexagon directly next to another, you would add root(s) * radius of hex
+- To add a hexagon directly above another, you would multiply 1.5 * radius of hex
+
+The java docs explain the order of generation for the hexagons both for buttons and board.
+The cube coordinates were given to the hexagons on the GUI as the board/buttons were generated.
+This was accomplished using similar math to the text view where rows and columns are converted to
+q, r, and s values.
+
 AI Players:
 AIPlayer is the basic AI that makes the highest scoring move every time
 AdvancedAIPlayer is the extra credit version of the AI that tries the following things in order:
@@ -270,3 +279,7 @@ The player interface is used for the AI players. All players have methods to mak
 want (more on that when the controller gets implemented). The player interface also has
 getAvailableMoves and getOptimalMove methods that get the position(s) of the aforementioned. The AI
 players get their optimal move from their corresponding rules.
+
+The score increase of a move is tested by making a copy of the model, and testing the move on that
+copy and seeing how much the score increases. We added a distance method to our Position3D class
+so that we could calculate the distance from the top left to account for tie breaks.
