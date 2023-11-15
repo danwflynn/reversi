@@ -4,7 +4,7 @@ package model;
  * A mock implementation of ReversiModelImpl that verifies the validity of the AIPlayer by
  * constructing fake legalities for moves, and testing that this affects best moves found.
  */
-public class MockModelFakeMoveLegality extends ReversiModelImpl {
+public class MockModelFakeMoveLegality extends ReversiModelImpl implements IReversiModel {
   /**
    * Constructor to make a copy of the game.
    * @param rm model to copy
