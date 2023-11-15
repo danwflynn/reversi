@@ -13,7 +13,7 @@ public final class Reversi {
    * @param args why do we need to java doc this
    */
   public static void main(String[] args) {
-    IReversiModel model = new ReversiModelImpl(4);
+    IReversiModel model = new ReversiModelImpl(5);
     model.placeTile(new Position3D(1, -2, 1));
     model.placeTile(new Position3D(2, -3, 1));
     model.pass();
@@ -21,6 +21,37 @@ public final class Reversi {
     model.placeTile(new Position3D(-1, -1, 2));
     model.pass();
     model.placeTile(new Position3D(2, 1, -3));
+    model.placeTile(new Position3D(-2, -1, 3));
+    model.placeTile(new Position3D(-1, -2, 3));
+    model.pass();
+    model.placeTile(new Position3D(1, -3, 2));
+    model.pass();
+    model.placeTile(new Position3D(3, -3, 0));
+    model.pass();
+    model.placeTile(new Position3D(-3, 0, 3));
+    model.placeTile(new Position3D(2, -1, -1));
+    model.pass();
+    model.placeTile(new Position3D(1, 2, -3));
+    model.placeTile(new Position3D(3, -1, -2));
+    model.placeTile(new Position3D(-2, 1, 1));
+    model.pass();
+    model.placeTile(new Position3D(3, -2, -1));
+    model.placeTile(new Position3D(-3, 1, 2));
+    model.placeTile(new Position3D(3, 0, -3));
+    model.pass();
+    model.placeTile(new Position3D(-1, 2, -1));
+    model.placeTile(new Position3D(-1, 3, -2));
+    model.placeTile(new Position3D(3, -4, 1));
+    model.placeTile(new Position3D(4, -3, -1));
+    model.pass();
+    model.placeTile(new Position3D(4, -1, -3));
+    model.placeTile(new Position3D(1, -4, 3));
+    model.pass();
+    model.placeTile(new Position3D(-4, 1, 3));
+    model.pass();
+    model.placeTile(new Position3D(-0, -3, 3));
+    model.placeTile(new Position3D(-1, -3, 4));
+    model.placeTile(new Position3D(-1, 4, -3));
     IGraphicalView view = new ReversiGraphicalView(model);
     view.setVisible(true);
   }

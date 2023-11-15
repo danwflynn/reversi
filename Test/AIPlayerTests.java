@@ -665,7 +665,7 @@ public class AIPlayerTests {
     Player newPlayer = new AIPlayer(TileType.BLACK, mock);
     newPlayer.getOptimalMove();
     for (Tile tile : model.getCopyOfBoard()) {
-      //for every tile on the board, confirm it checks legality of position
+      //for every tile on the board, confirm it checks position
       Assert.assertTrue(mock.getLog().toString().contains("Checking tile at "
               + tile.getPos()));
     }
@@ -694,5 +694,179 @@ public class AIPlayerTests {
     model1.placeTile(pl1.getOptimalMove());
     Assert.assertEquals(TileType.WHITE,
             model1.getCopyOfTileAt(new Position3D(-2, 1, 1)).getTileType());
+  }
+
+  @Test
+  public void testAdvancedAIMovesToCorner() {
+    IReversiModel model1 = new ReversiModelImpl(4);
+    Player pl1 = new AdvancedAIPlayer(TileType.BLACK, model1);
+    model1.placeTile(new Position3D(1, -2, 1));
+    model1.placeTile(new Position3D(2, -3, 1));
+    model1.pass();
+    model1.placeTile(new Position3D(1, 1, -2));
+    model1.placeTile(new Position3D(-1, -1, 2));
+    model1.pass();
+    model1.placeTile(new Position3D(2, 1, -3));
+    model1.placeTile(new Position3D(-2, -1, 3));
+    model1.placeTile(new Position3D(-1, -2, 3));
+    model1.pass();
+    model1.placeTile(pl1.getOptimalMove());
+    Assert.assertEquals(TileType.BLACK,
+            model1.getCopyOfTileAt(new Position3D(-3, 0, 3)).getTileType());
+  }
+
+  @Test
+  public void testAdvancedAIMinimizesOpponentsMoves() {
+    IReversiModel model1 = new ReversiModelImpl(5);
+    Player pl1 = new AdvancedAIPlayer(TileType.BLACK, model1);
+    model1.placeTile(new Position3D(1, -2, 1));
+    model1.placeTile(new Position3D(2, -3, 1));
+    model1.pass();
+    model1.placeTile(new Position3D(1, 1, -2));
+    model1.placeTile(new Position3D(-1, -1, 2));
+    model1.pass();
+    model1.placeTile(new Position3D(2, 1, -3));
+    model1.placeTile(new Position3D(-2, -1, 3));
+    model1.placeTile(new Position3D(-1, -2, 3));
+    model1.pass();
+    model1.placeTile(new Position3D(1, -3, 2));
+    model1.pass();
+    model1.placeTile(new Position3D(3, -3, 0));
+    model1.pass();
+    model1.placeTile(new Position3D(-3, 0, 3));
+    model1.placeTile(new Position3D(2, -1, -1));
+    model1.pass();
+    model1.placeTile(new Position3D(1, 2, -3));
+    model1.placeTile(new Position3D(3, -1, -2));
+    model1.placeTile(new Position3D(-2, 1, 1));
+    model1.pass();
+    model1.placeTile(new Position3D(3, -2, -1));
+    model1.placeTile(new Position3D(-3, 1, 2));
+    model1.placeTile(new Position3D(3, 0, -3));
+    model1.pass();
+    model1.placeTile(new Position3D(-1, 2, -1));
+    model1.placeTile(new Position3D(-1, 3, -2));
+    model1.placeTile(new Position3D(3, -4, 1));
+    model1.placeTile(new Position3D(4, -3, -1));
+    model1.pass();
+    model1.placeTile(new Position3D(4, -1, -3));
+    model1.placeTile(new Position3D(1, -4, 3));
+    model1.pass();
+    model1.placeTile(new Position3D(-4, 1, 3));
+    model1.pass();
+    model1.placeTile(new Position3D(-0, -3, 3));
+    model1.placeTile(new Position3D(-1, -3, 4));
+    model1.placeTile(new Position3D(-1, 4, -3));
+    model1.placeTile(pl1.getOptimalMove());
+    Assert.assertEquals(TileType.BLACK,
+            model1.getCopyOfTileAt(new Position3D(-3, -1, 4)).getTileType());
+  }
+
+  @Test
+  public void testAdvancedAIWithMockBaseCase() {
+    IReversiModel model1 = new ReversiModelImpl(4);
+    MockModelLoggingObservations mock = new MockModelLoggingObservations(model1);
+    Player pl1 = new AdvancedAIPlayer(TileType.BLACK, mock);
+    pl1.getOptimalMove();
+    for (Tile tile : mock.getCopyOfBoard()) {
+      //for every tile on the board, confirm it checks position
+      Assert.assertTrue(mock.getLog().toString().contains("Checking tile at "
+              + tile.getPos()));
+    }
+  }
+
+  @Test
+  public void testAdvancedAIWithMockDoesntMoveNextToCorners() {
+    IReversiModel model1 = new ReversiModelImpl(4);
+    model1.placeTile(new Position3D(1, -2, 1));
+    model1.placeTile(new Position3D(2, -3, 1));
+    model1.pass();
+    model1.placeTile(new Position3D(1, 1, -2));
+    model1.placeTile(new Position3D(-1, -1, 2));
+    model1.pass();
+    model1.placeTile(new Position3D(2, 1, -3));
+    MockModelLoggingObservations mock = new MockModelLoggingObservations(model1);
+    Player pl1 = new AdvancedAIPlayer(TileType.WHITE, mock);
+
+    pl1.getOptimalMove();
+    for (Tile tile : mock.getCopyOfBoard()) {
+      //for every tile on the board, confirm it checks position
+      Assert.assertTrue(mock.getLog().toString().contains("Checking tile at "
+              + tile.getPos()));
+    }
+  }
+
+  @Test
+  public void testAdvancedAIWithMockMovesToCorner() {
+    IReversiModel model1 = new ReversiModelImpl(4);
+    model1.placeTile(new Position3D(1, -2, 1));
+    model1.placeTile(new Position3D(2, -3, 1));
+    model1.pass();
+    model1.placeTile(new Position3D(1, 1, -2));
+    model1.placeTile(new Position3D(-1, -1, 2));
+    model1.pass();
+    model1.placeTile(new Position3D(2, 1, -3));
+    model1.placeTile(new Position3D(-2, -1, 3));
+    model1.placeTile(new Position3D(-1, -2, 3));
+    model1.pass();
+    MockModelLoggingObservations mock = new MockModelLoggingObservations(model1);
+    Player pl1 = new AdvancedAIPlayer(TileType.BLACK, mock);
+    pl1.getOptimalMove();
+    for (Tile tile : mock.getCopyOfBoard()) {
+      //for every tile on the board, confirm it checks position
+      Assert.assertTrue(mock.getLog().toString().contains("Checking tile at "
+              + tile.getPos()));
+    }
+  }
+
+  @Test
+  public void testAdvancedAIWithMockLeaveOpponentWithNoMoves() {
+    IReversiModel model1 = new ReversiModelImpl(5);
+    model1.placeTile(new Position3D(1, -2, 1));
+    model1.placeTile(new Position3D(2, -3, 1));
+    model1.pass();
+    model1.placeTile(new Position3D(1, 1, -2));
+    model1.placeTile(new Position3D(-1, -1, 2));
+    model1.pass();
+    model1.placeTile(new Position3D(2, 1, -3));
+    model1.placeTile(new Position3D(-2, -1, 3));
+    model1.placeTile(new Position3D(-1, -2, 3));
+    model1.pass();
+    model1.placeTile(new Position3D(1, -3, 2));
+    model1.pass();
+    model1.placeTile(new Position3D(3, -3, 0));
+    model1.pass();
+    model1.placeTile(new Position3D(-3, 0, 3));
+    model1.placeTile(new Position3D(2, -1, -1));
+    model1.pass();
+    model1.placeTile(new Position3D(1, 2, -3));
+    model1.placeTile(new Position3D(3, -1, -2));
+    model1.placeTile(new Position3D(-2, 1, 1));
+    model1.pass();
+    model1.placeTile(new Position3D(3, -2, -1));
+    model1.placeTile(new Position3D(-3, 1, 2));
+    model1.placeTile(new Position3D(3, 0, -3));
+    model1.pass();
+    model1.placeTile(new Position3D(-1, 2, -1));
+    model1.placeTile(new Position3D(-1, 3, -2));
+    model1.placeTile(new Position3D(3, -4, 1));
+    model1.placeTile(new Position3D(4, -3, -1));
+    model1.pass();
+    model1.placeTile(new Position3D(4, -1, -3));
+    model1.placeTile(new Position3D(1, -4, 3));
+    model1.pass();
+    model1.placeTile(new Position3D(-4, 1, 3));
+    model1.pass();
+    model1.placeTile(new Position3D(-0, -3, 3));
+    model1.placeTile(new Position3D(-1, -3, 4));
+    model1.placeTile(new Position3D(-1, 4, -3));
+    MockModelLoggingObservations mock = new MockModelLoggingObservations(model1);
+    Player pl1 = new AdvancedAIPlayer(TileType.BLACK, mock);
+    pl1.getOptimalMove();
+    for (Tile tile : mock.getCopyOfBoard()) {
+      //for every tile on the board, confirm it checks position
+      Assert.assertTrue(mock.getLog().toString().contains("Checking tile at "
+              + tile.getPos()));
+    }
   }
 }

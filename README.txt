@@ -1,3 +1,5 @@
+PART 2 AT THE BOTTOM
+
 IMPORTANT:
 The testing of this code base is split into files that serve different purposes.
 ReversiModelTests is all the testing done alongside the development of the components of the
@@ -242,11 +244,29 @@ of the actual tile for mutation purposes.
 
 
 ____________________
-User Controls:
+User Controls for GUI:
 
 In the Graphical User Interface, the user is able to do three things:
 - Select a tile: By clicking on the various hexagons, the player can select (and deselect) a tile
         that they would like to place on.
+        The behavior of selecting and deselecting matches the assignment specifications exactly.
 - Place a tile: After a valid tile is selected, the player can press 'm' on their keyboard to
-        place a tile there.
+        declare that they want to place a tile there.
+        The current implementation prints the declared move to the console.
 - Pass: To pass, a player can press 'p', ending their turn without placing a tile.
+        The current implementation prints pass to the console when p is pressed
+
+AI Players:
+AIPlayer is the basic AI that makes the highest scoring move every time
+AdvancedAIPlayer is the extra credit version of the AI that tries the following things in order:
+    1. Move to a corner that leaves the opponent with no moves
+    2. Move to a corner
+    3. Make sure you're not moving next to a corner if possible while still blocking opponent
+    4. Still make sure you're not moving next to a corner if possible
+    5. Try to make a move that leaves the opponent with no moves
+    6. If all of the above fail, just make the highest scoring move
+
+The player interface is used for the AI players. All players have methods to make moves if they
+want (more on that when the controller gets implemented). The player interface also has
+getAvailableMoves and getOptimalMove methods that get the position(s) of the aforementioned. The AI
+players get their optimal move from their corresponding rules.
