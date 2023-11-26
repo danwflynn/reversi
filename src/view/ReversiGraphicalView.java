@@ -3,6 +3,7 @@ package view;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import controller.ReversiController;
 import model.ReadonlyIReversiModel;
 
 import javax.swing.JFrame;
@@ -12,6 +13,7 @@ import javax.swing.WindowConstants;
  * An implementation of the GUI view for a game of Reversi.
  */
 public class ReversiGraphicalView extends JFrame implements IGraphicalView {
+  private final BoardPanel boardPanel;
 
   /**
    * Constructs a graphical view with the given model.
@@ -26,6 +28,7 @@ public class ReversiGraphicalView extends JFrame implements IGraphicalView {
     setLayout(null);
 
     BoardPanel boardPanel = new BoardPanel(model);
+    this.boardPanel = boardPanel;
     boardPanel.setBounds(50, 50, 1000, 800);
     this.add(boardPanel);
 
@@ -55,5 +58,12 @@ public class ReversiGraphicalView extends JFrame implements IGraphicalView {
    */
   public void makeVisible() {
     this.setVisible(true);
+  }
+
+  @Override
+  public void addObserver(ReversiController controller) {
+    for (HexagonTile h : this.boardPanel.getButtons()) {
+      h.addObserver(controller);
+    }
   }
 }

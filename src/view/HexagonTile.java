@@ -1,5 +1,6 @@
 package view;
 
+import controller.ReversiController;
 import model.Position3D;
 
 import javax.swing.JButton;
@@ -11,6 +12,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A class representing a HexagonTile in Reversi.
@@ -22,6 +25,7 @@ public class HexagonTile extends JButton {
   private static HexagonTile highlightedButton;
   private final Position3D cubeCoords;
   private final int size;
+  private final List<ReversiController> observers;
 
   /**
    * Constructs a Hexagon Tile with the given coordinates and size.
@@ -31,6 +35,7 @@ public class HexagonTile extends JButton {
   public HexagonTile(Position3D cubeCoords, int size) {
     this.cubeCoords = cubeCoords;
     this.size = size;
+    this.observers = new ArrayList<>();
     hexagon = createHexagon();
     setContentAreaFilled(false);
     setPreferredSize(new Dimension(150, 150));
@@ -62,6 +67,10 @@ public class HexagonTile extends JButton {
         } else if (keyChar == 'm') {
           if (highlightedButton == HexagonTile.this) {
             System.out.println("Declare move to " + cubeCoords);
+            for (ReversiController controller : observers) {
+              controller.placeTile(cubeCoords);
+            }
+            unhighlight();
           }
         }
       }
@@ -143,5 +152,9 @@ public class HexagonTile extends JButton {
    */
   private void printCoordinates() {
     System.out.println("Button cube coordinates: " + this.cubeCoords);
+  }
+
+  void addObserver(ReversiController controller) {
+    this.observers.add(controller);
   }
 }

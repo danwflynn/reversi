@@ -1,5 +1,7 @@
 package view;
 
+import controller.ReversiController;
+
 /**
  * An interface for a graphical GUI view.
  */
@@ -15,4 +17,6 @@ public interface IGraphicalView {
    * @param b Whether to make the view visible.
    */
   void setVisible(boolean b);
+
+  void addObserver(ReversiController controller);
 }
