@@ -85,13 +85,20 @@ public class ReversiGraphicalView extends JFrame implements IGraphicalView {
       h.highlight();
       h.hexDisable();
     }
-    this.setComponentZOrder(boardPanel, 1);
   }
 
   @Override
   public void enableAllButtons() {
     for (HexagonTile h : boardPanel.getButtons()) {
       h.hexEnable();
+      h.highlight();
+    }
+  }
+
+  @Override
+  public void unhighlightAllButtons() {
+    for (HexagonTile h : boardPanel.getButtons()) {
+      h.unhighlight();
     }
   }
 }

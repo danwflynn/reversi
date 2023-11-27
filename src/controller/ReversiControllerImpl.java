@@ -4,6 +4,7 @@ import model.IReversiModel;
 import model.Player;
 import model.Position3D;
 import model.TileType;
+import view.HexagonTile;
 import view.IGraphicalView;
 
 /**
@@ -87,7 +88,8 @@ public class ReversiControllerImpl implements ReversiController {
    */
   @Override
   public void sendTurnMessageToView() {
-    this.view.addAllButtons();
+    this.view.enableAllButtons();
+    this.view.unhighlightAllButtons();
     this.view.addTurnMessage();
   }
 }

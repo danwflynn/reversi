@@ -34,4 +34,6 @@ public interface IGraphicalView {
   void removeAllButtons();
 
   void enableAllButtons();
+
+  void unhighlightAllButtons();
 }

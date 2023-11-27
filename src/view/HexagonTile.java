@@ -138,7 +138,7 @@ public class HexagonTile extends JButton {
   /**
    * Removes the light on this Hexagon tile.
    */
-  private void unhighlight() {
+  void unhighlight() {
     highlightedButton = null;
     repaint();
   }
