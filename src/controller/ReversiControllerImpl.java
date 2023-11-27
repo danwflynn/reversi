@@ -80,6 +80,8 @@ public class ReversiControllerImpl implements ReversiController {
    */
   @Override
   public void alertTurn() {
+    this.view.enableAllButtons();
+    this.view.unhighlightAllButtons();
     this.player.turnAction();
   }
 
@@ -88,8 +90,6 @@ public class ReversiControllerImpl implements ReversiController {
    */
   @Override
   public void sendTurnMessageToView() {
-    this.view.enableAllButtons();
-    this.view.unhighlightAllButtons();
     this.view.addTurnMessage();
   }
 }
