@@ -57,7 +57,10 @@ public class ReversiGraphicalView extends JFrame implements IGraphicalView {
    */
   @Override
   public void addTurnMessage() {
-    System.out.println("It's your turn!");
+    //Create a one-time dialog box, where argument #1 is the frame to put it over,
+    //and argument #2 is the String to display.
+    //Note that while the dialog box is showing, all code is frozen and inputs cannot be taken in.
+    JOptionPane.showMessageDialog(this, "It's your turn!");
   }
 
   @Override
