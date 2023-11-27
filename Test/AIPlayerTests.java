@@ -1,4 +1,4 @@
-import model.Player;
+import model.IComputerPlayer;
 import model.IReversiModel;
 import model.ReversiModelImpl;
 import model.TileType;
@@ -20,8 +20,8 @@ import view.TextualView;
 public class AIPlayerTests {
   private IReversiModel model;
   private TextualView tv;
-  private Player p1;
-  private Player p2;
+  private IComputerPlayer p1;
+  private IComputerPlayer p2;
 
 
   /**
@@ -627,7 +627,7 @@ public class AIPlayerTests {
   public void testCheckingAllTilesForAvailableMovesViaMock() {
     ReversiModelImpl model = new ReversiModelImpl(4);
     MockModelLoggingObservations mock = new MockModelLoggingObservations(model);
-    Player player = new AIPlayer(TileType.BLACK, mock);
+    IComputerPlayer player = new AIPlayer(TileType.BLACK, mock);
     player.getAvailableMoves();
     for (Tile tile : model.getCopyOfBoard()) {
       //for every tile on the board, confirm it checks that position
@@ -640,7 +640,7 @@ public class AIPlayerTests {
   public void testAIPlayerCheckingLegalityOfTilesViaMock() {
     ReversiModelImpl model = new ReversiModelImpl(4);
     MockModelLoggingObservations mock = new MockModelLoggingObservations(model);
-    Player player = new AIPlayer(TileType.BLACK, mock);
+    IComputerPlayer player = new AIPlayer(TileType.BLACK, mock);
     player.getAvailableMoves();
     for (Tile tile : model.getCopyOfBoard()) {
       //for every tile on the board, confirm it checks legality of position
@@ -653,8 +653,8 @@ public class AIPlayerTests {
   public void testAIPlayerFindingBestMoveObligesToArbitraryLegalityDecisionsByMockModel() {
     ReversiModelImpl model = new ReversiModelImpl(4);
     MockModelFakeMoveLegality mock = new MockModelFakeMoveLegality(model);
-    Player mockPlayer = new AIPlayer(TileType.BLACK, mock);
-    Player realPlayer = new AIPlayer(TileType.BLACK, model);
+    IComputerPlayer mockPlayer = new AIPlayer(TileType.BLACK, mock);
+    IComputerPlayer realPlayer = new AIPlayer(TileType.BLACK, model);
 
     // position q = 0, r = 0, s = 0 is illegal at start of game for black, there is no bridge
     Assert.assertFalse(realPlayer.getAvailableMoves().contains(new Position3D(0, 0, 0)));
@@ -671,7 +671,7 @@ public class AIPlayerTests {
   public void testGetHighestScoringMoveWithMock() {
     ReversiModelImpl model = new ReversiModelImpl(4);
     MockModelLoggingObservations mock = new MockModelLoggingObservations(model);
-    Player newPlayer = new AIPlayer(TileType.BLACK, mock);
+    IComputerPlayer newPlayer = new AIPlayer(TileType.BLACK, mock);
     newPlayer.getOptimalMove();
     for (Tile tile : model.getCopyOfBoard()) {
       //for every tile on the board, confirm it checks position
@@ -683,7 +683,7 @@ public class AIPlayerTests {
   @Test
   public void testAdvancedAIBaseCase() {
     IReversiModel model1 = new ReversiModelImpl(4);
-    Player pl1 = new AdvancedAIPlayer(TileType.BLACK, model1);
+    IComputerPlayer pl1 = new AdvancedAIPlayer(TileType.BLACK, model1);
     model1.placeTile(pl1.getOptimalMove());
     Assert.assertEquals(TileType.BLACK,
             model1.getCopyOfTileAt(new Position3D(1, -2, 1)).getTileType());
@@ -692,7 +692,7 @@ public class AIPlayerTests {
   @Test
   public void testAdvancedAIDoesntMoveNextToCorners() {
     IReversiModel model1 = new ReversiModelImpl(4);
-    Player pl1 = new AdvancedAIPlayer(TileType.WHITE, model1);
+    IComputerPlayer pl1 = new AdvancedAIPlayer(TileType.WHITE, model1);
     model1.placeTile(new Position3D(1, -2, 1));
     model1.placeTile(new Position3D(2, -3, 1));
     model1.pass();
@@ -708,7 +708,7 @@ public class AIPlayerTests {
   @Test
   public void testAdvancedAIMovesToCorner() {
     IReversiModel model1 = new ReversiModelImpl(4);
-    Player pl1 = new AdvancedAIPlayer(TileType.BLACK, model1);
+    IComputerPlayer pl1 = new AdvancedAIPlayer(TileType.BLACK, model1);
     model1.placeTile(new Position3D(1, -2, 1));
     model1.placeTile(new Position3D(2, -3, 1));
     model1.pass();
@@ -727,7 +727,7 @@ public class AIPlayerTests {
   @Test
   public void testAdvancedAIMinimizesOpponentsMoves() {
     IReversiModel model1 = new ReversiModelImpl(5);
-    Player pl1 = new AdvancedAIPlayer(TileType.BLACK, model1);
+    IComputerPlayer pl1 = new AdvancedAIPlayer(TileType.BLACK, model1);
     model1.placeTile(new Position3D(1, -2, 1));
     model1.placeTile(new Position3D(2, -3, 1));
     model1.pass();
@@ -775,7 +775,7 @@ public class AIPlayerTests {
   public void testAdvancedAIWithMockBaseCase() {
     IReversiModel model1 = new ReversiModelImpl(4);
     MockModelLoggingObservations mock = new MockModelLoggingObservations(model1);
-    Player pl1 = new AdvancedAIPlayer(TileType.BLACK, mock);
+    IComputerPlayer pl1 = new AdvancedAIPlayer(TileType.BLACK, mock);
     pl1.getOptimalMove();
     for (Tile tile : mock.getCopyOfBoard()) {
       //for every tile on the board, confirm it checks position
@@ -795,7 +795,7 @@ public class AIPlayerTests {
     model1.pass();
     model1.placeTile(new Position3D(2, 1, -3));
     MockModelLoggingObservations mock = new MockModelLoggingObservations(model1);
-    Player pl1 = new AdvancedAIPlayer(TileType.WHITE, mock);
+    IComputerPlayer pl1 = new AdvancedAIPlayer(TileType.WHITE, mock);
 
     pl1.getOptimalMove();
     for (Tile tile : mock.getCopyOfBoard()) {
@@ -819,7 +819,7 @@ public class AIPlayerTests {
     model1.placeTile(new Position3D(-1, -2, 3));
     model1.pass();
     MockModelLoggingObservations mock = new MockModelLoggingObservations(model1);
-    Player pl1 = new AdvancedAIPlayer(TileType.BLACK, mock);
+    IComputerPlayer pl1 = new AdvancedAIPlayer(TileType.BLACK, mock);
     pl1.getOptimalMove();
     for (Tile tile : mock.getCopyOfBoard()) {
       //for every tile on the board, confirm it checks position
@@ -870,7 +870,7 @@ public class AIPlayerTests {
     model1.placeTile(new Position3D(-1, -3, 4));
     model1.placeTile(new Position3D(-1, 4, -3));
     MockModelLoggingObservations mock = new MockModelLoggingObservations(model1);
-    Player pl1 = new AdvancedAIPlayer(TileType.BLACK, mock);
+    IComputerPlayer pl1 = new AdvancedAIPlayer(TileType.BLACK, mock);
     pl1.getOptimalMove();
     for (Tile tile : mock.getCopyOfBoard()) {
       //for every tile on the board, confirm it checks position

@@ -1,6 +1,7 @@
 package controller;
 
 import model.Position3D;
+import model.TileType;
 
 /**
  * An interface for the controller for a game of Reversi, allowing a player to operate the game.
@@ -17,4 +18,15 @@ public interface ReversiController {
    * @param pos The position to place at
    */
   void placeTile(Position3D pos);
+
+  /**
+   * Get the player color of this controller.
+   * @return The color of the player.
+   */
+  TileType getPlayerColor();
+
+  /**
+   * Reacts to the model, which gives this controller the turn in play.
+   */
+  void alertTurn();
 }

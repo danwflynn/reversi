@@ -1,5 +1,7 @@
 package model;
 
+import controller.ReversiController;
+
 /**
  * Reversi model interface.
  * All the immutable methods are inherited from the read only interface.
@@ -15,7 +17,10 @@ public interface IReversiModel extends ReadonlyIReversiModel {
    */
   Tile getTileAt(Position3D pos) throws IllegalArgumentException;
 
-
+  /**
+   * Starts the game, allowing players to make moves.
+   */
+  void startGame();
 
   /**
    * Do nothing on your turn.
@@ -32,5 +37,15 @@ public interface IReversiModel extends ReadonlyIReversiModel {
    */
   void placeTile(Position3D pos) throws IllegalStateException, IllegalArgumentException;
 
+  /**
+   * Adds the observer for the controller for the White player.
+   * @param controller The controller observing this model.
+   */
+  void addWhiteObserver(ReversiController controller);
 
+  /**
+   * Adds the observer for the controller for the Black player.
+   * @param controller The controller observing this model.
+   */
+  void addBlackObserver(ReversiController controller);
 }

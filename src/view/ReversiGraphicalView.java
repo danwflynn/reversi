@@ -6,8 +6,7 @@ import java.awt.event.MouseEvent;
 import controller.ReversiController;
 import model.ReadonlyIReversiModel;
 
-import javax.swing.JFrame;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 
 /**
  * An implementation of the GUI view for a game of Reversi.

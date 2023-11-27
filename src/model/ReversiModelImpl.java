@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import controller.ReversiController;
+
 /**
  * Manages the board and the rules.
  * The board is a list of tiles (all tiles contain their own position).
@@ -16,7 +18,8 @@ public class ReversiModelImpl implements IReversiModel {
   private int blackScore;
   private int whiteScore;
   private int passCounter;
-
+  private ReversiController blackObserver;
+  private ReversiController whiteObserver;
   /**
    * Constructor for the class.
    * @param radius amount of hexagons from the center (included) to the edge in a straight line
@@ -54,6 +57,8 @@ public class ReversiModelImpl implements IReversiModel {
     // INVARIANT: The q, r, and s values of every position on the board add to 0
   }
 
+
+
   /**
    * Constructor to make a copy of the game.
    * @param rm model to copy
@@ -81,6 +86,14 @@ public class ReversiModelImpl implements IReversiModel {
       }
     }
     throw new IllegalArgumentException("This position is not on the board");
+  }
+
+  /**
+   * Starts the game, allowing players to make moves.
+   */
+  @Override
+  public void startGame() {
+
   }
 
   /**
@@ -128,10 +141,12 @@ public class ReversiModelImpl implements IReversiModel {
     }
     if (this.turn == TileType.BLACK) {
       this.turn = TileType.WHITE;
+      //this.whiteObserver.alertTurn();
     } else {
       this.turn = TileType.BLACK;
     }
     this.passCounter += 1;
+
   }
 
   /**
@@ -260,6 +275,32 @@ public class ReversiModelImpl implements IReversiModel {
       this.turn = TileType.BLACK;
     }
     this.passCounter = 0;
+  }
+
+  /**
+   * Adds the observer for the controller for the White player.
+   *
+   * @param controller The controller observing this model.
+   */
+  @Override
+  public void addWhiteObserver(ReversiController controller) {
+    if (!(controller.getPlayerColor().equals(TileType.WHITE))) {
+      throw new IllegalArgumentException("This player is not white.");
+    }
+    this.whiteObserver = controller;
+  }
+
+  /**
+   * Adds the observer for the controller for the Black player.
+   *
+   * @param controller The controller observing this model.
+   */
+  @Override
+  public void addBlackObserver(ReversiController controller) {
+    if (!(controller.getPlayerColor().equals(TileType.BLACK))) {
+      throw new IllegalArgumentException("This player is not black.");
+    }
+    this.blackObserver = controller;
   }
 
   /**

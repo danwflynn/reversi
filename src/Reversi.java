@@ -14,7 +14,7 @@ public final class Reversi {
    */
   public static void main(String[] args) {
     IReversiModel model = new ReversiModelImpl(7);
-    Player p1 = new AIPlayer(TileType.BLACK, model);
+    IComputerPlayer p1 = new AIPlayer(TileType.BLACK, model);
     IGraphicalView view = new ReversiGraphicalView(model);
     ReversiController controller = new ReversiControllerImpl(model, p1, view);
     view.setVisible(true);

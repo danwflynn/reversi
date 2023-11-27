@@ -1,8 +1,9 @@
 package controller;
 
 import model.IReversiModel;
-import model.Player;
+import model.IComputerPlayer;
 import model.Position3D;
+import model.TileType;
 import view.IGraphicalView;
 
 /**
@@ -11,7 +12,7 @@ import view.IGraphicalView;
  */
 public class ReversiControllerImpl implements ReversiController {
   private IReversiModel model;
-  private Player player;
+  private IComputerPlayer player;
   private IGraphicalView view;
 
   /**
@@ -20,11 +21,12 @@ public class ReversiControllerImpl implements ReversiController {
    * @param player The player using this controller
    * @param view The view that the player is able to see
    */
-  public ReversiControllerImpl(IReversiModel model, Player player, IGraphicalView view) {
+  public ReversiControllerImpl(IReversiModel model, IComputerPlayer player, IGraphicalView view) {
     this.model = model;
     this.player = player;
     this.view = view;
     this.view.addObserver(this);
+
   }
 
   /**
@@ -42,5 +44,23 @@ public class ReversiControllerImpl implements ReversiController {
   @Override
   public void placeTile(Position3D pos) {
     model.placeTile(pos);
+  }
+
+  /**
+   * Get the player color of this controller.
+   *
+   * @return The color of the player.
+   */
+  @Override
+  public TileType getPlayerColor() {
+    return this.player.getPlayerColor();
+  }
+
+  /**
+   * Reacts to the model, which gives this controller the turn in play.
+   */
+  @Override
+  public void alertTurn() {
+    this.player.turnAction();
   }
 }
