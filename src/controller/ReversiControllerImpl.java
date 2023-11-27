@@ -43,6 +43,7 @@ public class ReversiControllerImpl implements ReversiController {
   public void pass() {
     model.pass();
     view.removeAllButtons();
+    this.view.unhighlightAllButtons();
   }
 
   /**
