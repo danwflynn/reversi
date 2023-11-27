@@ -4,7 +4,6 @@ import model.IReversiModel;
 import model.Player;
 import model.Position3D;
 import model.TileType;
-import view.HexagonTile;
 import view.IGraphicalView;
 
 /**
@@ -52,6 +51,7 @@ public class ReversiControllerImpl implements ReversiController {
    */
   @Override
   public void placeTile(Position3D pos) {
+    this.view.unhighlightAllButtons();
     model.placeTile(pos);
     view.removeAllButtons();
   }
