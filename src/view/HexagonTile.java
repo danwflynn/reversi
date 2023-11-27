@@ -63,17 +63,19 @@ public class HexagonTile extends JButton {
       public void keyTyped(KeyEvent e) {
         // Handle keyTyped events (e.g., when 'p' or 'm' is pressed)
         char keyChar = e.getKeyChar();
-        if (keyChar == 'p') {
-          System.out.println("Pass");
-          observer.pass();
-          if (highlightedButton == HexagonTile.this) {
-            unhighlight();
-          }
-        } else if (keyChar == 'm') {
-          if (highlightedButton == HexagonTile.this) {
-            System.out.println("Declare move to " + cubeCoords);
-            observer.placeTile(cubeCoords);
-            unhighlight();
+        if (enabled) {
+          if (keyChar == 'p') {
+            System.out.println("Pass");
+            observer.pass();
+            if (highlightedButton == HexagonTile.this) {
+              unhighlight();
+            }
+          } else if (keyChar == 'm') {
+            if (highlightedButton == HexagonTile.this) {
+              System.out.println("Declare move to " + cubeCoords);
+              observer.placeTile(cubeCoords);
+              unhighlight();
+            }
           }
         }
       }
