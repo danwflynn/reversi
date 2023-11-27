@@ -1,13 +1,12 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * A class representing an AI Player.
  * This is the basic version that makes the highest scoring move every time.
  */
-public class AIPlayer extends HumanPlayer implements IComputerPlayer {
+public class AIPlayer extends HumanPlayer implements Player {
 
 
   /**
@@ -17,26 +16,6 @@ public class AIPlayer extends HumanPlayer implements IComputerPlayer {
    */
   public AIPlayer(TileType playerColor, IReversiModel model) {
     super(playerColor, model);
-  }
-
-  /**
-   * Gets a list of all positions where a move can be made by the player on a given turn.
-   *
-   * @return list of possible positions to make move
-   * @throws IllegalStateException if it isn't the player's turn
-   */
-  @Override
-  public List<Position3D> getAvailableMoves() throws IllegalStateException {
-    if (!this.model.getTurn().equals(this.playerColor)) {
-      throw new IllegalStateException("Not the player's turn.");
-    }
-    List<Position3D> availableMoves = new ArrayList<>();
-    for (Tile t : this.model.getCopyOfBoard()) {
-      if (this.model.isMoveLegal(t.getPos())) {
-        availableMoves.add(t.getPos());
-      }
-    }
-    return availableMoves;
   }
 
   /**

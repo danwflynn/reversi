@@ -31,22 +31,8 @@ public class ReversiGraphicalView extends JFrame implements IGraphicalView {
     boardPanel.setBounds(50, 50, 1000, 800);
     this.add(boardPanel);
 
-    int ind = 1;
-    for (HexagonTile h : boardPanel.getButtons()) {
-      this.addMouseListener(new MouseAdapter() {
-        @Override
-        public void mouseClicked(MouseEvent e) {
-          if (h.getHighlightedButton() != null) {
-            h.changeSelection();
-          }
-        }
-      });
-      this.add(h);
-      this.setComponentZOrder(h, ind);
-      ind++;
-    }
+    this.addAllButtons();
 
-    this.setComponentZOrder(boardPanel, ind);
     this.setVisible(true);
     this.setResizable(false);
 
@@ -63,6 +49,49 @@ public class ReversiGraphicalView extends JFrame implements IGraphicalView {
   public void addObserver(ReversiController controller) {
     for (HexagonTile h : this.boardPanel.getButtons()) {
       h.addObserver(controller);
+    }
+  }
+
+  /**
+   * Tells the human player that it's their turn.
+   */
+  @Override
+  public void addTurnMessage() {
+    System.out.println("It's your turn!");
+  }
+
+  @Override
+  public void addAllButtons() {
+    int ind = 1;
+    for (HexagonTile h : boardPanel.getButtons()) {
+      this.addMouseListener(new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+          if (h.getHighlightedButton() != null) {
+            h.changeSelection();
+          }
+        }
+      });
+      this.add(h);
+      this.setComponentZOrder(h, ind);
+      ind++;
+    }
+    this.setComponentZOrder(boardPanel, ind);
+  }
+
+  @Override
+  public void removeAllButtons() {
+    for (HexagonTile h : boardPanel.getButtons()) {
+      h.highlight();
+      h.hexDisable();
+    }
+    this.setComponentZOrder(boardPanel, 1);
+  }
+
+  @Override
+  public void enableAllButtons() {
+    for (HexagonTile h : boardPanel.getButtons()) {
+      h.hexEnable();
     }
   }
 }

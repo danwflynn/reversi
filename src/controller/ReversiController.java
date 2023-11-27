@@ -26,7 +26,18 @@ public interface ReversiController {
   TileType getPlayerColor();
 
   /**
+   * Gets whose turn it is.
+   * @return tile type of turn
+   */
+  TileType getModelTurn();
+
+  /**
    * Reacts to the model, which gives this controller the turn in play.
    */
   void alertTurn();
+
+  /**
+   * Makes the view display the message telling the player it's their turn.
+   */
+  void sendTurnMessageToView();
 }

@@ -1,7 +1,7 @@
 package controller;
 
 import model.IReversiModel;
-import model.IComputerPlayer;
+import model.Player;
 import model.Position3D;
 import model.TileType;
 import view.IGraphicalView;
@@ -11,9 +11,9 @@ import view.IGraphicalView;
  * game.
  */
 public class ReversiControllerImpl implements ReversiController {
-  private IReversiModel model;
-  private IComputerPlayer player;
-  private IGraphicalView view;
+  private final IReversiModel model;
+  private final Player player;
+  private final IGraphicalView view;
 
   /**
    * Constructs a ReversiControllerImpl.
@@ -21,9 +21,15 @@ public class ReversiControllerImpl implements ReversiController {
    * @param player The player using this controller
    * @param view The view that the player is able to see
    */
-  public ReversiControllerImpl(IReversiModel model, IComputerPlayer player, IGraphicalView view) {
+  public ReversiControllerImpl(IReversiModel model, Player player, IGraphicalView view) {
     this.model = model;
     this.player = player;
+    this.player.addObserver(this);
+    if (player.getPlayerColor().equals(TileType.BLACK)) {
+      this.model.addBlackObserver(this);
+    } else {
+      this.model.addWhiteObserver(this);
+    }
     this.view = view;
     this.view.addObserver(this);
 
@@ -34,7 +40,8 @@ public class ReversiControllerImpl implements ReversiController {
    */
   @Override
   public void pass() {
-
+    model.pass();
+    view.removeAllButtons();
   }
 
   /**
@@ -44,6 +51,7 @@ public class ReversiControllerImpl implements ReversiController {
   @Override
   public void placeTile(Position3D pos) {
     model.placeTile(pos);
+    view.removeAllButtons();
   }
 
   /**
@@ -57,10 +65,29 @@ public class ReversiControllerImpl implements ReversiController {
   }
 
   /**
+   * Gets whose turn it is.
+   *
+   * @return tile type of turn
+   */
+  @Override
+  public TileType getModelTurn() {
+    return this.model.getTurn();
+  }
+
+  /**
    * Reacts to the model, which gives this controller the turn in play.
    */
   @Override
   public void alertTurn() {
     this.player.turnAction();
+  }
+
+  /**
+   * Makes the view display the message telling the player it's their turn.
+   */
+  @Override
+  public void sendTurnMessageToView() {
+    this.view.addAllButtons();
+    this.view.addTurnMessage();
   }
 }

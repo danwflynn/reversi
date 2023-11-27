@@ -14,9 +14,14 @@ public final class Reversi {
    */
   public static void main(String[] args) {
     IReversiModel model = new ReversiModelImpl(7);
-    IComputerPlayer p1 = new AIPlayer(TileType.BLACK, model);
-    IGraphicalView view = new ReversiGraphicalView(model);
-    ReversiController controller = new ReversiControllerImpl(model, p1, view);
-    view.setVisible(true);
+    Player p1 = new HumanPlayer(TileType.BLACK, model);
+    Player p2 = new HumanPlayer(TileType.WHITE, model);
+    IGraphicalView view1 = new ReversiGraphicalView(model);
+    IGraphicalView view2 = new ReversiGraphicalView(model);
+    ReversiController controller1 = new ReversiControllerImpl(model, p1, view1);
+    ReversiController controller2 = new ReversiControllerImpl(model, p2, view2);
+    view1.setVisible(true);
+    view2.setVisible(true);
+    model.startGame();
   }
 }

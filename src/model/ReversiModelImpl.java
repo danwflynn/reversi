@@ -93,7 +93,7 @@ public class ReversiModelImpl implements IReversiModel {
    */
   @Override
   public void startGame() {
-
+    this.blackObserver.alertTurn();
   }
 
   /**
@@ -141,9 +141,10 @@ public class ReversiModelImpl implements IReversiModel {
     }
     if (this.turn == TileType.BLACK) {
       this.turn = TileType.WHITE;
-      //this.whiteObserver.alertTurn();
+      this.whiteObserver.alertTurn();
     } else {
       this.turn = TileType.BLACK;
+      this.blackObserver.alertTurn();
     }
     this.passCounter += 1;
 
@@ -271,8 +272,10 @@ public class ReversiModelImpl implements IReversiModel {
     this.updateScore();
     if (this.turn == TileType.BLACK) {
       this.turn = TileType.WHITE;
+      this.whiteObserver.alertTurn();
     } else {
       this.turn = TileType.BLACK;
+      this.blackObserver.alertTurn();
     }
     this.passCounter = 0;
   }

@@ -12,8 +12,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A class representing a HexagonTile in Reversi.
@@ -26,6 +24,7 @@ public class HexagonTile extends JButton {
   private final Position3D cubeCoords;
   private final int size;
   private ReversiController observer;
+  private boolean enabled;
 
   /**
    * Constructs a Hexagon Tile with the given coordinates and size.
@@ -35,6 +34,7 @@ public class HexagonTile extends JButton {
   public HexagonTile(Position3D cubeCoords, int size) {
     this.cubeCoords = cubeCoords;
     this.size = size;
+    this.enabled = true;
     hexagon = createHexagon();
     setContentAreaFilled(false);
     setPreferredSize(new Dimension(150, 150));
@@ -49,8 +49,10 @@ public class HexagonTile extends JButton {
           if (highlightedButton != null) {
             highlightedButton.unhighlight();
           }
-          highlight();
-          printCoordinates();
+          if (enabled) {
+            highlight();
+            printCoordinates();
+          }
         }
       }
     });
@@ -63,6 +65,10 @@ public class HexagonTile extends JButton {
         char keyChar = e.getKeyChar();
         if (keyChar == 'p') {
           System.out.println("Pass");
+          observer.pass();
+          if (highlightedButton == HexagonTile.this) {
+            unhighlight();
+          }
         } else if (keyChar == 'm') {
           if (highlightedButton == HexagonTile.this) {
             System.out.println("Declare move to " + cubeCoords);
@@ -124,7 +130,7 @@ public class HexagonTile extends JButton {
   /**
    * Makes this HexagonTile light up.
    */
-  private void highlight() {
+  void highlight() {
     highlightedButton = this;
     repaint();
   }
@@ -151,11 +157,22 @@ public class HexagonTile extends JButton {
     System.out.println("Button cube coordinates: " + this.cubeCoords);
   }
 
+  void hexEnable() {
+    this.enabled = true;
+  }
+
+  void hexDisable() {
+    this.enabled = false;
+  }
+
   /**
    * Adds the observer to this Hex Tile.
    * @param controller The observer
    */
   void addObserver(ReversiController controller) {
     this.observer = controller;
+    if (!controller.getPlayerColor().equals(controller.getModelTurn())) {
+      this.hexDisable();
+    }
   }
 }

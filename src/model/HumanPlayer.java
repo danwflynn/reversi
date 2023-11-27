@@ -1,9 +1,15 @@
 package model;
 
-public class HumanPlayer implements IHumanPlayer {
+import controller.ReversiController;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class HumanPlayer implements Player {
 
   protected final TileType playerColor;
   protected final IReversiModel model;
+  protected ReversiController observer;
 
   /**
    * Constructs an AIPlayer.
@@ -17,6 +23,7 @@ public class HumanPlayer implements IHumanPlayer {
     this.playerColor = playerColor;
     this.model = model;
   }
+
   /**
    * Gets the tile type of the given player.
    *
@@ -42,25 +49,45 @@ public class HumanPlayer implements IHumanPlayer {
   }
 
   /**
-   * Passes the player's turn by calling pass() on the model.
+   * Gets a list of all positions where a move can be made by the player on a given turn.
    *
+   * @return list of possible positions to make move
    * @throws IllegalStateException if it isn't the player's turn
    */
   @Override
-  public void pass() throws IllegalStateException {
-    this.model.pass();
+  public List<Position3D> getAvailableMoves() throws IllegalStateException {
+    if (!this.model.getTurn().equals(this.playerColor)) {
+      throw new IllegalStateException("Not the player's turn.");
+    }
+    List<Position3D> availableMoves = new ArrayList<>();
+    for (Tile t : this.model.getCopyOfBoard()) {
+      if (this.model.isMoveLegal(t.getPos())) {
+        availableMoves.add(t.getPos());
+      }
+    }
+    return availableMoves;
   }
 
   /**
-   * Places the player's tile at the given position by calling placeTile(pos) on the model.
+   * Gets the optimal move for the player based on their optimization rules.
    *
-   * @param pos position to make the move
-   * @throws IllegalStateException    if it isn't the player's turn or if the move is illegal
-   * @throws IllegalArgumentException if the position is out of bounds
+   * @return position for optimal move
+   * @throws IllegalStateException if it isn't the player's turn
+   * @throws IllegalStateException if there are no legal moves
    */
   @Override
-  public void placeTile(Position3D pos) throws IllegalStateException, IllegalArgumentException {
-    this.model.placeTile(pos);
+  public Position3D getOptimalMove() throws IllegalStateException {
+    throw new UnsupportedOperationException("Human players cannot use this method");
+  }
+
+  /**
+   * Adds controller to observe the player.
+   *
+   * @param controller listener to player
+   */
+  @Override
+  public void addObserver(ReversiController controller) {
+    this.observer = controller;
   }
 
   /**
@@ -68,6 +95,6 @@ public class HumanPlayer implements IHumanPlayer {
    */
   @Override
   public void turnAction() {
-    //move
+    this.observer.sendTurnMessageToView();
   }
 }

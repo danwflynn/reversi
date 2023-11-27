@@ -18,5 +18,20 @@ public interface IGraphicalView {
    */
   void setVisible(boolean b);
 
+  /**
+   * Lets a controller observe the view
+   * @param controller listener to view
+   */
   void addObserver(ReversiController controller);
+
+  /**
+   * Tells the human player that it's their turn.
+   */
+  void addTurnMessage();
+
+  void addAllButtons();
+
+  void removeAllButtons();
+
+  void enableAllButtons();
 }
