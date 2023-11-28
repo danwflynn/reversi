@@ -145,13 +145,11 @@ public class ReversiModelImpl implements IReversiModel {
     if (this.turn == TileType.BLACK) {
       this.turn = TileType.WHITE;
       if (whiteObserver != null && !this.isGameOver()) {
-        //System.out.println(this.isGameOver());
         this.whiteObserver.alertTurn();
       }
     } else {
       this.turn = TileType.BLACK;
       if (blackObserver != null && !this.isGameOver()) {
-        //System.out.println(this.isGameOver());
         this.blackObserver.alertTurn();
       }
     }
@@ -262,6 +260,7 @@ public class ReversiModelImpl implements IReversiModel {
   @Override
   public void placeTile(Position3D pos) throws IllegalStateException, IllegalArgumentException {
     placeTileBasicExceptions(pos);
+    this.passCounter = 0;
     boolean noBridges = true;
     for (List<Tile> l : this.getAvailableBridges(pos)) {
       if (!l.isEmpty()) {
@@ -288,7 +287,6 @@ public class ReversiModelImpl implements IReversiModel {
         this.blackObserver.alertTurn();
       }
     }
-    this.passCounter = 0;
   }
 
   /**

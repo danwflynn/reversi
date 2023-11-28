@@ -878,4 +878,120 @@ public class AIPlayerTests {
               + tile.getPos()));
     }
   }
+
+  @Test
+  public void testUntilGameOver() {
+    IReversiModel model7 = new ReversiModelImpl(7);
+    Player p71 = new AIPlayer(TileType.BLACK, model7);
+    Player p72 = new AIPlayer(TileType.WHITE, model7);
+    TextualView tv7 = new ReversiTextualView(model7);
+    model7.placeTile(p71.getOptimalMove());
+    model7.placeTile(p72.getOptimalMove());
+    model7.placeTile(p71.getOptimalMove());
+    model7.placeTile(p72.getOptimalMove());
+    model7.placeTile(p71.getOptimalMove());
+    model7.placeTile(p72.getOptimalMove());
+    model7.placeTile(p71.getOptimalMove());
+    model7.placeTile(p72.getOptimalMove());
+    model7.placeTile(p71.getOptimalMove());
+    model7.pass();
+    model7.placeTile(p71.getOptimalMove());
+    model7.placeTile(p72.getOptimalMove());
+    model7.placeTile(p71.getOptimalMove());
+    model7.placeTile(p72.getOptimalMove());
+    model7.placeTile(p71.getOptimalMove());
+    model7.placeTile(p72.getOptimalMove());
+    model7.pass();
+    model7.placeTile(p72.getOptimalMove());
+    model7.placeTile(p71.getOptimalMove());
+    model7.placeTile(p72.getOptimalMove());
+    model7.placeTile(p71.getOptimalMove());
+    model7.placeTile(p72.getOptimalMove());
+    model7.placeTile(p71.getOptimalMove());
+    model7.placeTile(p72.getOptimalMove());
+    model7.placeTile(p71.getOptimalMove());
+    model7.placeTile(p72.getOptimalMove());
+    model7.placeTile(p71.getOptimalMove());
+    model7.placeTile(p72.getOptimalMove());
+    model7.placeTile(p71.getOptimalMove());
+    model7.placeTile(p72.getOptimalMove());
+    model7.placeTile(p71.getOptimalMove());
+    model7.placeTile(p72.getOptimalMove());
+    model7.placeTile(p71.getOptimalMove());
+    model7.placeTile(p72.getOptimalMove());
+    model7.placeTile(p71.getOptimalMove());
+    model7.placeTile(p72.getOptimalMove());
+    model7.placeTile(p71.getOptimalMove());
+    model7.placeTile(p72.getOptimalMove());
+    model7.placeTile(p71.getOptimalMove());
+    model7.placeTile(p72.getOptimalMove());
+    model7.placeTile(p71.getOptimalMove());
+    model7.placeTile(p72.getOptimalMove());
+    model7.placeTile(p71.getOptimalMove());
+    model7.placeTile(p72.getOptimalMove());
+    model7.placeTile(p71.getOptimalMove());
+    model7.placeTile(p72.getOptimalMove());
+    model7.placeTile(p71.getOptimalMove());
+    model7.placeTile(p72.getOptimalMove());
+    model7.placeTile(p71.getOptimalMove());
+    model7.placeTile(p72.getOptimalMove());
+    model7.placeTile(p71.getOptimalMove());
+    model7.placeTile(p72.getOptimalMove());
+    model7.placeTile(p71.getOptimalMove());
+    model7.pass();
+    model7.placeTile(p71.getOptimalMove());
+    model7.placeTile(p72.getOptimalMove());
+    model7.placeTile(p71.getOptimalMove());
+    model7.placeTile(p72.getOptimalMove());
+    model7.placeTile(p71.getOptimalMove());
+    model7.placeTile(p72.getOptimalMove());
+    model7.placeTile(p71.getOptimalMove());
+    model7.placeTile(p72.getOptimalMove());
+    model7.placeTile(p71.getOptimalMove());
+    model7.placeTile(p72.getOptimalMove());
+    model7.placeTile(p71.getOptimalMove());
+    model7.placeTile(p72.getOptimalMove());
+    model7.placeTile(p71.getOptimalMove());
+    model7.placeTile(p72.getOptimalMove());
+    model7.placeTile(p71.getOptimalMove());
+    model7.placeTile(p72.getOptimalMove());
+    model7.placeTile(p71.getOptimalMove());
+    model7.placeTile(p72.getOptimalMove());
+    model7.placeTile(p71.getOptimalMove());
+    model7.placeTile(p72.getOptimalMove());
+    model7.pass();
+    model7.placeTile(p72.getOptimalMove());
+    model7.pass();
+    model7.placeTile(p72.getOptimalMove());
+    model7.pass();
+    model7.placeTile(p72.getOptimalMove());
+    model7.placeTile(p71.getOptimalMove());
+    model7.placeTile(p72.getOptimalMove());
+    model7.placeTile(p71.getOptimalMove());
+    model7.placeTile(p72.getOptimalMove());
+    model7.placeTile(p71.getOptimalMove());
+    model7.placeTile(p72.getOptimalMove());
+    model7.placeTile(p71.getOptimalMove());
+    model7.placeTile(p72.getOptimalMove());
+    model7.placeTile(p71.getOptimalMove());
+    model7.placeTile(p72.getOptimalMove());
+    model7.pass();
+    model7.pass();
+    Assert.assertTrue(model7.isGameOver());
+    Assert.assertEquals("      _ O _ O _ X _\n" +
+            "     X X X X O O O X\n" +
+            "    _ O _ O _ O _ O _\n" +
+            "   X O X X X X O X O X\n" +
+            "  _ O _ O _ O _ O _ O _\n" +
+            " X O O X X O O X O X O O\n" +
+            "_ X _ O _ O _ X _ O _ O _\n" +
+            " O X X X X X X X X X X O\n" +
+            "  _ X _ X _ X _ O _ X _\n" +
+            "   O X X X X X X X X O\n" +
+            "    _ O _ X _ X _ O _\n" +
+            "     O O O O O O O O\n" +
+            "      _ X _ X _ X _", tv7.toString());
+    Assert.assertEquals(47, model7.getBlackScore());
+    Assert.assertEquals(43, model7.getWhiteScore());
+  }
 }
