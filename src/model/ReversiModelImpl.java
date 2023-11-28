@@ -141,19 +141,20 @@ public class ReversiModelImpl implements IReversiModel {
     if (this.isGameOver()) {
       throw new IllegalStateException("The game is over");
     }
+    this.passCounter += 1;
     if (this.turn == TileType.BLACK) {
       this.turn = TileType.WHITE;
-      if (whiteObserver != null) {
+      if (whiteObserver != null && !this.isGameOver()) {
+        //System.out.println(this.isGameOver());
         this.whiteObserver.alertTurn();
       }
     } else {
       this.turn = TileType.BLACK;
-      if (blackObserver != null) {
+      if (blackObserver != null && !this.isGameOver()) {
+        //System.out.println(this.isGameOver());
         this.blackObserver.alertTurn();
       }
     }
-    this.passCounter += 1;
-
   }
 
   /**
@@ -278,12 +279,12 @@ public class ReversiModelImpl implements IReversiModel {
     this.updateScore();
     if (this.turn == TileType.BLACK) {
       this.turn = TileType.WHITE;
-      if (whiteObserver != null) {
+      if (whiteObserver != null && !this.isGameOver()) {
         this.whiteObserver.alertTurn();
       }
     } else {
       this.turn = TileType.BLACK;
-      if (blackObserver != null) {
+      if (blackObserver != null && !this.isGameOver()) {
         this.blackObserver.alertTurn();
       }
     }
