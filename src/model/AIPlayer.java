@@ -89,6 +89,10 @@ public class AIPlayer extends HumanPlayer implements Player {
    */
   @Override
   public void turnAction() {
-    //move
+    if (!this.getAvailableMoves().isEmpty()) {
+      this.observer.placeTile(this.getOptimalMove());
+    } else {
+      this.observer.pass();
+    }
   }
 }

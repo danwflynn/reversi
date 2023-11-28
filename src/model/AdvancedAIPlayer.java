@@ -152,4 +152,16 @@ public class AdvancedAIPlayer extends AIPlayer implements Player {
     }
     return super.getOptimalMove();
   }
+
+  /**
+   * Takes a turn in a game of Reversi.
+   */
+  @Override
+  public void turnAction() {
+    if (!this.getAvailableMoves().isEmpty()) {
+      this.observer.placeTile(this.getOptimalMove());
+    } else {
+      this.observer.pass();
+    }
+  }
 }
