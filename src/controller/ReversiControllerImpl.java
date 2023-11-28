@@ -1,9 +1,6 @@
 package controller;
 
-import model.IReversiModel;
-import model.Player;
-import model.Position3D;
-import model.TileType;
+import model.*;
 import view.IGraphicalView;
 
 /**
@@ -41,7 +38,9 @@ public class ReversiControllerImpl implements ReversiController {
   @Override
   public void pass() {
     model.pass();
-    view.removeAllButtons();
+    if (this.player instanceof AIPlayer || this.model.isGameOver() || this.model.bothPlayersHuman()) {
+      view.removeAllButtons();
+    }
     this.view.unhighlightAllButtons();
   }
 
@@ -53,7 +52,9 @@ public class ReversiControllerImpl implements ReversiController {
   public void placeTile(Position3D pos) {
     this.view.unhighlightAllButtons();
     model.placeTile(pos);
-    view.removeAllButtons();
+    if (this.player instanceof AIPlayer || this.model.isGameOver() || this.model.bothPlayersHuman()) {
+      view.removeAllButtons();
+    }
   }
 
   /**
@@ -92,5 +93,10 @@ public class ReversiControllerImpl implements ReversiController {
   @Override
   public void sendTurnMessageToView() {
     this.view.addTurnMessage();
+  }
+
+  @Override
+  public boolean isHuman() {
+    return !(this.player instanceof AIPlayer);
   }
 }

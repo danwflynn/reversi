@@ -13,7 +13,7 @@ public final class Reversi {
    * @param args why do we need to java doc this
    */
   public static void main(String[] args) {
-    IReversiModel model = new ReversiModelImpl(7);
+    IReversiModel model = new ReversiModelImpl(12);
     Player p1 = new AIPlayer(TileType.BLACK, model);
     Player p2 = new AIPlayer(TileType.WHITE, model);
     IGraphicalView view1 = new ReversiGraphicalView(model);

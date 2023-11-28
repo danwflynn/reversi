@@ -48,4 +48,6 @@ public interface IReversiModel extends ReadonlyIReversiModel {
    * @param controller The controller observing this model.
    */
   void addBlackObserver(ReversiController controller);
+
+  boolean bothPlayersHuman();
 }

@@ -315,6 +315,14 @@ public class ReversiModelImpl implements IReversiModel {
     this.blackObserver = controller;
   }
 
+  @Override
+  public boolean bothPlayersHuman() {
+    if (this.blackObserver == null || this.whiteObserver == null) {
+      return false;
+    }
+    return this.blackObserver.isHuman() && this.whiteObserver.isHuman();
+  }
+
   /**
    * Gets the size of the board in tiles.
    * @return The size of the board

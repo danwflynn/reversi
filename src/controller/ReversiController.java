@@ -40,4 +40,6 @@ public interface ReversiController {
    * Makes the view display the message telling the player it's their turn.
    */
   void sendTurnMessageToView();
+
+  boolean isHuman();
 }
