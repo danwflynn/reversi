@@ -5,6 +5,7 @@ The testing of this code base is split into files that serve different purposes.
 ReversiModelTests is all the testing done alongside the development of the components of the
 reversi model. ReadOnlyReversiModelTests is for tests focusing on the ReadOnly version of the model.
 AIPlayerTests is for tests focusing on the nature of the AIPlayer of the game of Reversi.
+ControllerTests is for tests focusing on the nature of the controller in the game of Reversi.
 ExampleTests is a reversi model tutorial for the reader's convenience. The setup for
 the ExampleTests class creates a reversi game model with radius 5 along with its text view. The
 tutorial starts with exceptions thrown by illegal constructor arguments, then it tests and
@@ -17,7 +18,7 @@ Overview:
 
 This project is a model and textview implementation of the game Reversi with a hexagonal grid as
 the game board as opposed to other versions which use a square or rectangle to represent a board.
-This code base contains 2 packages in its current state. There is a model package which manages
+This code base contains 3 packages in its current state. There is a model package which manages
 the players (having their respective tiles), the board (which is inside the Reversi model
 class), and the rules of the game (also managed in Reversi model class). This code allows for
 multiple forms of extensibility. If someone wanted to make a new version of the game (similar but
@@ -26,7 +27,8 @@ necessary methods. In that case, the private fields and methods would need to be
 be used. This current codebase also allows room for a controller to be implemented as they
 will be in future assignments. In addition to this, the player interface allows extensibility
 for future implementation with human players. The player interface lets players make moves
-in the game, check their attributes, and see which moves are optimal.
+in the game, check their attributes, and see which moves are optimal. The controller allows
+for proper communication between the player and the model when making moves.
 
 Quick Start:
 @Test
@@ -51,18 +53,12 @@ Quick Start:
 This is an example of a test that makes legal moves and checks to see if the score is correct on
 every single move.
 
-The player can initiate the GUI by inserting this model like so in the 'Reversi' class's main:
-
-  public static void main(String[] args) {
-    IReversiModel model = new ReversiModelImpl(15);
-    IGraphicalView view = new ReversiGraphicalView(model);
-    view.setVisible(true);
-  }
+See Reversi (the main class) for a simple starting example for game of Reversi.
 
 Key Components:
 Everything About Reversi Model:
 
-Here is how you create a new game:
+Here is how you create a new model of the game:
 IReversi model = new ReversiModelImpl(4);
 
 Here we can see that the constructor parameter is 4 which means that the radius of the board is 4.
@@ -111,6 +107,11 @@ There are also getters written to get the players' scores and tile types because
 be needed in certain situations. There are also 2 methods that get all available moves and the
 highest scoring move for a player. These are especially useful for the AI implementation because
 this helps it build specific strategies.
+
+Controller Interface:
+ReversiController is the interface for the controller, allowing communications between the player
+and the model of the game when the player attempts to make moves. Its implementation can be found
+in ReversiControllerImpl.
 
 ___________________
 Key Subcomponents:
@@ -198,6 +199,11 @@ HexagonTile represents a single Hexagon tile in the game. It has four fields:
 - 'cubeCoords' is a Position3D representing where this tile is on the board in cube coordinates.
 - 'size' is the side length of this hexagon tile.
 
+ReversiControllerImpl represents a controller in the game of Reversi. It has three fields:
+- 'model' is the model that the controller is able to control.
+- 'player' is the player using this controller in order to make plays in the model of the game.
+- 'view' is the view the controller uses to access the visual aspect of the game.
+
 Source Organization:
 
 Test:
@@ -206,6 +212,7 @@ ExampleTests: A series of tests made after the model development with the purpos
     important aspects of the game
 ReadOnlyReversiModelTests: Tests specifically for the Readonly version of the game's model.
 AIPlayerTests: Tests specifically for the AIPlayer and its functionality.
+ControllerTests: Tests specifically for the controller interface / implementation.
 
 view:
 TextualView: Text view interface
@@ -229,6 +236,10 @@ MockModelLoggingObservations: A mock model that logs checks to tiles and legal m
 ReadonlyReversiModel: An interface for the model's methods that don't directly mutate the model
 ReadonlyReversiModelImpl: An implementation of ReadonlyReversiModel, with no mutator methods
 
+controller:
+ReversiController: controller interface representing a controller used by a player to access the
+game
+ReversiControllerImpl: implementation of ReversiController
 
 ____________________
 Changes for part 2
@@ -242,6 +253,17 @@ There is a new function, getCopyOfTileAt which returns a copy of the tile at the
 on the model's board which is only observable. The other method, getTileAt, returns the reference
 of the actual tile for mutation purposes.
 
+____________________
+Changes for part 3
+
+We have made it so that views and players take in a readonly version of the model.
+This guarantees that the view and player are unable to directly mutate the model, leading to more
+stable code. The player must access the model through the controller instead, which is given the
+access to the mutable version of the model.
+
+We added functionality to our view and model to handle observers and listeners. This allows
+for cross-communication between the model, view, and controller in the real-time nature of a
+game of Reversi.
 
 ____________________
 User Controls for GUI:
