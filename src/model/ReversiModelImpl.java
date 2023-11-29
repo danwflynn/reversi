@@ -20,6 +20,7 @@ public class ReversiModelImpl implements IReversiModel {
   private int passCounter;
   private ReversiController blackObserver;
   private ReversiController whiteObserver;
+  
   /**
    * Constructor for the class.
    * @param radius amount of hexagons from the center (included) to the edge in a straight line

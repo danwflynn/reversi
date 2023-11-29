@@ -19,7 +19,7 @@ public interface IGraphicalView {
   void setVisible(boolean b);
 
   /**
-   * Lets a controller observe the view
+   * Lets a controller observe the view.
    * @param controller listener to view
    */
   void addObserver(ReversiController controller);

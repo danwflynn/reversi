@@ -1,7 +1,11 @@
 package controller;
 
-import model.*;
+import model.IReversiModel;
 import view.IGraphicalView;
+import model.Player;
+import model.TileType;
+import model.Position3D;
+import model.AIPlayer;
 
 /**
  * An implementation for the controller of a Reversi game, which allows a player to operate the
@@ -38,7 +42,8 @@ public class ReversiControllerImpl implements ReversiController {
   @Override
   public void pass() {
     model.pass();
-    if (this.player instanceof AIPlayer || this.model.isGameOver() || this.model.bothPlayersHuman()) {
+    if (this.player instanceof AIPlayer || this.model.isGameOver()
+            || this.model.bothPlayersHuman()) {
       view.removeAllButtons();
     }
     this.view.unhighlightAllButtons();
@@ -53,7 +58,8 @@ public class ReversiControllerImpl implements ReversiController {
     this.view.unhighlightAllButtons();
     try {
       model.placeTile(pos);
-      if (this.player instanceof AIPlayer || this.model.isGameOver() || this.model.bothPlayersHuman()) {
+      if (this.player instanceof AIPlayer || this.model.isGameOver()
+              || this.model.bothPlayersHuman()) {
         view.removeAllButtons();
       }
     } catch (IllegalStateException e) {
@@ -90,9 +96,9 @@ public class ReversiControllerImpl implements ReversiController {
    */
   @Override
   public void alertTurn() {
-      this.view.enableAllButtons();
-      this.view.unhighlightAllButtons();
-      this.player.turnAction();
+    this.view.enableAllButtons();
+    this.view.unhighlightAllButtons();
+    this.player.turnAction();
   }
 
   /**

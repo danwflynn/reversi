@@ -172,7 +172,7 @@ public class BoardPanel extends JPanel {
   }
 
   /**
-   * Draws an individual hexagon at its coordinates on the board
+   * Draws an individual hexagon at its coordinates on the board.
    * @param g2d The Graphics2D object being used to draw the hexagon
    * @param x The x-value to draw at
    * @param y The y-value to draw at
@@ -236,8 +236,8 @@ public class BoardPanel extends JPanel {
   }
 
   /**
-   * Draws the outermost ring of tiles around the center
-   * This method is iteratively called to draw all the rings
+   * Draws the outermost ring of tiles around the center.
+   * This method is iteratively called to draw all the rings.
    * @param ring Which ring (increasing as radius goes up) is being drawn
    * @param g2d The Graphics2D value to draw on
    * @param x The x-value to draw at

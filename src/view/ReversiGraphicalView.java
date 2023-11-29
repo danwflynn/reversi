@@ -1,11 +1,14 @@
 package view;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import controller.ReversiController;
 import model.ReadonlyIReversiModel;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
+import javax.swing.JFrame;
+import javax.swing.WindowConstants;
 
 /**
  * An implementation of the GUI view for a game of Reversi.
