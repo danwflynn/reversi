@@ -29,13 +29,29 @@ public interface IGraphicalView {
    */
   void addTurnMessage();
 
+  /**
+   * Creates a dialogue box informing the user of an illegal move they tried to make.
+   * @param s The excpetion message as given by the model.
+   */
   void addIllegalMoveMessage(String s);
 
+  /**
+   * Adds all buttons to the view, giving the user the option to manipulate them in game.
+   */
   void addAllButtons();
 
+  /**
+   * Removes all buttons from the view, stopping the user from manipulating them in game.
+   */
   void removeAllButtons();
 
+  /**
+   * Re-enables buttons in the view, allowing the user to manipulate them in game.
+   */
   void enableAllButtons();
 
+  /**
+   * Ensures that all buttons in the board are de-selected.
+   */
   void unhighlightAllButtons();
 }

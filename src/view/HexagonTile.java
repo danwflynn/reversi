@@ -159,10 +159,16 @@ public class HexagonTile extends JButton {
     System.out.println("Button cube coordinates: " + this.cubeCoords);
   }
 
+  /**
+   * Enables a hexagon and the ability for it to be manipulated by the player.
+   */
   void hexEnable() {
     this.enabled = true;
   }
 
+  /**
+   * Disables a hexagon and the ability for it to be manipulated by the player.
+   */
   void hexDisable() {
     this.enabled = false;
   }

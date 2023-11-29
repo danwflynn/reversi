@@ -45,6 +45,10 @@ public class ReversiGraphicalView extends JFrame implements IGraphicalView {
     this.setVisible(true);
   }
 
+  /**
+   * Add an observer to this graphical view.
+   * @param controller The listener to view
+   */
   @Override
   public void addObserver(ReversiController controller) {
     for (HexagonTile h : this.boardPanel.getButtons()) {
@@ -63,11 +67,18 @@ public class ReversiGraphicalView extends JFrame implements IGraphicalView {
     JOptionPane.showMessageDialog(this, "It's your turn!");
   }
 
+  /**
+   * Adds a dialogue message, telling the user about an illegal move they made.
+   * @param s The exception message as given by the model.
+   */
   @Override
   public void addIllegalMoveMessage(String s) {
     JOptionPane.showMessageDialog(this, "Illegal move " + s);
   }
 
+  /**
+   * Adds all buttons to the view, giving the user the option to manipulate them in game.
+   */
   @Override
   public void addAllButtons() {
     int ind = 1;
@@ -87,6 +98,9 @@ public class ReversiGraphicalView extends JFrame implements IGraphicalView {
     this.setComponentZOrder(boardPanel, ind);
   }
 
+  /**
+   * Removes all buttons from the view, stopping the user from manipulating them in game.
+   */
   @Override
   public void removeAllButtons() {
     for (HexagonTile h : boardPanel.getButtons()) {
@@ -95,6 +109,9 @@ public class ReversiGraphicalView extends JFrame implements IGraphicalView {
     }
   }
 
+  /**
+   * Re-enables buttons in the view, allowing the user to manipulate them in game.
+   */
   @Override
   public void enableAllButtons() {
     for (HexagonTile h : boardPanel.getButtons()) {
@@ -103,6 +120,9 @@ public class ReversiGraphicalView extends JFrame implements IGraphicalView {
     }
   }
 
+  /**
+   * Ensures that all buttons in the board are de-selected.
+   */
   @Override
   public void unhighlightAllButtons() {
     for (HexagonTile h : boardPanel.getButtons()) {

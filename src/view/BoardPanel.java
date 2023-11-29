@@ -141,6 +141,10 @@ public class BoardPanel extends JPanel {
     }
   }
 
+  /**
+   * Paints this object, rendering its state visible on the frame.
+   * @param g the Graphics object to protect
+   */
   @Override
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
@@ -167,7 +171,13 @@ public class BoardPanel extends JPanel {
     }
   }
 
-  // Draws an individual hexagon at its coordinates on the board
+  /**
+   * Draws an individual hexagon at its coordinates on the board
+   * @param g2d The Graphics2D object being used to draw the hexagon
+   * @param x The x-value to draw at
+   * @param y The y-value to draw at
+   * @param size The size of the hexagon
+   */
   private void drawHexagon(Graphics2D g2d, double x, double y, int size) {
     Path2D path = new Path2D.Double();
     double angle = Math.toRadians(60); // 60 degrees in radians
@@ -199,22 +209,41 @@ public class BoardPanel extends JPanel {
     g2d.setColor(Color.GRAY);
   }
 
-  // Draws a black piece over a tile
+  /**
+   * Draws a black piece over a tile.
+   * @param g2d The Graphics2D to draw on
+   * @param x The x-value to draw at
+   * @param y The y-value to draw at
+   * @param size The size of the oval
+   */
   private void drawBlackPiece(Graphics2D g2d, double x, double y, int size) {
     g2d.setColor(Color.BLACK);
     g2d.fillOval((int) x + size / 2, (int) y - size / 2, size, size);
     g2d.setColor(Color.GRAY);
   }
 
-  // Draws a white piece over a tile
+  /**
+   * Draws a white piece over a tile.
+   * @param g2d The Graphics2D to draw on
+   * @param x The x-value to draw at
+   * @param y The y-value to draw at
+   * @param size The size of the oval
+   */
   private void drawWhitePiece(Graphics2D g2d, double x, double y, int size) {
     g2d.setColor(Color.WHITE);
     g2d.fillOval((int) x + size / 2, (int) y - size / 2, size, size);
     g2d.setColor(Color.GRAY);
   }
 
-  // Draws the outermost ring of tiles around the center
-  // This method is iteratively called to draw all the rings
+  /**
+   * Draws the outermost ring of tiles around the center
+   * This method is iteratively called to draw all the rings
+   * @param ring Which ring (increasing as radius goes up) is being drawn
+   * @param g2d The Graphics2D value to draw on
+   * @param x The x-value to draw at
+   * @param y The y-value to draw at
+   */
+
   private void drawHexRing(int ring, Graphics2D g2d, double x, double y) {
     for (int row = 0; row < 2 * ring + 1; row++) {
       if (row == 0) {
@@ -276,14 +305,31 @@ public class BoardPanel extends JPanel {
     }
   }
 
-  // Helper to check if pieces need to be drawn on each side.
+  /**
+   * Checks if surrounding pieces need to be drawn at the given locations.
+   * @param g2d The Graphics2D to draw on
+   * @param y1 The y-value to draw at
+   * @param x1 The x-value to draw at
+   * @param x2 The x-value nearby to check at
+   * @param r The r-value in cube coordinates to check on the board
+   * @param q The q-value in cube coordinates to check on the board
+   * @param s The s-value in cube coordinates to check on the board
+   */
   private void drawingPiecesHelper(Graphics2D g2d,
                                    double y1, double x1, double x2, int r, int q, int s) {
     checkForBlackAndWhite(g2d, y1, x1, r, s, q);
     checkForBlackAndWhite(g2d, y1, x2, r, q, s);
   }
 
-  // Draws the corresponding black and white pieces when necessary.
+  /**
+   * Draws surrounding pieces if needed at the given locations.
+   * @param g2d The Graphics2D to draw on
+   * @param y1 The y-value to draw at
+   * @param x2 The x-value to draw at
+   * @param r The r-value in cube coordinates to check on the board
+   * @param q The q-value in cube coordinates to check on the board
+   * @param s The s-value in cube coordinates to check on the board
+   */
   private void checkForBlackAndWhite(Graphics2D g2d, double y1, double x2, int r, int q, int s) {
     if (this.model.getCopyOfTileAt(new Position3D(s, r, q)).getTileType().equals(TileType.BLACK)) {
       drawBlackPiece(g2d, x2, y1, size);
@@ -293,7 +339,10 @@ public class BoardPanel extends JPanel {
     }
   }
 
-  // Gets all the buttons to be placed over the board.
+  /**
+   * Gets all the buttons to be placed over the board.
+   * @return A list of hexagon buttons
+   */
   public ArrayList<HexagonTile> getButtons() {
     return this.hexagonTiles;
   }
