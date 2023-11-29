@@ -8,7 +8,7 @@ import java.util.List;
 public class HumanPlayer implements Player {
 
   protected final TileType playerColor;
-  protected final IReversiModel model;
+  protected final ReadonlyIReversiModel model;
   protected ReversiController observer;
 
   /**
@@ -16,7 +16,7 @@ public class HumanPlayer implements Player {
    * @param playerColor The color of the player
    * @param model The model to use as reference for the player
    */
-  public HumanPlayer(TileType playerColor, IReversiModel model) {
+  public HumanPlayer(TileType playerColor, ReadonlyIReversiModel model) {
     if (playerColor.equals(TileType.EMPTY)) {
       throw new IllegalArgumentException("Player cannot be represented by an empty piece.");
     }

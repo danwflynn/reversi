@@ -29,10 +29,12 @@ public class ControllerTests {
     this.view2.setVisible(true);
   }
 
-//  @Test
-//  public void testAIRunTheWholeGame() {
-//    this.model.startGame();
-//    Assert.assertEquals(47, model.getBlackScore());
-//    Assert.assertEquals(43, model.getWhiteScore());
-//  }
+  @Test
+  public void testAIRunTheWholeGame() {
+    this.model.startGame();
+    Assert.assertEquals(47, model.getBlackScore());
+    Assert.assertEquals(43, model.getWhiteScore());
+  }
+
+
 }

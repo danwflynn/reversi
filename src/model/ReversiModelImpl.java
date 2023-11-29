@@ -63,7 +63,7 @@ public class ReversiModelImpl implements IReversiModel {
    * Constructor to make a copy of the game.
    * @param rm model to copy
    */
-  public ReversiModelImpl(IReversiModel rm) {
+  public ReversiModelImpl(ReadonlyIReversiModel rm) {
     this.board = rm.getCopyOfBoard();
     this.turn = rm.getTurn();
     this.radius = rm.getRadius();
