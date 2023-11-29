@@ -51,9 +51,17 @@ public class ReversiControllerImpl implements ReversiController {
   @Override
   public void placeTile(Position3D pos) {
     this.view.unhighlightAllButtons();
-    model.placeTile(pos);
-    if (this.player instanceof AIPlayer || this.model.isGameOver() || this.model.bothPlayersHuman()) {
-      view.removeAllButtons();
+    try {
+      model.placeTile(pos);
+      if (this.player instanceof AIPlayer || this.model.isGameOver() || this.model.bothPlayersHuman()) {
+        view.removeAllButtons();
+      }
+    } catch (IllegalStateException e) {
+      String playerName = "Black. ";
+      if (this.player.getPlayerColor().equals(TileType.WHITE)) {
+        playerName = "White. ";
+      }
+      this.view.addIllegalMoveMessage("for " + playerName + e.getMessage());
     }
   }
 

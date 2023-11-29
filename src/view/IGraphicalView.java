@@ -29,6 +29,8 @@ public interface IGraphicalView {
    */
   void addTurnMessage();
 
+  void addIllegalMoveMessage(String s);
+
   void addAllButtons();
 
   void removeAllButtons();

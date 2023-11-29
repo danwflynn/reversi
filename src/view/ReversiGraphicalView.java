@@ -64,6 +64,11 @@ public class ReversiGraphicalView extends JFrame implements IGraphicalView {
   }
 
   @Override
+  public void addIllegalMoveMessage(String s) {
+    JOptionPane.showMessageDialog(this, "Illegal move " + s);
+  }
+
+  @Override
   public void addAllButtons() {
     int ind = 1;
     for (HexagonTile h : boardPanel.getButtons()) {
