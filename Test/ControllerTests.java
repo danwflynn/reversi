@@ -1,6 +1,13 @@
 import controller.ReversiController;
 import controller.ReversiControllerImpl;
-import model.*;
+import model.TileType;
+import model.AIPlayer;
+import model.IReversiModel;
+import model.Player;
+import model.ReversiModelImpl;
+import model.HumanPlayer;
+import model.Position3D;
+import model.AdvancedAIPlayer;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

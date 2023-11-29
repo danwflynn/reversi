@@ -1,6 +1,11 @@
 import controller.ReversiController;
 import controller.ReversiControllerImpl;
-import model.*;
+import model.IReversiModel;
+import model.ReversiModelImpl;
+import model.Player;
+import model.HumanPlayer;
+import model.TileType;
+import model.AIPlayer;
 import view.IGraphicalView;
 import view.ReversiGraphicalView;
 
