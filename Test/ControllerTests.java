@@ -7,6 +7,9 @@ import org.junit.Test;
 import view.IGraphicalView;
 import view.ReversiGraphicalView;
 
+/**
+ * A class for tests involving the controller in the game of Reversi.
+ */
 public class ControllerTests {
   private IReversiModel model;
   private Player p1;
@@ -16,6 +19,9 @@ public class ControllerTests {
   private ReversiController controller1;
   private ReversiController controller2;
 
+  /**
+   * Sets up initial testing conditions for convenience.
+   */
   @Before
   public void setup() {
     this.model = new ReversiModelImpl(7);
