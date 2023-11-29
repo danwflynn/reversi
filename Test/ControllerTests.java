@@ -43,4 +43,10 @@ public class ControllerTests {
   }
 
 
+  @Test
+  public void testControllerObservationalMethods() {
+    Assert.assertEquals(TileType.BLACK, this.controller1.getPlayerColor());
+    Assert.assertEquals(TileType.BLACK, this.controller1.getModelTurn());
+    Assert.assertFalse(this.controller1.isHuman());
+  }
 }
