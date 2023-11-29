@@ -113,7 +113,8 @@ ReversiController is the interface for the controller, allowing communications b
 and the model of the game when the player attempts to make moves. Its implementation can be found
 in ReversiControllerImpl. The controller also restricts the player so that they can't select any
 buttons when it isn't their turn. AI players also have their buttons disabled as they don't even
-need them.
+need them. When the game is over, there is no message to say that the game is over. When the game
+is over, neither player can do anything.
 
 ___________________
 Key Subcomponents:
