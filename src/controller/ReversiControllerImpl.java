@@ -103,6 +103,10 @@ public class ReversiControllerImpl implements ReversiController {
     this.view.addTurnMessage();
   }
 
+  /**
+   * Determines if this controller is being used by a human.
+   * @return True if this controller's player is human, false otherwise.
+   */
   @Override
   public boolean isHuman() {
     return !(this.player instanceof AIPlayer);

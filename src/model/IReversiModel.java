@@ -49,5 +49,9 @@ public interface IReversiModel extends ReadonlyIReversiModel {
    */
   void addBlackObserver(ReversiController controller);
 
+  /**
+   * Determines if both players in the game are human players, as opposed to AI.
+   * @return True if both players are human, and false otherwise.
+   */
   boolean bothPlayersHuman();
 }

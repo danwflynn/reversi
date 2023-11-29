@@ -53,7 +53,7 @@ public class ReversiGraphicalView extends JFrame implements IGraphicalView {
   }
 
   /**
-   * Tells the human player that it's their turn.
+   * Tells the human player that it's their turn with a dialog box.
    */
   @Override
   public void addTurnMessage() {

@@ -5,6 +5,10 @@ import controller.ReversiController;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A class representing a human player (as opposed to an AI), which is able to play a game of
+ * Reversi.
+ */
 public class HumanPlayer implements Player {
 
   protected final TileType playerColor;

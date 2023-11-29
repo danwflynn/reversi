@@ -89,7 +89,7 @@ public class GameTile implements Tile {
   }
 
   /**
-   * Override hashcode.
+   * Override hashcode for checking if two GameTiles are equal.
    * @return hashcode.
    */
   @Override

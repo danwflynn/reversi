@@ -315,6 +315,10 @@ public class ReversiModelImpl implements IReversiModel {
     this.blackObserver = controller;
   }
 
+  /**
+   * Determines if both players in the game are human players, as opposed to AI.
+   * @return True if both players are human, and false otherwise.
+   */
   @Override
   public boolean bothPlayersHuman() {
     if (this.blackObserver == null || this.whiteObserver == null) {

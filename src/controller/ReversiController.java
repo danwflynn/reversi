@@ -41,5 +41,9 @@ public interface ReversiController {
    */
   void sendTurnMessageToView();
 
+  /**
+   * Determines if this controller is being used by a human.
+   * @return True if this controller's player is human, false otherwise.
+   */
   boolean isHuman();
 }
