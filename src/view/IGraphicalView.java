@@ -31,7 +31,7 @@ public interface IGraphicalView {
 
   /**
    * Creates a dialogue box informing the user of an illegal move they tried to make.
-   * @param s The excpetion message as given by the model.
+   * @param s The exception message as given by the model.
    */
   void addIllegalMoveMessage(String s);
 

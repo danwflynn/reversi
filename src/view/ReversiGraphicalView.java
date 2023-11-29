@@ -1,5 +1,4 @@
 package view;
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -35,7 +34,6 @@ public class ReversiGraphicalView extends JFrame implements IGraphicalView {
 
     this.setVisible(true);
     this.setResizable(false);
-
   }
 
   /**
