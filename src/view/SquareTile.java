@@ -40,7 +40,7 @@ public class SquareTile extends JButton {
     int x = (getWidth() - diameter) / 2;
     int y = (getHeight() - diameter) / 2;
 
-    Position3D pos = new Position3D(row, col, -row - col);
+    Position3D pos = new Position3D(col, row, -col - row);
     if (this.model.getCopyOfTileAt(pos).getTileType().equals(TileType.BLACK)) {
       g.setColor(Color.BLACK);
       g.fillOval(x, y, diameter, diameter);

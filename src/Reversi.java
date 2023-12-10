@@ -5,6 +5,7 @@ import model.ReversiModelImpl;
 import model.SquareReversiModelImpl;
 import model.player.Player;
 import model.player.HumanPlayer;
+import model.position.Position3D;
 import model.tile.TileType;
 import view.IGraphicalView;
 import view.ReversiGraphicalView;
@@ -30,6 +31,9 @@ public final class Reversi {
 //    view2.setVisible(true);
 //    model.startGame();
     IReversiModel sm = new SquareReversiModelImpl(6);
+    sm.placeTile(new Position3D(1, 3, -4));
+    sm.placeTile(new Position3D(1, 4, -5));
+    sm.placeTile(new Position3D(3, 1, -4));
     IGraphicalView view = new SquareReversiView(sm);
     view.makeVisible();
   }
