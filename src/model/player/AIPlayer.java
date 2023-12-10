@@ -1,6 +1,7 @@
 package model.player;
 
 import model.IReversiModel;
+import model.SquareReversiModelImpl;
 import model.position.Position3D;
 import model.ReversiModelImpl;
 import model.tile.TileType;
@@ -40,8 +41,12 @@ public class AIPlayer extends HumanPlayer implements Player {
     if (possibleMoves.isEmpty()) {
       throw new IllegalStateException("No available moves.");
     }
-    Position3D topLeftPos = this.model.getCopyOfTileAt(new Position3D(0,
-            -1 * this.model.getRadius() + 1, this.model.getRadius() - 1)).getPos();
+    // Slight change here to make top left position 0, 0 for square
+    Position3D topLeftPos = new Position3D(0, 0, 0);
+    if (!(this.model instanceof SquareReversiModelImpl)) {
+      topLeftPos = this.model.getCopyOfTileAt(new Position3D(0,
+              -1 * this.model.getRadius() + 1, this.model.getRadius() - 1)).getPos();
+    }
     Position3D currentHighestScoringMove = null;
     int currentMaxScoreIncrease = 0;
     int oldScore;
@@ -53,6 +58,10 @@ public class AIPlayer extends HumanPlayer implements Player {
     for (Position3D pos : possibleMoves) {
       int newScore;
       IReversiModel tempModel = new ReversiModelImpl(this.model);
+      // Make temp model a square version if necessary
+      if (this.model instanceof SquareReversiModelImpl) {
+        tempModel = new SquareReversiModelImpl(this.model);
+      }
       tempModel.placeTile(pos);
       if (this.playerColor.equals(TileType.BLACK)) {
         newScore = tempModel.getBlackScore();

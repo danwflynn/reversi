@@ -128,4 +128,31 @@ public class SquareReversiModelImpl extends ReversiModelImpl implements IReversi
       }
     }
   }
+
+  @Override
+  public boolean isMoveLegal(Position3D pos) {
+    if (this.isGameOver()) {
+      return false;
+    }
+    if (!this.getTileAt(pos).getTileType().equals(TileType.EMPTY)) {
+      return false;
+    }
+    boolean noBridges = true;
+    for (List<Tile> l : this.getAvailableBridges(pos)) {
+      if (!l.isEmpty()) {
+        noBridges = false;
+        break;
+      }
+    }
+    if (noBridges) {
+      return false;
+    }
+    boolean legality = false;
+    for (Tile t : this.board) {
+      if (t.getPos().equals(pos)) {
+        legality = true;
+      }
+    }
+    return legality;
+  }
 }
