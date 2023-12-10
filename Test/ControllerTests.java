@@ -11,6 +11,8 @@ import model.player.AdvancedAIPlayer;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import view.HexagonTile;
+import view.HintDecorator;
 import view.IGraphicalView;
 import view.ReversiGraphicalView;
 
@@ -133,5 +135,10 @@ public class ControllerTests {
     Assert.assertEquals(0, ahModel.getWhiteScore());
     hc.pass();
     Assert.assertTrue(ahModel.isGameOver());
+  }
+
+  @Test
+  public void testDec() {
+    HintDecorator h = new HintDecorator(new HexagonTile(new Position3D(0, 0, 0), 50));
   }
 }

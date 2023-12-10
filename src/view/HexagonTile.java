@@ -22,13 +22,13 @@ import java.awt.event.KeyListener;
  * They are placed over the board and are invisible when not selected.
  */
 public class HexagonTile extends JButton {
-  private final Polygon hexagon;
-  private static HexagonTile highlightedButton;
-  private final Position3D cubeCoords;
-  private final int size;
-  private ReversiController observer;
-  private boolean enabled;
-  private static boolean hintsEnabled;
+  protected final Polygon hexagon;
+  protected static HexagonTile highlightedButton;
+  protected final Position3D cubeCoords;
+  protected final int size;
+  protected ReversiController observer;
+  protected boolean enabled;
+  protected static boolean hintsEnabled;
 
   /**
    * Constructs a Hexagon Tile with the given coordinates and size.
@@ -200,7 +200,7 @@ public class HexagonTile extends JButton {
     }
   }
 
-  private int calculateScoreIncrease() {
+  protected int calculateScoreIncrease() {
     int oldScore = this.observer.getPlayerScore();
     int newScore;
     IReversiModel model = this.observer.getCopyOfModel();
