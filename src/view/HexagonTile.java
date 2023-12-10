@@ -6,10 +6,7 @@ import model.position.Position3D;
 import model.tile.TileType;
 
 import javax.swing.JButton;
-import java.awt.Polygon;
-import java.awt.Graphics;
-import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -128,7 +125,10 @@ public class HexagonTile extends JButton {
       g.fillPolygon(hexagon);
       if (hintsEnabled) {
         g.setColor(Color.BLACK);
-        g.drawString(String.valueOf(this.calculateScoreIncrease()), 25, 35);
+        int fontSize = size / 2;
+        Font font = new Font("Arial", Font.PLAIN, fontSize);
+        g.setFont(font);
+        g.drawString(String.valueOf(this.calculateScoreIncrease()), size, size);
       }
     }
   }

@@ -12,6 +12,11 @@ public class SquareModelTests {
     Assert.assertEquals(2, sm.getWhiteScore());
   }
 
+  @Test (expected = IllegalArgumentException.class)
+  public void testOddDiameterThrowsException() {
+    IReversiModel sm = new SquareReversiModelImpl(3);
+  }
+
   @Test
   public void testSquareMakeHorizontalMove() {
     IReversiModel sm = new SquareReversiModelImpl(4);
