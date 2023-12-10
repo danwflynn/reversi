@@ -62,4 +62,30 @@ public class SquareModelTests {
     Assert.assertEquals(4, sm.getBlackScore());
     Assert.assertEquals(1, sm.getWhiteScore());
   }
+
+  @Test
+  public void testFlipMultipleDirections() {
+    IReversiModel sm = new SquareReversiModelImpl(6);
+    Assert.assertEquals(2, sm.getBlackScore());
+    Assert.assertEquals(2, sm.getWhiteScore());
+    sm.placeTile(new Position3D(3, 1, -4));
+    sm.placeTile(new Position3D(4, 1, -5));
+    sm.placeTile(new Position3D(1, 3, -4));
+    sm.placeTile(new Position3D(3, 4, -7));
+    sm.placeTile(new Position3D(4, 3, -7));
+    sm.placeTile(new Position3D(1, 2, -3));
+    Assert.assertEquals(4, sm.getBlackScore());
+    Assert.assertEquals(6, sm.getWhiteScore());
+  }
+
+  @Test
+  public void testFlipOverMultipleStraight() {
+    IReversiModel sm = new SquareReversiModelImpl(6);
+    Assert.assertEquals(2, sm.getBlackScore());
+    Assert.assertEquals(2, sm.getWhiteScore());
+    sm.placeTile(new Position3D(2, 4, -6));
+    sm.placeTile(new Position3D(1, 2, -3));
+    sm.pass();
+    sm.placeTile(new Position3D(2, 5, -7));
+  }
 }
