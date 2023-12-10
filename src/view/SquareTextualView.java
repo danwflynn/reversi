@@ -3,9 +3,16 @@ package view;
 import model.IReversiModel;
 import model.position.Position3D;
 
+/**
+ * Textual view for the square game.
+ */
 public class SquareTextualView implements TextualView {
   IReversiModel model;
 
+  /**
+   * SQT constructor.
+   * @param model square model
+   */
   public SquareTextualView(IReversiModel model) {
     this.model = model;
   }
