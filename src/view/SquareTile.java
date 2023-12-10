@@ -1,5 +1,6 @@
 package view;
 
+import controller.ReversiController;
 import model.ReadonlyIReversiModel;
 import model.position.Position3D;
 import model.tile.TileType;
@@ -8,18 +9,23 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class SquareTile extends JButton {
   private final ReadonlyIReversiModel model;
   private final SquareBoardPanel boardPanel;
   private final int row;
   private final int col;
+  private ReversiController observer;
+  private boolean enabled;
 
   public SquareTile(ReadonlyIReversiModel model, SquareBoardPanel squareBoardPanel, int row, int col) {
     this.model = model;
     this.boardPanel = squareBoardPanel;
     this.row = row;
     this.col = col;
+    this.enabled = false;
     setBackground(Color.GRAY);
     setPreferredSize(new Dimension(50, 50)); // Set an appropriate size
     setOpaque(true);
@@ -27,9 +33,51 @@ public class SquareTile extends JButton {
     addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        toggleHighlight();
+        if (enabled) {
+          toggleHighlight();
+        }
       }
     });
+
+    // Add a KeyListener to listen for key events
+    addKeyListener(new KeyListener() {
+      @Override
+      public void keyTyped(KeyEvent e) {
+        // Handle keyTyped events (e.g., when 'p' or 'm' is pressed)
+        char keyChar = e.getKeyChar();
+        if (enabled) {
+          if (keyChar == 'p') {
+            System.out.println("Pass");
+            observer.pass();
+            if (boardPanel.isHighlightedButton(SquareTile.this)) {
+              unhighlight();
+            }
+            //hintsEnabled = false;
+          } else if (keyChar == 'm') {
+            if (boardPanel.isHighlightedButton(SquareTile.this)) {
+              System.out.println("Declare move to " + col + ", " + row);
+              observer.placeTile(new Position3D(col, row, -col - row));
+              unhighlight();
+              //hintsEnabled = false;
+            }
+          } else if (keyChar == 'h') {
+            //hintsEnabled = !hintsEnabled;
+          }
+        }
+      }
+
+      @Override
+      public void keyPressed(KeyEvent e) {
+        // Handle keyPressed events (if needed)
+      }
+
+      @Override
+      public void keyReleased(KeyEvent e) {
+        // Handle keyReleased events (if needed)
+      }
+    });
+
+    setFocusable(true); // Allow the button to receive keyboard focus
   }
 
   @Override
@@ -50,7 +98,7 @@ public class SquareTile extends JButton {
     }
   }
 
-  private void toggleHighlight() {
+  void toggleHighlight() {
     if (boardPanel.isHighlightedButton(this)) {
       boardPanel.setHighlightedButton(null);
     } else {
@@ -62,6 +110,18 @@ public class SquareTile extends JButton {
 
   public void unhighlight() {
     setBackground(Color.GRAY);
+  }
+
+  void addObserver(ReversiController controller) {
+    this.observer = controller;
+  }
+
+  void squareEnable() {
+    this.enabled = true;
+  }
+
+  void squareDisable() {
+    this.enabled = false;
   }
 }
 

@@ -30,11 +30,23 @@ public final class Reversi {
 //    view1.setVisible(true);
 //    view2.setVisible(true);
 //    model.startGame();
-    IReversiModel sm = new SquareReversiModelImpl(6);
-    sm.placeTile(new Position3D(1, 3, -4));
-    sm.placeTile(new Position3D(1, 4, -5));
-    sm.placeTile(new Position3D(3, 1, -4));
-    IGraphicalView view = new SquareReversiView(sm);
-    view.makeVisible();
+
+//    IReversiModel sm = new SquareReversiModelImpl(6);
+//    sm.placeTile(new Position3D(1, 3, -4));
+//    sm.placeTile(new Position3D(1, 4, -5));
+//    sm.placeTile(new Position3D(3, 1, -4));
+//    IGraphicalView view = new SquareReversiView(sm);
+//    view.makeVisible();
+
+    IReversiModel model = new SquareReversiModelImpl(8);
+    Player p1 = new HumanPlayer(TileType.BLACK, model);
+    Player p2 = new HumanPlayer(TileType.WHITE, model);
+    IGraphicalView view1 = new SquareReversiView(model);
+    IGraphicalView view2 = new SquareReversiView(model);
+    ReversiController controller1 = new ReversiControllerImpl(model, p1, view1);
+    ReversiController controller2 = new ReversiControllerImpl(model, p2, view2);
+    view1.setVisible(true);
+    view2.setVisible(true);
+    model.startGame();
   }
 }

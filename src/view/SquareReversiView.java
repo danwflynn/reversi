@@ -44,9 +44,9 @@ public class SquareReversiView extends JFrame implements IGraphicalView {
    */
   @Override
   public void addObserver(ReversiController controller) {
-//    for (SquareTile squareTile : this.boardPanel.getButtons()) {
-//      squareTile.addObserver(controller);
-//    }
+    for (SquareTile squareTile : this.boardPanel.getButtons()) {
+      squareTile.addObserver(controller);
+    }
   }
 
   /**
@@ -94,10 +94,11 @@ public class SquareReversiView extends JFrame implements IGraphicalView {
    */
   @Override
   public void removeAllButtons() {
-//    for (SquareTile squareTile : boardPanel.getButtons()) {
-//      squareTile.highlight();
-//      squareTile.squareDisable();
-//    }
+    for (SquareTile squareTile : boardPanel.getButtons()) {
+      squareTile.toggleHighlight();
+      squareTile.unhighlight();
+      squareTile.squareDisable();
+    }
   }
 
   /**
@@ -105,10 +106,11 @@ public class SquareReversiView extends JFrame implements IGraphicalView {
    */
   @Override
   public void enableAllButtons() {
-//    for (SquareTile squareTile : boardPanel.getButtons()) {
-//      squareTile.squareEnable();
-//      squareTile.highlight();
-//    }
+    for (SquareTile squareTile : boardPanel.getButtons()) {
+      squareTile.squareEnable();
+      squareTile.toggleHighlight();
+      squareTile.unhighlight();
+    }
   }
 
   /**
@@ -116,8 +118,8 @@ public class SquareReversiView extends JFrame implements IGraphicalView {
    */
   @Override
   public void unhighlightAllButtons() {
-//    for (SquareTile squareTile : boardPanel.getButtons()) {
-//      squareTile.unhighlight();
-//    }
+    for (SquareTile squareTile : boardPanel.getButtons()) {
+      squareTile.unhighlight();
+    }
   }
 }
