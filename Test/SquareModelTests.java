@@ -4,6 +4,9 @@ import model.position.Position3D;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * Tests for square model.
+ */
 public class SquareModelTests {
   @Test
   public void testSmallestBoard() {

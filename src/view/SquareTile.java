@@ -14,6 +14,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ * Clickable buttons for square view.
+ */
 public class SquareTile extends JButton {
   private final ReadonlyIReversiModel model;
   private final SquareBoardPanel boardPanel;
@@ -22,7 +25,15 @@ public class SquareTile extends JButton {
   private ReversiController observer;
   private boolean enabled;
 
-  public SquareTile(ReadonlyIReversiModel model, SquareBoardPanel squareBoardPanel, int row, int col) {
+  /**
+   * Square tile constructor.
+   * @param model model
+   * @param squareBoardPanel board
+   * @param row x
+   * @param col y
+   */
+  public SquareTile(ReadonlyIReversiModel model,
+                    SquareBoardPanel squareBoardPanel, int row, int col) {
     this.model = model;
     this.boardPanel = squareBoardPanel;
     this.row = row;

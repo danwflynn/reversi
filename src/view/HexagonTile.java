@@ -6,7 +6,11 @@ import model.position.Position3D;
 import model.tile.TileType;
 
 import javax.swing.JButton;
-import java.awt.*;
+import java.awt.Polygon;
+import java.awt.Dimension;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;

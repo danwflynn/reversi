@@ -9,10 +9,17 @@ import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents the board of the square game for the view.
+ */
 public class SquareBoardPanel extends JPanel {
   private final List<SquareTile> buttons;
   private SquareTile highlightedButton;
 
+  /**
+   * Constructor for square board.
+   * @param model square model
+   */
   public SquareBoardPanel(ReadonlyIReversiModel model) {
     buttons = new ArrayList<>();
     setLayout(new GridLayout(model.getRadius() * 2, model.getRadius() * 2));
@@ -35,6 +42,10 @@ public class SquareBoardPanel extends JPanel {
     return buttons;
   }
 
+  /**
+   * Sets which button will be highlighted when selecting.
+   * @param squareTile tile to select
+   */
   public void setHighlightedButton(SquareTile squareTile) {
     if (highlightedButton != null && highlightedButton != squareTile) {
       highlightedButton.unhighlight();

@@ -7,9 +7,16 @@ import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 import javax.swing.JOptionPane;
 
+/**
+ * Square version of the view that uses a grid for the square game.
+ */
 public class SquareReversiView extends JFrame implements IGraphicalView {
   private final SquareBoardPanel boardPanel;
 
+  /**
+   * Constructor for square view.
+   * @param model square model
+   */
   public SquareReversiView(ReadonlyIReversiModel model) {
     super();
     int windowWidth = 1000;
@@ -69,6 +76,7 @@ public class SquareReversiView extends JFrame implements IGraphicalView {
    */
   @Override
   public void addAllButtons() {
+    // Does nothing in this case
   }
 
   /**

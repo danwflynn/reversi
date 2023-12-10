@@ -6,6 +6,9 @@ import model.tile.TileType;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * Making sure that the strategy works on the square game.
+ */
 public class AISquareTests {
   @Test
   public void testAIMakesNoMoves() {

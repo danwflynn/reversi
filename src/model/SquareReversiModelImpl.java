@@ -8,6 +8,9 @@ import model.tile.TileType;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Square version of the model implementation.
+ */
 public class SquareReversiModelImpl extends ReversiModelImpl implements IReversiModel {
   /**
    * Constructor for the class.
