@@ -140,5 +140,6 @@ public class ControllerTests {
   @Test
   public void testDec() {
     HintDecorator h = new HintDecorator(new HexagonTile(new Position3D(0, 0, 0), 50));
+    Assert.assertEquals(0, new Position3D(0, 0, 0).getR());
   }
 }
