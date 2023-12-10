@@ -16,14 +16,14 @@ import model.tile.TileType;
  * There is a counter to detect 2 passes in a row.
  */
 public class ReversiModelImpl implements IReversiModel {
-  private final List<Tile> board;
-  private TileType turn;
-  private final int radius;
-  private int blackScore;
-  private int whiteScore;
-  private int passCounter;
-  private ReversiController blackObserver;
-  private ReversiController whiteObserver;
+  protected final List<Tile> board;
+  protected TileType turn;
+  protected int radius;
+  protected int blackScore;
+  protected int whiteScore;
+  protected int passCounter;
+  protected ReversiController blackObserver;
+  protected ReversiController whiteObserver;
   
   /**
    * Constructor for the class.
@@ -229,7 +229,7 @@ public class ReversiModelImpl implements IReversiModel {
    * Flips the tiles of a bridge for tile capture.
    * @param bridge The bridge of Tiles to flip.
    */
-  private void flipBridge(List<Tile> bridge) {
+  protected void flipBridge(List<Tile> bridge) {
     for (Tile t : bridge) {
       if (!t.getTileType().equals(this.turn)) {
         t.setTileType(this.turn);
@@ -240,7 +240,7 @@ public class ReversiModelImpl implements IReversiModel {
   /**
    * Updates the score based on the number of white and black tiles on the board.
    */
-  private void updateScore() {
+  protected void updateScore() {
     int b = 0;
     int w = 0;
     for (Tile t : this.board) {
