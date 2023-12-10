@@ -1,4 +1,6 @@
-package model;
+package model.tile;
+
+import model.position.Position3D;
 
 /**
  * This is the tile interface.

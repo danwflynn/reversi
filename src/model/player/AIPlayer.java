@@ -1,4 +1,9 @@
-package model;
+package model.player;
+
+import model.IReversiModel;
+import model.position.Position3D;
+import model.ReversiModelImpl;
+import model.tile.TileType;
 
 import java.util.List;
 

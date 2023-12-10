@@ -2,10 +2,10 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import model.IReversiModel;
-import model.Position3D;
+import model.position.Position3D;
 import model.ReversiModelImpl;
-import model.GameTile;
-import model.TileType;
+import model.tile.GameTile;
+import model.tile.TileType;
 import view.ReversiTextualView;
 import view.TextualView;
 

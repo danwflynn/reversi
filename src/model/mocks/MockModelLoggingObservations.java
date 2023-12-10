@@ -1,4 +1,9 @@
-package model;
+package model.mocks;
+
+import model.IReversiModel;
+import model.position.Position3D;
+import model.ReversiModelImpl;
+import model.tile.Tile;
 
 /**
  * A Mock model of Reversi for testing the validity of inputs and checks.

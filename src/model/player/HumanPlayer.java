@@ -1,6 +1,10 @@
-package model;
+package model.player;
 
 import controller.ReversiController;
+import model.position.Position3D;
+import model.ReadonlyIReversiModel;
+import model.tile.Tile;
+import model.tile.TileType;
 
 import java.util.ArrayList;
 import java.util.List;

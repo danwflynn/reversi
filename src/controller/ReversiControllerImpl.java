@@ -1,11 +1,12 @@
 package controller;
 
 import model.IReversiModel;
+import model.ReversiModelImpl;
 import view.IGraphicalView;
-import model.Player;
-import model.TileType;
-import model.Position3D;
-import model.AIPlayer;
+import model.player.Player;
+import model.tile.TileType;
+import model.position.Position3D;
+import model.player.AIPlayer;
 
 /**
  * An implementation for the controller of a Reversi game, which allows a player to operate the
@@ -116,5 +117,19 @@ public class ReversiControllerImpl implements ReversiController {
   @Override
   public boolean isHuman() {
     return !(this.player instanceof AIPlayer);
+  }
+
+  @Override
+  public int getPlayerScore() {
+    if (this.getPlayerColor().equals(TileType.BLACK)) {
+      return this.model.getBlackScore();
+    } else {
+      return this.model.getWhiteScore();
+    }
+  }
+
+  @Override
+  public IReversiModel getCopyOfModel() {
+    return new ReversiModelImpl(this.model);
   }
 }

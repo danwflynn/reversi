@@ -1,14 +1,14 @@
 import org.junit.Assert;
 import org.junit.Test;
 import java.util.List;
-import model.GameTile;
+import model.tile.GameTile;
 import model.IReversiModel;
-import model.Position3D;
+import model.position.Position3D;
 import model.ReadonlyIReversiModel;
 import model.ReadonlyReversiModelImpl;
 import model.ReversiModelImpl;
-import model.Tile;
-import model.TileType;
+import model.tile.Tile;
+import model.tile.TileType;
 
 /**
  * A class for tests involving the ReadOnly class, or code made after its creation.

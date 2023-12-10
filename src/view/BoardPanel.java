@@ -1,8 +1,8 @@
 package view;
 
-import model.Position3D;
+import model.position.Position3D;
 import model.ReadonlyIReversiModel;
-import model.TileType;
+import model.tile.TileType;
 
 import javax.swing.JPanel;
 import java.awt.FlowLayout;

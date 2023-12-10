@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import controller.ReversiController;
+import model.position.Position3D;
+import model.tile.GameTile;
+import model.tile.Tile;
+import model.tile.TileType;
 
 /**
  * Manages the board and the rules.

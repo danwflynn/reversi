@@ -1,7 +1,9 @@
 package view;
 
 import controller.ReversiController;
-import model.Position3D;
+import model.IReversiModel;
+import model.position.Position3D;
+import model.tile.TileType;
 
 import javax.swing.JButton;
 import java.awt.Polygon;
@@ -25,6 +27,7 @@ public class HexagonTile extends JButton {
   private final int size;
   private ReversiController observer;
   private boolean enabled;
+  private static boolean hintsEnabled;
 
   /**
    * Constructs a Hexagon Tile with the given coordinates and size.
@@ -35,6 +38,7 @@ public class HexagonTile extends JButton {
     this.cubeCoords = cubeCoords;
     this.size = size;
     this.enabled = true;
+    hintsEnabled = false;
     hexagon = createHexagon();
     setContentAreaFilled(false);
     setPreferredSize(new Dimension(150, 150));
@@ -70,12 +74,16 @@ public class HexagonTile extends JButton {
             if (highlightedButton == HexagonTile.this) {
               unhighlight();
             }
+            hintsEnabled = false;
           } else if (keyChar == 'm') {
             if (highlightedButton == HexagonTile.this) {
               System.out.println("Declare move to " + cubeCoords);
               observer.placeTile(cubeCoords);
               unhighlight();
+              hintsEnabled = false;
             }
+          } else if (keyChar == 'h') {
+            hintsEnabled = !hintsEnabled;
           }
         }
       }
@@ -118,6 +126,10 @@ public class HexagonTile extends JButton {
     if (this == highlightedButton) {
       g.setColor(Color.CYAN);
       g.fillPolygon(hexagon);
+      if (hintsEnabled) {
+        g.setColor(Color.BLACK);
+        g.drawString(String.valueOf(this.calculateScoreIncrease()), 25, 35);
+      }
     }
   }
 
@@ -182,5 +194,21 @@ public class HexagonTile extends JButton {
     if (!controller.getPlayerColor().equals(controller.getModelTurn())) {
       this.hexDisable();
     }
+  }
+
+  private int calculateScoreIncrease() {
+    int oldScore = this.observer.getPlayerScore();
+    int newScore;
+    IReversiModel model = this.observer.getCopyOfModel();
+    if (!model.isMoveLegal(this.cubeCoords)) {
+      return 0;
+    }
+    model.placeTile(this.cubeCoords);
+    if (this.observer.getPlayerColor().equals(TileType.BLACK)) {
+      newScore = model.getBlackScore();
+    } else {
+      newScore = model.getWhiteScore();
+    }
+    return newScore - oldScore - 1;
   }
 }

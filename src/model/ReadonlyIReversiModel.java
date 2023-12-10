@@ -1,5 +1,9 @@
 package model;
 
+import model.position.Position3D;
+import model.tile.Tile;
+import model.tile.TileType;
+
 import java.util.List;
 
 /**

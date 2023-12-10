@@ -1,4 +1,4 @@
-package model;
+package model.position;
 
 /**
  * Represents coordinates for a place on the board using 3d q r s system.

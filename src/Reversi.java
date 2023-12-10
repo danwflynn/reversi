@@ -2,10 +2,9 @@ import controller.ReversiController;
 import controller.ReversiControllerImpl;
 import model.IReversiModel;
 import model.ReversiModelImpl;
-import model.Player;
-import model.HumanPlayer;
-import model.TileType;
-import model.AIPlayer;
+import model.player.Player;
+import model.player.HumanPlayer;
+import model.tile.TileType;
 import view.IGraphicalView;
 import view.ReversiGraphicalView;
 
@@ -20,7 +19,7 @@ public final class Reversi {
   public static void main(String[] args) {
     IReversiModel model = new ReversiModelImpl(8);
     Player p1 = new HumanPlayer(TileType.BLACK, model);
-    Player p2 = new AIPlayer(TileType.WHITE, model);
+    Player p2 = new HumanPlayer(TileType.WHITE, model);
     IGraphicalView view1 = new ReversiGraphicalView(model);
     IGraphicalView view2 = new ReversiGraphicalView(model);
     ReversiController controller1 = new ReversiControllerImpl(model, p1, view1);

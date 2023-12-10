@@ -1,6 +1,5 @@
-PART 2 AT THE BOTTOM
+PART 3 AT THE BOTTOM
 
-IMPORTANT:
 The testing of this code base is split into files that serve different purposes.
 ReversiModelTests is all the testing done alongside the development of the components of the
 reversi model. ReadOnlyReversiModelTests is for tests focusing on the ReadOnly version of the model.
@@ -180,8 +179,8 @@ and tileType.
 The Player interface handles players that play the game of Reversi. There is currently one
 implementation of this, AIPlayer, which has two fields:
 - 'playerColor' is whether the player is playing the Black or White pieces.
-- 'model' is the Model of the Reversi game which the player uses to get information about the game's
-        state.
+- 'model' is the Model of the Reversi game which the player uses to get information
+about the game's state.
 
 
 The TextualView is an interface for handling the textual representation of the game. Its
@@ -267,6 +266,19 @@ access to the mutable version of the model.
 We added functionality to our view and model to handle observers and listeners. This allows
 for cross-communication between the model, view, and controller in the real-time nature of a
 game of Reversi.
+
+Important note about human views:
+Players can only click and select buttons when it is their turn. If it isn't their turn, the
+buttons are disabled.
+
+Features interfaces:
+The model and view already have features interfaces from the previous assignments.
+
+Control flow for MVC:
+Humans: Model starts game -> Controller tells player it's their turn -> Player tells controller to
+send turn message to view -> Controller tells the view to create turn message -> View creates turn
+message -> Player clicks ok and makes move through view -> Controller tells model to make the move
+->
 
 ____________________
 User Controls for GUI:

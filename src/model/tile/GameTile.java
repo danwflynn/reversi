@@ -1,4 +1,6 @@
-package model;
+package model.tile;
+
+import model.position.Position3D;
 
 /**
  * Class to represent a tile on the board.

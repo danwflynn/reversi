@@ -1,7 +1,8 @@
 package controller;
 
-import model.Position3D;
-import model.TileType;
+import model.IReversiModel;
+import model.position.Position3D;
+import model.tile.TileType;
 
 /**
  * An interface for the controller for a game of Reversi, allowing a player to operate the game.
@@ -46,4 +47,8 @@ public interface ReversiController {
    * @return True if this controller's player is human, false otherwise.
    */
   boolean isHuman();
+
+  int getPlayerScore();
+
+  IReversiModel getCopyOfModel();
 }

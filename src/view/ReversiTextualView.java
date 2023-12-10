@@ -1,7 +1,7 @@
 package view;
 
 import model.IReversiModel;
-import model.Position3D;
+import model.position.Position3D;
 
 /**
  * Reversi textual view implementation.

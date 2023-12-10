@@ -1,6 +1,8 @@
 package model;
 
 import controller.ReversiController;
+import model.position.Position3D;
+import model.tile.Tile;
 
 /**
  * Reversi model interface.

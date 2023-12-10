@@ -1,4 +1,8 @@
-package model;
+package model.mocks;
+
+import model.IReversiModel;
+import model.position.Position3D;
+import model.ReversiModelImpl;
 
 /**
  * A mock implementation of ReversiModelImpl that verifies the validity of the AIPlayer by

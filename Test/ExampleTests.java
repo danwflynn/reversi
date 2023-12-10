@@ -1,7 +1,7 @@
 import model.IReversiModel;
-import model.Position3D;
+import model.position.Position3D;
 import model.ReversiModelImpl;
-import model.TileType;
+import model.tile.TileType;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
