@@ -3,6 +3,8 @@ import model.SquareReversiModelImpl;
 import model.position.Position3D;
 import org.junit.Assert;
 import org.junit.Test;
+import view.SquareTextualView;
+import view.TextualView;
 
 /**
  * Tests for square model.
@@ -13,6 +15,9 @@ public class SquareModelTests {
     IReversiModel sm = new SquareReversiModelImpl(2);
     Assert.assertEquals(2, sm.getBlackScore());
     Assert.assertEquals(2, sm.getWhiteScore());
+    TextualView tv = new SquareTextualView(sm);
+    Assert.assertEquals("X O \n" +
+            "O X \n", tv.toString());
   }
 
   @Test (expected = IllegalArgumentException.class)
@@ -28,6 +33,11 @@ public class SquareModelTests {
     sm.placeTile(new Position3D(0, 2, -2));
     Assert.assertEquals(4, sm.getBlackScore());
     Assert.assertEquals(1, sm.getWhiteScore());
+    TextualView tv = new SquareTextualView(sm);
+    Assert.assertEquals("_ _ _ _ \n" +
+            "_ X O _ \n" +
+            "X X X _ \n" +
+            "_ _ _ _ \n", tv.toString());
   }
 
   @Test
@@ -39,6 +49,11 @@ public class SquareModelTests {
     sm.placeTile(new Position3D(0, 3, -3));
     Assert.assertEquals(3, sm.getBlackScore());
     Assert.assertEquals(3, sm.getWhiteScore());
+    TextualView tv = new SquareTextualView(sm);
+    Assert.assertEquals("_ _ _ _ \n" +
+            "_ X O _ \n" +
+            "X O X _ \n" +
+            "O _ _ _ \n", tv.toString());
   }
 
   @Test
@@ -49,6 +64,11 @@ public class SquareModelTests {
     sm.placeTile(new Position3D(2, 0, -2));
     Assert.assertEquals(4, sm.getBlackScore());
     Assert.assertEquals(1, sm.getWhiteScore());
+    TextualView tv = new SquareTextualView(sm);
+    Assert.assertEquals("_ _ X _ \n" +
+            "_ X X _ \n" +
+            "_ O X _ \n" +
+            "_ _ _ _ \n", tv.toString());
   }
 
   @Test (expected = IllegalStateException.class)
