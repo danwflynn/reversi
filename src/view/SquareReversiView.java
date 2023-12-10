@@ -3,9 +3,9 @@ package view;
 import controller.ReversiController;
 import model.ReadonlyIReversiModel;
 
-import javax.swing.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import javax.swing.JFrame;
+import javax.swing.WindowConstants;
+import javax.swing.JOptionPane;
 
 public class SquareReversiView extends JFrame implements IGraphicalView {
   private final SquareBoardPanel boardPanel;
@@ -16,17 +16,14 @@ public class SquareReversiView extends JFrame implements IGraphicalView {
     int windowHeight = 800;
     this.setSize(windowWidth, windowHeight);
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    //setLayout(null);
 
     SquareBoardPanel boardPanel = new SquareBoardPanel(model);
     this.boardPanel = boardPanel;
-    //boardPanel.setBounds(50, 50, 1000, 800);
     this.add(boardPanel);
 
     this.addAllButtons();
 
     this.setVisible(true);
-    //this.setResizable(false);
   }
 
   /**
@@ -72,21 +69,6 @@ public class SquareReversiView extends JFrame implements IGraphicalView {
    */
   @Override
   public void addAllButtons() {
-//    int ind = 1;
-//    for (SquareTile squareTile : boardPanel.getButtons()) {
-//      this.addMouseListener(new MouseAdapter() {
-//        @Override
-//        public void mouseClicked(MouseEvent e) {
-//          if (squareTile.getHighlightedButton() != null) {
-//            squareTile.changeSelection();
-//          }
-//        }
-//      });
-//      this.add(squareTile);
-//      this.setComponentZOrder(squareTile, ind);
-//      ind++;
-//    }
-//    this.setComponentZOrder(boardPanel, ind);
   }
 
   /**

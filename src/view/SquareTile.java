@@ -5,8 +5,10 @@ import model.ReadonlyIReversiModel;
 import model.position.Position3D;
 import model.tile.TileType;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JButton;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
